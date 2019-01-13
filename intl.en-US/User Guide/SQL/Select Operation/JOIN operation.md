@@ -21,7 +21,7 @@ join_table:
 
 **Note:** equality\_expression is an equality expression.
 
-left join: Returns all records from the left table \(shop\) even if no matching row exists in the right table \(sale\_detail\).
+LEFT OUTER JOIN: Returns all records from the left table \(shop\) even if no matching row exists in the right table \(sale\_detail\).
 
 ```
 select a.shop_name as ashop, b.shop_name as bshop from shop a

@@ -21,7 +21,7 @@ join_table:
 
 **说明：** equality\_expression是一个等式表达式。
 
--   left join：
+-   left outer join：
 
     左连接，会从左表（shop）中返回所有的记录，即使在右表（sale\_detail）中没有匹配的行。
 
