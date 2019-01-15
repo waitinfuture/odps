@@ -75,6 +75,8 @@ public final class Lower extends UDF {
 
 UDF的使用方式与MaxCompute SQL中普通的内建函数相同，详情请参见 [内建函数](intl.zh-CN/用户指南/SQL/内建函数/数学函数.md)。
 
+如果您想了解使用Intellij IDEA开发工具完成完整的Java UDF开发示例，请参见[Intellij IDEA Java UDF开发最佳实践](../../../../../intl.zh-CN/最佳实践/数据开发/Intellij IDEA Java UDF开发最佳实践.md#)。使用Eclipse开发工具完成完整的Java UDF开发示例，请参见[Eclipse Java UDF开发最佳实践](../../../../../intl.zh-CN/最佳实践/数据开发/Eclipse Java UDF开发最佳实践.md#)。
+
 ## 其他UDF示例 {#section_kb5_v44_k2b .section}
 
 如以下代码，定义了一个有三个overloads的UDF，其中第一个用了array作为参数，第二个用了map作为参数，第三个用了struct。由于第三个overloads了struct作为参数或者返回值，因此要求必须要对UDF class打上`@Resolve` annotation，来指定 struct的具体类型。
@@ -139,7 +141,7 @@ public abstract class Aggregator implements ContextFunction {
 
 以实现求平均值avg为例，下图简要说明了在MaxCompute UDAF中这一函数的实现逻辑及计算流程：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15451121611855_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15475238151855_zh-CN.jpg)
 
 在上图中，输入数据被按照一定的大小进行分片（有关分片的描述请参见 [MapReduce](intl.zh-CN/用户指南/MapReduce/概要/MapReduce概述.md)），每片的大小适合一个worker在适当的时间内完成。这个分片大小的设置需要您手动配置完成。
 
@@ -217,7 +219,7 @@ public class AggrAvg extends Aggregator {
 -   terminate\(\)方法：返回数据。
 -   newBuffer\(\)方法：创建初始返回结果的值。
 -   UDAF在SQL中的使用语法与普通的内建聚合函数相同，详情请参见 [聚合函数](intl.zh-CN/用户指南/SQL/内建函数/聚合函数.md)。
--   关于如何运行UDTF的方法与 UDF 类似，详情请参见 [运行 UDF](../../../../intl.zh-CN/快速入门/JAVA UDF开发.md)。
+-   关于如何运行UDTF的方法与 UDF 类似，详情请参见 [运行 UDF](../../../../../intl.zh-CN/快速入门/JAVA UDF开发（可选）.md)。
 -   String对应的Writable类型为Text。
 
 ## UDTF {#section_a4t_34f_vdb .section}
@@ -253,7 +255,7 @@ import com.aliyun.odps.udf.UDFException;
    }
 ```
 
-**说明：** 以上只是程序示例，关于如何在MaxCompute中运行 UDTF的方法与UDF类似，详情请参见：[运行UDF](../../../../intl.zh-CN/快速入门/JAVA UDF开发.md)。
+**说明：** 以上只是程序示例，关于如何在MaxCompute中运行 UDTF的方法与UDF类似，详情请参见：[运行UDF](../../../../../intl.zh-CN/快速入门/JAVA UDF开发（可选）.md)。
 
 在SQL中可以这样使用这个UDTF，假设在MaxCompute上创建UDTF时注册函数名为 user\_udtf：
 
@@ -318,7 +320,7 @@ select reduce_udtf(col0, col1, col2) as (c0, c1) from (select col0, col1, col2 f
 
 ## 其他UDTF示例 {#section_h4k_ppf_vdb .section}
 
-在UDTF中，您可以读取MaxCompute的 [资源](../../../../intl.zh-CN/用户指南/基本概念/资源.md)。利用UDTF读取MaxCompute资源的示例，如下所示。
+在UDTF中，您可以读取MaxCompute的 [资源](../../../../../intl.zh-CN/用户指南/基本概念/资源.md)。利用UDTF读取MaxCompute资源的示例，如下所示。
 
 1.  编写UDTF程序，编译成功后导出jar包（udtfexample1.jar）。
 
@@ -515,5 +517,5 @@ select hive_collect(4y,5y,6y) from dual;
 
 -   MaxCompute的add jar命令会永久地在project中创建一个resource，所以创建udf时需要指定jar包，无法自动将所有jar包加入classpath。
 -   在使用兼容的HIVE UDF的时候，需要在sql前加set语句`set odps.sql.hive.compatible=true;`语句，set语句和sql语句一起提交执行。
--   在使用兼容的HIVE UDF时，还要注意MaxCompute的[JAVA沙箱](intl.zh-CN/用户指南/Java沙箱.md)限制。
+-   在使用兼容的HIVE UDF时，还要注意MaxCompute的[Java沙箱](intl.zh-CN/用户指南/Java沙箱.md)限制。
 
