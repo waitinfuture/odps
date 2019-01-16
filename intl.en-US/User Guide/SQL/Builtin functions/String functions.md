@@ -1,5 +1,7 @@
 # String functions {#concept_ulf_pfm_vdb .concept}
 
+This article introduces the string functions such as CHAR\_MATCHCOUNT, CHR, CONCAT, GET\_JSON\_OBJECT, INSTR, IS\_ENCODING supported by MaxCompute.
+
 ## CHAR\_MATCHCOUNT {#section_mnd_gvz_vdb .section}
 
 Command format:
@@ -371,7 +373,7 @@ Function definition:
 
 ```
 bigint regexp_instr(string source, string pattern[,
-bigint start_position[, bigint nth_occurrence[, bigint return_option]])
+bigint start_position[, bigint nth_occurrence[, bigint return_option]]])
 ```
 
 Usage:
@@ -864,7 +866,6 @@ Concatenates all strings in the parameters, connected by the specified delimiter
 Parameter description:
 
 -   SEP: String-type delimiter. If not specified, an exception is returned.
--   a/b… String type. If Bigint, Decimal, Double or Datetime types are input, they are implicitly converted to String type before calculation. If the input is another type, an exception is throwm.
 
 Return value:
 
