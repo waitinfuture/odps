@@ -30,7 +30,7 @@
 
     实际在MaxCompute公共云运行时，由于沙箱等限制，需要把fastjson.JSON包和UDF jar包分别作为资源上传MaxCompute，并且在DataWorks创建函数时**同时引用两个资源**。如下图所示，本例中ODPSUDF-1.0-SNAPSHOT2.jar是UDF打包后生成的jar，而fastjson-1.2.28.odps.jar是fastjson.JSON包。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/106671/154771289037575_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/106671/154780656337575_zh-CN.png)
 
 
 ## UDF代码示例 {#section_hl5_xfq_3gb .section}
@@ -69,9 +69,15 @@ public class ToJsonString extends UDF {
     public String evaluate(int[] obj) {
         return JSON.toJSONString(obj);
     }
+}
+```
+
+## 单元测试 {#section_cwd_txp_mgb .section}
+
+```
 //下列代码为测试代码，用于测试数据转换是否生效，您在实际使用过程中可注释掉。
     public static void main(String[] args) {
-        //System.out.println(new ToJsonString().evaluate(null));//JAVA不能调用，但odps可以
+        //System.out.println(new ToJsonString().evaluate(null));//java不能调用，但odps可以
         System.out.println(new ToJsonString().evaluate("中文\t"));
         System.out.println(new ToJsonString().evaluate(123L));
         System.out.println(new ToJsonString().evaluate(1.123));
@@ -80,8 +86,7 @@ public class ToJsonString extends UDF {
         System.out.println(new ToJsonString().evaluate(BigDecimal.TEN));
         System.out.println(new ToJsonString().evaluate(Arrays.asList(1.0,2.0,3.0,4.0)));
         double[] args1 = {1,2,3,4};
-        System.out.println(new ToJsonString().evaluate(args1));
+        System.out.println(new ToJsonString().evaluate(args };
     }
-}
 ```
 
