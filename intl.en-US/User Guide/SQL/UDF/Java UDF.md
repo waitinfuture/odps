@@ -137,7 +137,7 @@ The three most important interfaces are ‘iterate’, ‘merge’, and ‘termi
 
 Take ‘achieve average calculation’ as an example and next figure describes the realization logical and computational procedure of this function in MaxCompute UDAF:
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15422752941855_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15478044021855_en-US.jpg)
 
 In the preceding figure , the input data is sliced according to a certain size.For more information about slicing, see [MapReduce](reseller.en-US/User Guide/MapReduce/Summary/MapReduce.md)\). The size of each slice is suitable for a worker to complete in the specified time. This slice size must be configured manually by the user.
 
@@ -213,7 +213,7 @@ public class AggrAvg extends Aggregator {
 
 -   For Writable’s readFields function,  since the partial writable object can be reused, the same object readFields function is called multiple times. This function expects the entire object to be reset each time it is called. If the object contains a collection, it must be emptied.
 -   The use method of UDAF is similar to aggregation functions in MaxCompute SQL. For more information, see [Aggregation Functions](reseller.en-US/User Guide/SQL/Builtin functions/Aggregate functions.md).
--   How to run UDTF is similar to UDF. For more information, see [Java UDF Development](../../../../reseller.en-US/Quick Start/Java UDF Development.md).
+-   How to run UDTF is similar to UDF. For more information, see [Java UDF Development](../../../../../reseller.en-US/Quick Start/Java UDF Development.md).
 
 ## UDTF {#section_a4t_34f_vdb .section}
 
@@ -248,7 +248,7 @@ import com.aliyun.odps.udf.UDFException;
    }
 ```
 
-**Note:** The preceding example is for reference only. How to run UDTF is similar to using UDF. For more information, see [Java UDF Development](../../../../reseller.en-US/Quick Start/Java UDF Development.md).
+**Note:** The preceding example is for reference only. How to run UDTF is similar to using UDF. For more information, see [Java UDF Development](../../../../../reseller.en-US/Quick Start/Java UDF Development.md).
 
 In SQL,use this UDTF as the following example. Suppose that the register function name in MaxCompute is  ‘user\_udtf’.
 
@@ -313,7 +313,7 @@ But using UDTF has the following limits:
 
 ## Other UDTF Examples {#section_h4k_ppf_vdb .section}
 
-In UDTF, learn more aboutMaxCompute [Resources](../../../../reseller.en-US/User Guide/Definition/Resource.md).  The following describes how to use UDTFs to read MaxCompute resources:
+In UDTF, learn more aboutMaxCompute [Resources](../../../../../reseller.en-US/User Guide/Definition/Resource.md).  The following describes how to use UDTFs to read MaxCompute resources:
 
 1.  Compile a UDTF program. Once the compilation is successful, export the Jar package \(udtfexample1.jar\).
 
