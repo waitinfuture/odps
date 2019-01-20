@@ -30,7 +30,7 @@
 
     实际在MaxCompute公共云运行时，由于沙箱等限制，需要把fastjson.JSON包和UDF jar包分别作为资源上传MaxCompute，并且在DataWorks创建函数时**同时引用两个资源**。如下图所示，本例中ODPSUDF-1.0-SNAPSHOT2.jar是UDF打包后生成的jar，而fastjson-1.2.28.odps.jar是fastjson.JSON包。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/106671/154780656337575_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/106671/154795465837575_zh-CN.png)
 
 
 ## UDF代码示例 {#section_hl5_xfq_3gb .section}
@@ -86,7 +86,8 @@ public class ToJsonString extends UDF {
         System.out.println(new ToJsonString().evaluate(BigDecimal.TEN));
         System.out.println(new ToJsonString().evaluate(Arrays.asList(1.0,2.0,3.0,4.0)));
         double[] args1 = {1,2,3,4};
-        System.out.println(new ToJsonString().evaluate(args };
+        System.out.println(new ToJsonString().evaluate(args1));
+       }
     }
 ```
 
