@@ -37,7 +37,7 @@ Return value:Datetime type. If any input is NULL, return NULL.
 For example:
 
 ```
- if trans_date = 2005-02-28 00:00:00:
+ if trans_date = 2005-02-28 00:00:00
 dateadd(trans_date, 1, 'dd') = 2005-03-01 00:00:00
 -- Add one day. The result is beyond the last day in February. The actual value is the first day of next month.
 dateadd(trans_date, -1, 'dd') = 2005-02-27 00:00:00
