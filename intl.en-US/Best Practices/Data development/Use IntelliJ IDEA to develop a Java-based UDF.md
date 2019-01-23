@@ -2,16 +2,20 @@
 
 IntelliJ IDEA is an integrated development environment for the Java language that helps us quickly develop this Java program. This article details how to use the IntelliJ IDEA for Java UDF development.
 
-Before starting the UDF development practice, you first need to prepare the IntelliJ IDEA development tools, see
+Before starting the UDF development practice, you need to do the following preparations:
 
-[Install IntelliJ IDEA and configure MaxCompute Studio](../../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Tools Installation and version history/Install IntelliJ IDEA.md), then [Connect to a MaxCompute project](../../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Project space connection management.md) in IntelliJ IDEA MaxCompute Studio, and [Create a MaxCompute Java module](../../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Developing Java/Create MaxCompute Java Module.md). UDF can be developed after the development environment is ready,The following example shows how to develop a UDF to convert uppercase letters to lowercase letters.
+1.  Prepare the IntelliJ IDEA development tool, see [Install IntelliJ IDEA and configure MaxCompute Studio](../../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Tools Installation and version history/Install IntelliJ IDEA.md).
+2.  Then [Connect to a MaxCompute project](../../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Project space connection management.md) by IntelliJ IDEA MaxCompute Studio.
+3.  After connecting the MaxCompute project successfully, you need [Create a MaxCompute Java module](../../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Developing Java/Create MaxCompute Java Module.md).
+
+UDF can be developed after the development environment is ready,The following example shows how to develop a UDF to convert uppercase letters to lowercase letters.
 
 **Note:** For more information about UDF development, see [Java-based UDF](../../../../../reseller.en-US/User Guide/SQL/UDF/Java UDF.md#).
 
 1.  In the IntelliJ IDEA, right-click the MaxCompute Java module directory, select **src** \> **main** \> **java** \> **New**, and click **MaxCompute Java**, as shown in the following figure. 
 2.  Set **Name** to `package name.file name`, select UDF for **Kind**, and click **OK**. 
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154822967734451_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154823021634451_en-US.png)
 
     **Note:** 
 
@@ -19,7 +23,7 @@ Before starting the UDF development practice, you first need to prepare the Inte
     -   Kind: project type. Supported types include user-defined functions \(for example, UDF, UDAF, and UDTF\), MapReduce \(for example, Driver, Mapper, and Reducer\), and non-structural development frameworks \(for example, Storage Handler and Extractor\).
 3.  Edit the code, as shown in the following figure. 
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154822967734458_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154823021634458_en-US.png)
 
     The following is an example:
 
@@ -41,11 +45,11 @@ Before starting the UDF development practice, you first need to prepare the Inte
 4.  Debug the UDF. After developing the UDF, you can test it through unit testing \(UT\) or local running.
     1.  Unit testing There are various UT examples in the examples directory in your module project. You can perform the UT according to these examples.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154822967734470_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154823021634470_en-US.png)
 
         The following figure shows the test result.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154822967834473_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154823021634473_en-US.png)
 
         As shown in the preceding figure, a string of uppercase letters 'ALIYUN' is converted to a string of lowercase letters 'aliyun'.
 
@@ -57,11 +61,11 @@ Before starting the UDF development practice, you first need to prepare the Inte
 
         1.  Before testing the Java-based UDF code, store some uppercase letters on MaxCompute. Create a test table named upperABC by using a script file or the `create table upperABC(upper string);` SQL statement on the odpscmd client, as shown in the following figure.
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154822967834592_en-US.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154823021634592_en-US.png)
 
         2.  Right-click the UDF class and select **Run 'class name.main\(\)'**. The run configurations dialog box is displayed, as shown in the following figure.
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154822967834483_en-US.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154823021634483_en-US.png)
 
             **Note:** 
 
@@ -71,11 +75,11 @@ Before starting the UDF development practice, you first need to prepare the Inte
             -   You can run the UDF directly if the mock project is used or if the data is downloaded.
         Click **OK**. The following figure shows the result.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154822967834510_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154823021634510_en-US.png)
 
 5.  Publish the UDF. After the Lower.java test is successful, pack this file into a JAR package and upload the package to MaxCompute. To publish a UDF to a server, you need to **pack this file** \> **add a resource** \> **register the function**. IntelliJ IDEA MaxCompute Studio allows you to publish a UDF easily. That is, MaxCompute Studio automatically runs the maven clean package command, uploads the JAR package, and registers the UDF in sequence. The procedure is as follows: Right-click the Java file of the UDF and select **Deploy to server**. In the displayed dialog box, select the target MaxCompute project and enter the Function name and the Resource name. You can change the resource name as needed, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154822967834564_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154823021634564_en-US.png)
 
     **Note:** 
 
@@ -83,15 +87,15 @@ Before starting the UDF development practice, you first need to prepare the Inte
 
     After completing the settings, click **OK**. You can find the registered function in the connected MaxCompute project, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154822967834572_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154823021634572_en-US.png)
 
 6.  Use the UDF. You can use the UDF after it is successfully registered. In the module project, open the SQL script and run the `select Lower_test('ALIYUN');` command. The result is shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154822967834603_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154823021634603_en-US.png)
 
     You can also run the select Lower\_test\('ALIYUN'\) from uppperABC; command on the odpscmd client to test the Java-based UDF. If the following information is displayed, the Lower\_test Java-based UDF developed by using IntelliJ IDEA works properly.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154822967834582_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154823021634582_en-US.png)
 
 
 To use Eclipse to develop a Java-based UDF, see [Use Eclipse to develop a Java-based UDF](reseller.en-US/Best Practices/Data development/Use Eclipse to develop a Java-based UDF.md#).
