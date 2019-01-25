@@ -8,11 +8,7 @@ Before using the MaxCompute service, you must register an Alibaba Cloud account.
 
     **Note:** The account type you create is an Alibaba Cloud primary account, which is the account type with highest-level permissions. We recommend you keep the access credentials of this account in a secure place. We also recommend you do not allow others to use your account, and that you periodically change your password.
 
-2.   Real name authentication 
-
-    Only an Alibaba Cloud account that has been real name authenticated can purchase and use all products on Alibaba Cloud. If your account has not successfully passed real name authentication, go to the page to authenticate it. **To save you any trouble in the future, be sure to complete the real-name authentication.**
-
-3.   Create an AccessKey 
+2.   Create an AccessKey 
 
     An AccessKey is primarily used for access permission verification between various Alibaba Cloud products. It is needed to guarantee the processing of tasks in the DataWorks development kit. An AccessKey is comprised of two parts: an Access Key ID and an Access Key Secret. The specific operation is as follows:
 
