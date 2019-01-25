@@ -1,6 +1,6 @@
 # Type conversions {#concept_wyb_sgl_vdb .concept}
 
-MaxCompute SQL allows conversion between data types. The two conversion methods are **explicit type conversion** and **implicit type conversion**.
+MaxCompute SQL allows conversion between data types. The two conversion methods are explicit type conversion and implicit type conversion.
 
 ## Explicit conversion {#section_gvj_1jl_vdb .section}
 
@@ -13,11 +13,11 @@ Explicit conversions use CAST to convert a value type to another. The following 
 |String|Y|Y|–|Y|N|Y|
 |Datetime|N|N|Y|–|N|N|
 |Boolean|N|N|N|N|–|N|
-|Decimal|Y|Y|Y|N|N|-|
+|Decimal|Y|Y|Y|N|N|–|
 
-**Y** means can be converted. **N** means cannot be converted. **–** means conversion is not required.
+Y means can be converted. N means cannot be converted. – means conversion is not required.
 
-**Example:**
+Example:
 
 ```
 select cast(user_id as double) as new_id from user;
@@ -32,30 +32,30 @@ select cast('2015-10-01 00:00:00' as datetime) as new_date from user;
 -   Explicit conversions of unsupported types may return an exception.
 -   If a conversion fails during execution, the conversion is aborted with an exception.
 -   To convert the Datetime type, use the default format yyyy-mm-dd hh:mi:ss. For more information, see [Conversions between the String type and the Datetime type](reseller.en-US/User Guide/SQL/Type conversion.md#section_qkb_fql_vdb).
--   Some types cannot be explicitly converted, but can be converted using built-in SQL functions. For example, the to\_char function can be used to convert values of the Boolean type to the String type. For more information, see [TO\_CHAR](reseller.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md). The to\_date function can be used to convert values of the String type to the Datetime type. For more information, see [TO\_DATE](reseller.en-US/User Guide/SQL/Builtin Function/Date Functions.md).
--   For more information, see [CAST](reseller.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md).
+-   Some types cannot be explicitly converted, but can be converted using built-in SQL functions. For example, the to\_char function can be used to convert values of the Boolean type to the String type. For more information, see [TO\_CHAR](reseller.en-US/User Guide/SQL/Builtin functions/Mathematical functions.md). The to\_date function can be used to convert values of the String type to the Datetime type. For more information, see [TO\_DATE](reseller.en-US/User Guide/SQL/Builtin functions/Date functions.md).
+-   For more information, see [CAST](reseller.en-US/User Guide/SQL/Builtin functions/Mathematical functions.md).
 -   If a DECIMAL value exceeds the value range, MSB overflow error or LSB overflow truncation may occur for CAST STRING TO DECIMAL.
 
 ## Implicit conversion and scope {#section_uhl_sml_vdb .section}
 
 Implicit type conversion is an automatic type conversion performed by MaxCompute according to the usage context and type conversion rules. The following table lists the types that can be implicitly converted using MaxCompute.
 
-| |boolean|tinyint|smallint|int|bigint|float|double|decimal|string|varchar|timestamp|binary|
-|:-|:------|:------|:-------|:--|:-----|:----|:-----|:------|:-----|:------|:--------|:-----|
-|boolean to|T|F|F|F|F|F|F|F|F|F|F|F|
-|tinyint to|F|T|T|T|T|T|T|T|T|T|F|F|
-|smallint to|F|F|T|T|T|T|T|T|T|T|F|F|
-|int to|F|F|F|T|T|T|T|T|T|T|F|F|
-|bigint to|F|F|F|F|T|T|T|T|T|T|F|F|
-|float to|F|F|F|F|F|T|T|T|T|T|F|F|
-|double to|F|F|F|F|F|F|T|T|T|T|F|F|
-|decimal to|F|F|F|F|F|F|F|T|T|T|F|F|
-|string to|F|F|F|F|F|F|T|T|T|T|F|F|
-|varchar to |F|F|F|F|F|F|T|T|T|T|F|F|
-|timestamp to|F|F|F|F|F|F|F|F|T|T|T|F|
-|binary to|F|F|F|F|F|F|F|F|F|F|F|T|
+| |boolean|tinyint|smallint|int|bigint|float|double|Decimal|string|varchar|timestamp|binary|
+|:-|:------|:------|:-------|:--|:-----|:----|------|-------|:-----|:------|:--------|:-----|
+|boolean to|Y|N|N|N|N|N|N|N|N|N|N|N|
+|tinyint to|N|Y|Y|Y|Y|Y|Y|Y|Y|Y|N|N|
+|smallint to|N|N|Y|Y|Y|Y|Y|Y|Y|Y|N|N|
+|int to|N|N|Y|Y|Y|Y|Y|Y|Y|Y|N|–|
+|bigint to|N|N|N|N|Y|Y|Y|Y|Y|Y|N|N|
+|float to|N|N|N|N|Y|Y|Y|Y|Y|Y|N|–|
+|double to|N|N|N|N|N|N|Y|Y|Y|Y|N|N|
+|decimal to|N|N|N|N|N|N|N|Y|Y|Y|N|N|
+|string to|N|N|N|N|N|N|Y|Y|Y|Y|N|N|
+|varchar to|N|N|N|N|Y|Y|Y|Y|N|N|–|–|
+|timestamp to|N|N|N|N|N|N|N|N|Y|Y|Y|N|
+|binary to|N|N|N|N|N|N|N|N|N|N|N|Y|
 
-**T** means can be converted. **F** means cannot be converted.
+Y means can be converted. N means cannot be converted.
 
 **Note:** 
 
@@ -111,7 +111,6 @@ select user_id+age+'12345',
 
         -   The source and pattern parameters of LIKE and RLIKE can only be of the String type.
         -   Other types can neither be involved in the operations nor be implicitly converted to the String type.
-
     -   The usage of IN is as follows:
 
 ```
@@ -142,11 +141,11 @@ key in (value1, value2, …)
 MaxCompute SQL provides numerous system functions. You can calculate one or multiple columns of any row and output data of any type. Their implicit conversion rules are described as follows:
 
 -   To call a function, if the data type of an input parameter is different from that defined in the function, convert the data type of the input parameter to that defined in the function.
--   Parameters of different built-in functions of MaxCompute SQL have different requirements on implicit conversions. For more information, see [Built-in Functions](reseller.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md).
+-   Parameters of different built-in functions of MaxCompute SQL have different requirements on implicit conversions. For more information, see [Built-in Functions](reseller.en-US/User Guide/SQL/Builtin functions/Mathematical functions.md).
 
 ## Implicit conversions under CASE WHEN {#section_if3_cql_vdb .section}
 
-For more information about CASE WHEN, see [CASE WHEN Expressions](reseller.en-US/User Guide/SQL/Builtin Function/Other functions.md).  Its implicit conversion rules are listed as follows:
+For more information about CASE WHEN, see [CASE WHEN Expressions](reseller.en-US/User Guide/SQL/Builtin functions/Other functions.md).  Its implicit conversion rules are listed as follows:
 
 -   If the types of the returned values are Bigint and Double, convert all to the Double type.
 -   If a String type exists in return types, convert all to the String type. If the conversion fails \(such as Boolean type conversion\), an error is returned.
@@ -187,5 +186,5 @@ cast("2013-02-29 12:12:12" as datetime) -- Returns an error because February 29,
 cast("2013-11-31 12:12:12" as datetime) -- Returns an exception because November 31, 2013 does not exist.
 ```
 
-MaxCompute provides the TO\_DATE function to convert the String type that does not meet the Datetime format to the Datetime type. For more information, see [TO\_DATE](reseller.en-US/User Guide/SQL/Builtin Function/Date Functions.md).
+MaxCompute provides the TO\_DATE function to convert the String type that does not meet the Datetime format to the Datetime type. For more information, see [TO\_DATE](reseller.en-US/User Guide/SQL/Builtin functions/Date functions.md).
 
