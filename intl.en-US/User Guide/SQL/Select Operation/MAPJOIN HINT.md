@@ -14,7 +14,7 @@ A typical scenario of MapJoin,  is as follows: When the data volume is small, S
 -   When MapJoin is used and a small table or subquery must be referenced, the alias must be referenced.
 -   MapJoin supports non-equivalent JOIN conditions or multiple conditions connected using OR.
 -   Currently, MaxCompute allows a maximum of eight small tables to be specified in MapJoin. Otherwise, a syntax error is returned.
--   If MapJoin is used, the total memory occupied by all small tables cannot exceed 512 MB. Note that MaxCompute uses compressed storage, so the data size is sharply expanded after small tables are loaded into the memory. The limit of 512 MB refers to the size after small tables are loaded into the memory.
+-   If MapJoin is used, the total memory occupied by all small tables cannot exceed 512 MB. Note that MaxCompute uses compressed storage, so the data size is sharply expanded after small tables are loaded into the memory. The limit of 512 MB refers to the size after small tables are loaded into the memory. We can config the total memory by SET odps.sql.mapjoin.memory.max=2048;. The maximum configurable memory is 2048MB.
 -   When JOIN is performed on the multiple tables, the two leftmost tables cannot be tables for MapJoin at the same time.
 
 **For example:**
