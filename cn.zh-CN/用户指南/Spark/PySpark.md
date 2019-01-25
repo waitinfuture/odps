@@ -1,10 +1,10 @@
 # PySpark {#concept_lbf_1mg_4gb .concept}
 
-本文以一个简单的PySpark读写MaxCompute表作为例子讲解整个开发过程。
+如下内容是一个简单的PySpark读写MaxCompute表开发示例。
 
 -   1.下载[odps\_sdk.py](https://github.com/aliyun/aliyun-cupid-sdk/blob/3.3.2-public/spark/spark-2.x/datasource/src/main/python/odps_sdk.py)到本地。
--   2.下载[odps-spark-datasource-1.0.3.jar](http://repo.aliyun.com/download/odps-spark-datasource-1.0.3.jar)至本地，截止至文档发布的时刻，1.0.3为最新版本，如版本更新请自行更新。
--   3.准备Python版Spark app，如下：
+-   2.下载[odps-spark-datasource-1.0.3.jar](http://repo.aliyun.com/download/odps-spark-datasource-1.0.3.jar)到本地，截止至文档发布的时刻，1.0.3为最新版本，如果版本升级，您可自行更新。
+-   3.准备Python版Spark app。
 -   4.example.py代码示例：
 
     ```language-python
