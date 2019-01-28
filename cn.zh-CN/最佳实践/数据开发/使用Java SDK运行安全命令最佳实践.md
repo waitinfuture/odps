@@ -41,7 +41,7 @@
 
     您可以登录阿里云官网，在右上角的用户名下单击**accesskeys**进入Access Key管理页面获取，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/154864683838210_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/154864726638210_zh-CN.png)
 
 3.  配置Endpoint，详细内容请参见[配置Endpoint](../../../../../cn.zh-CN/准备工作/配置Endpoint.md#)。
 4.  创建空间项目<your\_project\>，通过IntelliJ IDEA MaxCompute Studio[创建MaxCompute项目连接](../../../../../cn.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md#)。
@@ -111,13 +111,13 @@ SET LABEL 2 TO TABLE test_label(key, value);
 
     查看运行结果：
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/154864683838175_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/154864726638175_zh-CN.png)
 
 3.  结果验证
 
     程序运行完成后，在MaxCompute Console中运行desc test\_label;命令，可以看到set label命令已经生效了。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/154864683838189_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/154864726638189_zh-CN.png)
 
     其他安全相关的命令，都可以通过Java SDK来运行。
 
