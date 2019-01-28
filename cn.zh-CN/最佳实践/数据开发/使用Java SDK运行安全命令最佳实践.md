@@ -41,7 +41,7 @@
 
     您可以登录阿里云官网，在右上角的用户名下单击**accesskeys**进入Access Key管理页面获取，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/154864726638210_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/154865645538210_zh-CN.png)
 
 3.  配置Endpoint，详细内容请参见[配置Endpoint](../../../../../cn.zh-CN/准备工作/配置Endpoint.md#)。
 4.  创建空间项目<your\_project\>，通过IntelliJ IDEA MaxCompute Studio[创建MaxCompute项目连接](../../../../../cn.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md#)。
@@ -64,7 +64,7 @@
 SET LABEL 2 TO TABLE test_label(key, value);
 ```
 
-## 操作步骤 {#section_un5_1sn_4gb .section}
+## 实施步骤 {#section_un5_1sn_4gb .section}
 
 1.  创建测试表`test_label`，命令如下。
 
@@ -76,48 +76,47 @@ SET LABEL 2 TO TABLE test_label(key, value);
     ```
 
 2.  测试运行
+    -   Java代码如下。
 
-    Java代码如下。
-
-    ```language-java
-    import com.aliyun.odps.Column;
-    import com.aliyun.odps.Odps;
-    import com.aliyun.odps.OdpsException;
-    import com.aliyun.odps.OdpsType;
-    import com.aliyun.odps.TableSchema;
-    import com.aliyun.odps.account.Account;
-    import com.aliyun.odps.account.AliyunAccount;
-    import com.aliyun.odps.security.SecurityManager;
-    
-    public class test {
-      public static void main(String [] args) throws OdpsException {
-        try {
-          // init odps
-          Account account = new AliyunAccount("<your_accessid>", "<your_accesskey>");
-          Odps odps = new Odps(account);
-          odps.setEndpoint("http://service-corp.odps.aliyun-inc.com/api");
-          odps.setDefaultProject("<your_project>");
-    
-          // set label 2 to table columns
-          SecurityManager securityManager = odps.projects().get().getSecurityManager();
-          String res = securityManager.runQuery("SET LABEL 2 TO TABLE test_label(key, value);", false);
-          System.out.println(res);
-        } catch (OdpsException e) {
-          e.printStackTrace();
+        ```language-java
+        import com.aliyun.odps.Column;
+        import com.aliyun.odps.Odps;
+        import com.aliyun.odps.OdpsException;
+        import com.aliyun.odps.OdpsType;
+        import com.aliyun.odps.TableSchema;
+        import com.aliyun.odps.account.Account;
+        import com.aliyun.odps.account.AliyunAccount;
+        import com.aliyun.odps.security.SecurityManager;
+        
+        public class test {
+          public static void main(String [] args) throws OdpsException {
+            try {
+              // init odps
+              Account account = new AliyunAccount("<your_accessid>", "<your_accesskey>");
+              Odps odps = new Odps(account);
+              odps.setEndpoint("http://service-corp.odps.aliyun-inc.com/api");
+              odps.setDefaultProject("<your_project>");
+        
+              // set label 2 to table columns
+              SecurityManager securityManager = odps.projects().get().getSecurityManager();
+              String res = securityManager.runQuery("SET LABEL 2 TO TABLE test_label(key, value);", false);
+              System.out.println(res);
+            } catch (OdpsException e) {
+              e.printStackTrace();
+            }
+          }
         }
-      }
-    }
-    ```
+        ```
 
-    查看运行结果：
+    -   查看运行结果：
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/154864726638175_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/154865645538175_zh-CN.png)
 
 3.  结果验证
 
     程序运行完成后，在MaxCompute Console中运行desc test\_label;命令，可以看到set label命令已经生效了。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/154864726638189_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/154865645538189_zh-CN.png)
 
     其他安全相关的命令，都可以通过Java SDK来运行。
 
