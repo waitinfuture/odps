@@ -4,7 +4,7 @@
 
 ## insert操作 {#section_o5d_vdy_gfb .section}
 
-命令格式如下：
+**命令格式**
 
 ```
 INSERT OVERWRITE|INTO TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)] [(col1,col2 ...)]
@@ -14,7 +14,7 @@ FROM from_statement;
 
 **说明：** 
 
--   MaxCompute的Insert语法与通常使用的MySQL或Oracle的Insert语法有差别，在insert overwrite|into后需要加入table关键字，不是直接使用tablename。
+-   MaxCompute的Insert语法与通常使用的MySQL或Oracle的Insert语法有差别，在insert overwrite|into后需要加入table关键字，而非直接使用tablename。
 -   当Insert的目标表是分区表时，指定分区值`[PARTITION (partcol1=val1, partcol2=val2 …)]`语法中不允许使用函数等表达式。
 -   目前INSERT OVERWRITE还不支持指定插入列的功能，暂时只能用INSERT INTO。
 -   不支持insert into到hash clustering表
@@ -23,7 +23,7 @@ FROM from_statement;
 
 Insert into与Insert overwrite的区别是：Insert into会向表或表的分区中追加数据，而Insert overwrite会在向表或分区中插入数据前清空表中的原有数据。
 
-**说明：** MaxCompute分区表中的分区size通过describe出来的值在反复对同一个分区进行INSERT OVERWRITE的时候，获得的数据分区size会不同。这是因为从同一个表的同一个分区select出来再insert overwrite回相同表的相同分区，文件切分逻辑会发生变化，因此会导致数据的size发生变化。但数据的总长度在INSERT OVERWRITE前后是不变的，所以用户不必担心存储量的计费会存在问题。
+**说明：** 在反复对同一个分区进行INSERT OVERWRITE的时候，通过describe查看到的数据分区size会不同。这是因为从同一个表的同一个分区select出来再insert overwrite回相同分区时，文件切分逻辑会发生变化，因此会导致数据的size发生变化。但数据的总长度在INSERT OVERWRITE前后是不变的，因此您不必担心存储计费会存在问题。
 
 在使用MaxCompute处理数据的过程中，Insert overwrite/into是最常用到的语句，它们会将计算的结果保存到一个表中，以供下一步计算使用。比如计算sale\_detail表中不同地区的销售额，操作如下：
 
@@ -34,7 +34,7 @@ insert overwrite table sale_detail_insert partition (sale_date='2013', region='c
 select shop_name, customer_id,total_price from sale_detail;
 ```
 
-**说明：** 在进行Insert更新数据操作时，源表与目标表的对应关系依赖于在select子句中列的顺序，而不是表与表之间列名的对应关系，下面的SQL语句仍然是合法的：
+**说明：** 在进行Insert更新数据操作时，源表与目标表的对应关系依赖于在select子句中列的顺序，而不是表与表之间列名的对应关系。下面的SQL语句仍然是合法的：
 
 ```
 insert overwrite table sale_detail_insert partition (sale_date='2013', region='china')
@@ -61,4 +61,14 @@ select shop_name, customer_id, total_price, sale_date, region  from sale_detail;
 insert overwrite table sale_detail_insert partition (sale_date=datepart('2016-09-18 01:10:00', 'yyyy') , region='china')
 select shop_name, customer_id, total_price from sale_detail;
 ```
+
+## 更新数据到动态分区 {#section_anh_h5q_pgb .section}
+
+动态分区使用注意事项：
+
+-   在您insert into partition时，如果分区不存在，会自动创建分区。
+-   如果多个insert into partition作业并发，同时发现分区不存在，都会主动创建分区，但是同时只有一个会创建成功，其它的都会失败。
+-   insert into partition作业如果不能控制并发，只能通过预创建分区来避免问题。
+
+更多动态分区详情请参考[输出到动态分区（DYNAMIC PARTITION）](cn.zh-CN/用户指南/SQL/INSERT操作/输出到动态分区（DYNAMIC PARTITION）.md#)。
 
