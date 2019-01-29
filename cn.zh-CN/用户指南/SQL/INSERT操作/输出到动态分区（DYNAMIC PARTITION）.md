@@ -1,10 +1,8 @@
 # 输出到动态分区（DYNAMIC PARTITION） {#concept_b1p_qdb_wdb .concept}
 
-在Insert overwrite到一张分区表时，可以在语句中指定分区的值。
+在Insert overwrite到一张分区表时，可以在分区中指定一个分区列名，但不给出值。相应地，在select子句中的对应列来提供分区的值。
 
-## 概述 {#section_aky_dyy_bgb .section}
-
-您可以在分区中指定一个分区列名，但不给出值。相应地，在select子句中的对应列来提供分区的值。
+## 动态分区语法 {#section_aky_dyy_bgb .section}
 
 命令格式如下：
 
@@ -25,8 +23,9 @@ insert overwrite table tablename partition (partcol1, partcol2 ...) select_state
     ```
 
 -   如果目标表有多级分区，在运行Insert语句时允许指定部分分区为静态，但是静态分区必须是高级分区。
+-   如果目标表为Hash Clustering table，暂时不支持动态分区。
 
-## 示例 {#section_shg_fyy_bgb .section}
+## 动态分区示例 {#section_shg_fyy_bgb .section}
 
 动态分区的示例如下：
 
@@ -94,4 +93,6 @@ select * from parttable;
 |:-|:-|:-|
 |0|NULL|2017-01-23 22:30:47.130406621|
 |0|NULL|2017-01-23 22:30:47.130406621|
+
+使用该命令的详细示例请参见[RDS迁移到MaxCompute实现动态分区](../../../../../intl.zh-CN/最佳实践/数据迁移/RDS迁移到MaxCompute实现动态分区.md#)。
 
