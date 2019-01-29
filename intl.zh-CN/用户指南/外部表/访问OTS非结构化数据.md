@@ -67,9 +67,9 @@ MaxCompute计算服务访问Table Store数据需要有一个安全的授权通�
 
         **说明：** 您可单击右上角的登录账号，进入账号管理页面查看云账号的UID。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15445997052844_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15487462162844_zh-CN.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15445997052845_zh-CN.jpg)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15487462162845_zh-CN.jpg)
 
     3.  编辑该角色的授权策略AliyunODPSRolePolicy，如下所示：
 
@@ -172,7 +172,7 @@ WHERE odps_orderkey > 5000 ;
 
 ## MaxCompute导出数据到Table Store {#section_gy2_xsb_wdb .section}
 
-**说明：** MaxCompute不会主动创建外部的Table Store表，所以在对Table Store表进行数据输出之前，必须保证该表已经在Table Store上创建过（否则将报错）。
+**说明：** MaxCompute不会主动创建外部的Table Store表，所以在对Table Store表进行数据输出之前，必须保证该表已经在Table Store上完成创建（否则将报错）。
 
 根据上面的操作，您已创建了外部表ots\_table\_external来打通MaxCompute与Table Storeb数据表ots\_tpch\_orders的链路，同时还有一份存储在MaxCompute内部表internal\_orders的数据，现在希望对internal\_orders中的数据进行一定处理后再写回 Table Store，可通过对外部表做INSERT OVERWITE TABLE操作来实现，如下所示：
 
@@ -184,7 +184,7 @@ FROM internal_orders;
 
 **说明：** 
 
-如果ODPS表内数据本身有一定的顺序，比如已经按照Primary Key做过一次排序，那么在写入到OTS表时，会导致压力集中在一个OTS分区上面，无法充分利用分布式写入的特点。因此，当出现这种情况时，我们建议通过distribute by rand\(\)先将数据打散。
+如果ODPS表内数据本身有一定的顺序，例如已经按照Primary Key做过一次排序，则在写入到OTS表时，会导致压力集中在一个OTS分区上面，无法充分利用分布式写入的特点。因此，当出现这种情况时，我们建议通过distribute by rand\(\)先将数据打散，举例如下。
 
 ```
 INSERT OVERWRITE TABLE ots_table_external
