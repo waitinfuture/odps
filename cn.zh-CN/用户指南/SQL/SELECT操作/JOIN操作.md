@@ -1,6 +1,6 @@
 # JOIN操作 {#concept_cxf_rkb_wdb .concept}
 
-MaxCompute的JOIN支持多路链接，但不支持笛卡尔积，即无on条件的链接。
+您可以使用JOIN操作连接两张表的查询结果。MaxCompute的JOIN操作分为左连接、右连接、全连接，支持多路链接，但不支持CROSS JOIN笛卡尔积，即无on条件的连接。
 
 命令格式如下：
 
@@ -23,7 +23,7 @@ join_table:
 
 -   left outer join：
 
-    左连接，会从左表（shop）中返回所有的记录，即使在右表（sale\_detail）中没有匹配的行。
+    **左连接**，会从左表（shop）中返回所有的记录，即使在右表（sale\_detail）中没有匹配的行。
 
     ```
     select a.shop_name as ashop, b.shop_name as bshop from shop a
@@ -33,7 +33,7 @@ join_table:
 
 -   right outer join：
 
-    右连接，返回右表中的所有记录，即使在左表中没有记录与它匹配。
+    **右连接**，返回右表中的所有记录，即使在左表中没有记录与它匹配。
 
     示例如下。
 
@@ -42,7 +42,7 @@ join_table:
             right outer join sale_detail b on a.shop_name=b.shop_name;
     ```
 
--   full outer join：全连接，返回左右表中的所有记录。
+-   full outer join：**全连接**，返回左右表中的所有记录。
 
     示例如下。
 
@@ -52,7 +52,7 @@ join_table:
     ```
 
 
-如下示例中，表A是test\_table\_a，表B是test\_table\_b，用户用到join查询和where的过滤查询。查询分区大于20180101的数据中origin和id一致的记录数，使用left join希望可以保留左表中test\_table\_a的全表记录。正常情况下left join ，左表会是全的。right join，右表会是全的。
+如下示例中，表A是test\_table\_a，表B是test\_table\_b，用户使用join查询和where过滤查询。查询分区大于20180101的数据中origin和id一致的记录数，使用left join可以保留左表中test\_table\_a的全表记录。正常情况下，如果您使用left join ，左表会保留全表记录；如果您使用right join，右表会保留全表记录。
 
 错误SQL示例如下：
 
@@ -88,7 +88,7 @@ select a.shop_name from shop a inner join sale_detail b on a.shop_name=b.shop_na
 select a.shop_name from shop a join sale_detail b on a.shop_name=b.shop_name;
 ```
 
-连接条件，只允许and连接的等值条件。只有在MAPJOIN中，可以使用不等值连接或者使用or连接多个条件。
+连接条件，只允许and连接的等值条件。只有在[MAPJOIN](intl.zh-CN/用户指南/SQL/SELECT操作/MAPJOIN HINT.md#)中，可以使用不等值连接或者使用or连接多个条件。
 
 ```
 select a.* from shop a full outer join sale_detail b on a.shop_name=b.shop_name
