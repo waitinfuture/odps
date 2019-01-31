@@ -10,7 +10,7 @@ MaxCompute is mainly used to store and compute batches of structured data. It pr
 
 Given these massive data volumes, the limited processing capacity of a single server has prompted analysts to move towards distributed computing. However, distributed computing models are not easy to maintain and demand highly-qualified data analysts. When using a distributed model,data analysts not only need to understand their business needs, but also must be familiar with the underlying computing model. The purpose of MaxCompute is to provide you with a convenient way of analyzing and processing mass data, and you can achieve the purpose of analyzing large data without having to care about the details of distributed computing.
 
-**Note:** MaxCompute has been widely used in the Alibaba group, such as data warehouse and BI analysis of large Internet enterprises, web log analysis, transaction analysis of e-commerce sites, user characteristics and interest mining.
+**Note:** MaxCompute is widely used by Alibaba Group in scenarios such as data warehouse and BI analysis, web log analysis, transaction analysis of e-commerce sites, and customer behavior analysis.
 
 ## MaxCompute learning path {#section_learningpath .section}
 
