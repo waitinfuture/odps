@@ -24,7 +24,7 @@ IntelliJ IDEA是Java语言的集成开发环境，可以帮助我们快速的开
     -   Kind：选择类型。目前支持的类型有：自定义函数（UDF/UDAF/UDTF）、MapReduce（Driver/Mapper/Reducer）、非结构化开发（StorageHandler/Extractor）等。
 2.  **编辑Java UDF代码** 在您新建的Java UDF项目（本例中的porjectLower）中编辑代码，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154856831534458_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154892538234458_zh-CN.png)
 
     示例代码如下。
 
@@ -46,11 +46,11 @@ IntelliJ IDEA是Java语言的集成开发环境，可以帮助我们快速的开
 3.  **测试UDF** 开发UDF完成后，可通过单元测试和本地运行两种方式进行测试，看是否符合预期结果，操作如下。
     1.  **单元测试** 在您的Modul项目中examples目录下有各种类型的单元测试示例，您可参考示例编写自己的Unit Test。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154856831534470_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154892538234470_zh-CN.png)
 
         测试结果如下。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154856831634473_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154892538234473_zh-CN.png)
 
         我们可以看到大写字母"ALIYUN"已经成功转换成小写字母"aliyun"输出。
 
@@ -62,11 +62,11 @@ IntelliJ IDEA是Java语言的集成开发环境，可以帮助我们快速的开
 
         1.  为了测试Java UDF代码，我们可以首先在MaxCompute上存放一些大写字母作为输入数据。您可以利用script脚本文件或者odpscmd客户端使用SQL语句`create table upperABC(upper string);`新建一个名为upperABC的测试表格，如图。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154856831634592_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154892538234592_zh-CN.png)
 
         2.  右击UDF类，单击**Run '类名.main\(\)'**，弹出run configurations对话框，如下图。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154856831634483_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154892538234483_zh-CN.png)
 
             **说明：** 
 
@@ -76,11 +76,11 @@ IntelliJ IDEA是Java语言的集成开发环境，可以帮助我们快速的开
             -   如果采用Mock项目或已下载数据，则直接运行。
         单击**OK**，运行结果如下图。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154856831634510_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154892538234510_zh-CN.png)
 
 4.  **发布UDF** 此时我们的Lower.java测试通过，接下来我们要将其打包成jar资源上传到MaxCompute服务端上。一个UDF要想发布到服务端供生产使用，要经过**打包** \> **上传** \> **注册**三个步骤。针对此，IntelliJ IDEA MaxCompute Studio提供了一键发布功能（Studio会依次执行maven clean package，上传jar和注册UDF三个步骤，一次完成）。具体的操作如下。右键单击UDF的Java文件，选择**Deploy to server**，弹框里选择注册到哪一个MaxCompute project，依次输入Function name和Resource name，Resource name可以修改，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154856831634564_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154892538234564_zh-CN.png)
 
     **说明：** 
 
@@ -88,15 +88,15 @@ IntelliJ IDEA是Java语言的集成开发环境，可以帮助我们快速的开
 
     填写完成后，单击**OK**即可完成注册，成功后会有提示。您可在连接的MaxCompute项目下找到已经注册好的Function函数，如图所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154856831634572_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154892538234572_zh-CN.png)
 
 5.  **试用UDF** 成功注册UDF后，即可试用UDF。在您的Module项目中打开SQL脚本，执行命令`select Lower_test('ALIYUN');`，显示结果如下图所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154856831634603_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154892538234603_zh-CN.png)
 
     您也可以在odpscmd客户端使用select Lower\_test\('ALIYUN'\) from uppperABC;命令测试您的Java UDF函数。到此，您使用IntelliJIDEA上开发的Java UDF函数Lower\_test已经可用了。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154856831634582_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/80567/154892538234582_zh-CN.png)
 
 
 如果您要使用Eclipse开发工具完成完整的Java UDF开发流程，请参见[Eclipse Java UDF开发最佳实践](intl.zh-CN/最佳实践/数据开发/Eclipse Java UDF开发最佳实践.md#)。
