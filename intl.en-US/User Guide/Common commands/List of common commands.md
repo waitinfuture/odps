@@ -2,14 +2,14 @@
 
 This module explains how to use the relevant commands through the client to help you quickly understand MaxCompute.
 
-The latest MaxCompute service adjusts the usual commands, the new command style is more closely used by hive, which is convenient for original hadoop/hive users.
+The latest MaxCompute service adjusts the usual commands, the new command style is more closely used by hive, which is convenient for original Hadoop/HIVE users.
 
-MaxCompute offers many operations for [projects](reseller.en-US/User Guide/Definition/Projects.md#), [tables](reseller.en-US/User Guide/Common commands/Table operations.md#), resources, [instances](reseller.en-US/User Guide/Definition/Instance.md#), and other objects. You can perform operations on these objects using the console commands and SDK.
+MaxCompute offers many operations for [projects](reseller.en-US/User Guide/Definitions/Project.md#), [tables](reseller.en-US/User Guide/Common commands/Table operations.md#), resources, [instances](reseller.en-US/User Guide/Definitions/Instance.md#), and other objects. You can perform operations on these objects using the console commands and SDK.
 
 **Note:** 
 
--   The common commands introduced in this module are mainly targeted at latest version of the[Client](../../../../reseller.en-US/Tools and Downloads/Client.md#) .
--   If you want to learn how to install and configure clients, see [Install and configure a client](../../../../reseller.en-US/Prepare/Install and configure a client.md#)Quick Start.
+-   The common commands introduced in this module are mainly targeted at latest version of the[Client](../../../../../reseller.en-US/Tools and Downloads/Client.md#) .
+-   If you want to learn how to install and configure clients, see [Install and configure a client](../../../../../reseller.en-US/Prepare/Install and configure a client.md#)Quick Start.
 -   For more information about the SDK, see [MaxCompute SDK introduction](reseller.en-US/User Guide/MapReduce/Java SDK/Java SDK.md#)MaxCompute SDK introduction.
 
 ## List of common commands {#section_lfx_cph_rfb .section}
@@ -26,7 +26,7 @@ MaxCompute offers many operations for [projects](reseller.en-US/User Guide/Defin
 
 [get](reseller.en-US/User Guide/Common commands/Resources.md#section_il1_rbf_vdb)
 
-[help](../../../../reseller.en-US/Tools and Downloads/Client.md#section_p5h_41x_5db) [history](reseller.en-US/User Guide/Data upload and download/Tunnel commands.md#section_wzb_xxf_vdb)
+[help](../../../../../reseller.en-US/Tools and Downloads/Client.md#section_p5h_41x_5db) [history](reseller.en-US/User Guide/Data upload and download/Tunnel commands.md#section_wzb_xxf_vdb)
 
 [instance/instances](reseller.en-US/User Guide/Common commands/Instances.md#)
 
@@ -36,11 +36,11 @@ MaxCompute offers many operations for [projects](reseller.en-US/User Guide/Defin
 
 [lifecycle](reseller.en-US/User Guide/SQL/DDL SQL/Lifecycle of table.md#) [list](reseller.en-US/User Guide/Common commands/Resources.md#section_t5b_mbf_vdb)
 
-[odpscmd](../../../../reseller.en-US/Tools and Downloads/Client.md#section_u5h_41x_5db)
+[odpscmd](../../../../../reseller.en-US/Tools and Downloads/Client.md#section_u5h_41x_5db)
 
 [partition](reseller.en-US/User Guide/Common commands/Table operations.md#section_bwc_bv2_vdb)
 
-[q/quit](../../../../reseller.en-US/Tools and Downloads/Client.md#section_ovh_41x_5db)
+[q/quit](../../../../../reseller.en-US/Tools and Downloads/Client.md#section_ovh_41x_5db)
 
 [resource](reseller.en-US/User Guide/Common commands/Resources.md#)
 
@@ -50,9 +50,9 @@ MaxCompute offers many operations for [projects](reseller.en-US/User Guide/Defin
 
 [upload](reseller.en-US/User Guide/Data upload and download/Tunnel commands.md#ul_ics_btf_vdb)
 
-[wait](reseller.en-US/User Guide/Common commands/Instances.md#section_llj_zz2_vdb) [who](reseller.en-US/User Guide/Security/Security command list/Manage permissions.md#table_hw5_wj1_wdb)
+[wait](reseller.en-US/User Guide/Common commands/Instances.md#section_llj_zz2_vdb) [who](reseller.en-US/Security/Configure security features/Security command list/Manage permissions.md#table_hw5_wj1_wdb)
 
 ## Use limits {#section_qkn_chv_sfb .section}
 
--   When you perform resource operations, please note that the size of each resource file should not exceed 500 M, and the total size of resources referenced by a single SQL or MapReduce task should not exceed 2048M. For more restrictions, see[MR limits](reseller.en-US/User Guide/MapReduce/MR limits.md#)。
+-   When you perform resource operations, please note that the size of each resource file should not exceed 500 MB, and the total size of resources referenced by a single SQL or MapReduce task should not exceed 2048 MB. For more restrictions, see[MR limits](reseller.en-US/User Guide/MapReduce/MR limits.md#)。
 
