@@ -12,7 +12,7 @@ MaxCompute需要直接访问OSS的数据，前提需要将OSS的数据相关权�
 -   自定义授权。
     1.  首先需要在[RAM](https://www.aliyun.com/product/ram)中授予MaxCompute访问OSS的权限。登录 [RAM控制台](https://ram.console.aliyun.com/#/overview)（若MaxCompute和OSS不是同一个账号，此处需由OSS账号登录进行授权），通过控制台中的 [角色管理](https://ram.console.aliyun.com/#/role/list) 创建角色 ，角色名如`AliyunODPSDefaultRole`或`AliyunODPSRoleForOtherUser`。如下图所示：
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12074/15425953185234_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12074/15489873165234_zh-CN.png)
 
     2.  修改角色策略内容设置，如下所示。
 
@@ -175,6 +175,8 @@ select recordId, patientId, direction from ambulance_data_csv_external where pat
 
 MaxCompute目前只支持通过内置extractor读取OSS上gzip压缩的CSV/TSV数据。与读取非压缩文件相比，主要区别是SERDEPROPERTIES指定的属性。
 
+**说明：** 如果OSS上的数据文件为归档文件，请登录[OSS](../../../../../cn.zh-CN/产品简介/什么是对象存储 OSS.md#)，对文件进行解冻。
+
 创建外部表的代码示例，如下所示：
 
 ```
@@ -311,7 +313,7 @@ LOCATION 'oss://oss-cn-hangzhou-zmf.aliyuncs.com/oss-odps-test/Demo/SampleData/C
 
     与使用内置Extractor相似，首先需要创建一张外部表，不同的是在指定外部表访问数据的时候，需要使用自定义的StorageHandler。
 
-    创建外部表语句如下:
+    创建外部表语句如下，其中delimeter是您自定义的分割方法名称:
 
     ```
     CREATE EXTERNAL TABLE IF NOT EXISTS ambulance_data_txt_external
@@ -537,7 +539,7 @@ where sentence_snr > 10.0;
     ...
     ```
 
-    **说明：** 以上这些操作与标准的MaxCompute内部表操作一样，分区的详情请参见[分区](../../../../cn.zh-CN/用户指南/基本概念/分区.md#)。在数据准备好并且PARTITION信息引入MaxCompute之后，即可通过SQL语句对OSS外表数据的分区进行操作。
+    **说明：** 以上这些操作与标准的MaxCompute内部表操作一样，分区的详情请参见[分区](../../../../../cn.zh-CN/用户指南/基本概念/分区.md#)。在数据准备好并且PARTITION信息引入MaxCompute之后，即可通过SQL语句对OSS外表数据的分区进行操作。
 
     此时分析数据时，可以指定指需分析某天的数据，如只想分析2016年6月1号当天，有多少不同的IP出现在LOG里面，可以通过如下语句实现。
 
