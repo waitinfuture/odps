@@ -13,6 +13,7 @@ partition_spec:(partition_col1 = partition_col_value1, partition_col2 = partiton
 
 **Note:** 
 
+-   The partition name must be lowercase.
 -   Only ‘creating partitions’ are supported wherein, ‘creating partition columns’ are not supported.
 -   If the same name partition has already existed and the option \[if not exists\] is not specified, an exception returns.
 -   Currently, the maximum number of partitions supported in a single MaxCompute table is 60,000.
