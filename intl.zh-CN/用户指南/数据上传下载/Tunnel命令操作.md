@@ -1,14 +1,14 @@
 # Tunnel命令操作 {#concept_rkf_2wc_5db .concept}
 
-本文向您介绍Upload、Show、Resume等Tunnel上传下载命令使用说明。
+本文向您介绍Upload、Show、Resume等MaxCompute Tunnel上传下载命令的使用说明。
 
-## 功能简介 {#section_hcs_btf_vdb .section}
+## Tunnel命令功能 {#section_hcs_btf_vdb .section}
 
-您可以通过[客户端](../../../../intl.zh-CN/工具及下载/客户端.md)提供的[Tunnel](intl.zh-CN/用户指南/数据上传下载/Tunnel命令操作.md)命令实现原有Dship工具的功能。
+您可以通过[客户端](../../../../../intl.zh-CN/工具及下载/客户端.md)提供的[Tunnel](intl.zh-CN/用户指南/数据上传下载/Tunnel命令操作.md)命令实现原有Dship工具的功能。
 
 Tunnel命令主要用于数据的上传和下载等功能。
 
--   Upload：支持文件或目录（指一级目录）的上传，每一次上传只支持数据上传到一张表或表的一个分区，有分区的表一定要指定上传的分区，多级分区一定要指定到末级分区。
+-   Upload：支持文件或目录（指一级目录）的上传，每一次上传只支持数据上传到一张表或表的一个[分区](intl.zh-CN/用户指南/SQL/DDL语句/分区和列操作.md#)。有分区的表一定要指定上传的分区，多级分区一定要指定到末级分区。
 
     ```
     tunnel upload log.txt test_project.test_table/p1="b1",p2="b2";
@@ -17,14 +17,14 @@ Tunnel命令主要用于数据的上传和下载等功能。
     -- 将log.txt中的数据上传至表 test_table 中。--scan参数表示需要扫描log.txt中的数据是否符合 test_table 的定义，如果不符合报错，并停止上传数据。
     ```
 
--   Download：只支持下载到单个文件，每一次下载只支持下载一张表或一个分区到一个文件，有分区的表一定要指定下载的分区，多级分区一定要指定到末级分区。
+-   Download：只支持下载到单个文件，每一次下载只支持下载一张表或一个分区到一个文件。有分区的表一定要指定下载的分区，多级分区一定要指定到末级分区。
 
     ```
     tunnel download  test_project.test_table/p1="b1",p2="b2"  test_table.txt;
     -- 将test_project.test_table表（二级分区表）中的数据下载到 test_table.txt 文件中
     ```
 
--   Resume：因为网络或tunnel服务的原因出错，支持文件或目录的续传。可以继续上一次的数据上传操作，但Resume命令暂时没有对下载操作的支持。
+-   Resume：因为网络或Tunnel服务的原因出错，支持文件或目录的续传。可以继续上一次的数据上传操作，但Resume命令暂时没有对下载操作的支持。
 
     ```
     tunnel resume;
@@ -39,7 +39,7 @@ Tunnel命令主要用于数据的上传和下载等功能。
     --显示最后一次上传/下载数据的日志
     ```
 
--   Purge：清理session目录，默认清理3天内的。
+-   Purge：清理session目录，默认清理3天内的日志。
 
     ```
     tunnel purge 5;
@@ -133,7 +133,7 @@ Example:
 -   -dbr：是否忽略脏数据（多列、少列、列数据类型不匹配等情况）。
     -   值为true时，将全部不符合表定义的数据忽略。
     -   值为false时，若遇到脏数据，则给出错误提示信息，目标表内的原始数据不会被污染。
--   -dfp：DateTime类型数据格式，默认为yyyy-MM-dd HH:mm:ss。如果您想指定时间格式到毫秒级别，可以使用tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS'，有关DateTime数据类型的详情请参见[数据类型](../../../../intl.zh-CN/用户指南/基本概念/数据类型.md#)。
+-   -dfp：DateTime类型数据格式，默认为yyyy-MM-dd HH:mm:ss。如果您想指定时间格式到毫秒级别，可以使用tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS'，有关DateTime数据类型的详情请参见[数据类型](../../../../../intl.zh-CN/用户指南/基本概念/数据类型.md#)。
 -   -fd：本地数据文件的列分割符，默认为逗号。
 -   -h：数据文件是否包括表头，如果为true，则dship会跳过表头从第二行开始上传数据。
 -   -mbr：默认情况下，当上传的脏数据超过1000条时，上传动作终止。通过此参数，可以调整可容忍的脏数据量。
@@ -152,13 +152,13 @@ Example:
 
 -   创建目标表，如下所示：
 
-```
-CREATE TABLE IF NOT EXISTS sale_detail(
-      shop_name     STRING,
-      customer_id   STRING,
-      total_price   DOUBLE)
-PARTITIONED BY (sale_date STRING,region STRING);
-```
+    ```
+    CREATE TABLE IF NOT EXISTS sale_detail(
+          shop_name     STRING,
+          customer_id   STRING,
+          total_price   DOUBLE)
+    PARTITIONED BY (sale_date STRING,region STRING);
+    ```
 
 -   添加分区，如下所示：
 
@@ -243,7 +243,7 @@ Example:
        tunnel resume
 ```
 
-示例如下：
+**示例**
 
 修改data.txt文件为如下内容：
 
@@ -380,7 +380,7 @@ Example:
 -   -threads：指定threads的数量，默认为1。
 -   -tz：指定时区。默认为本地时区：Asia/Shanghai。
 
-示例如下：
+**示例**
 
 下载数据到result.txt文件中，如下所示：
 
@@ -439,7 +439,7 @@ Example:
 "yyyy年MM月dd日": 数据格式"2014年09月01日"
 ```
 
-示例如下：
+**示例**
 
 ```
 tunnel upload log.txt test_table -dfp "yyyy-MM-dd HH:mm:ss"
@@ -468,7 +468,7 @@ tunnel upload log.txt test_table -c "gbk"
 -   列分隔符不能够包含行分隔符。
 -   转义字符分隔符，在命令行方式下只支持\\r、\\n和\\t。
 
-示例如下：
+**示例**
 
 ```
 tunnel upload log.txt test_table -fd "||" -rd "\r\n"
