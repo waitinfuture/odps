@@ -1,6 +1,6 @@
 # 输出到动态分区（DYNAMIC PARTITION） {#concept_b1p_qdb_wdb .concept}
 
-在Insert overwrite到一张分区表时，可以在分区中指定一个分区列名，但不给出值。相应地，在select子句中的对应列来提供分区的值。
+在Insert overwrite到一张分区表时，可以在分区中指定一个分区列名，但不给出值。相应地，在select子句中的对应列提供分区的值。
 
 ## 动态分区语法 {#section_aky_dyy_bgb .section}
 
@@ -13,8 +13,8 @@ insert overwrite table tablename partition (partcol1, partcol2 ...) select_state
 **说明：** 
 
 -   select\_statement字段中，后面的字段将提供目标表动态分区值。如目标表就一级动态分区，则select\_statement最后一个字段值即为目标表的动态分区值。
--   目前，在使用动态分区功能的SQL中，在分布式环境下，单个进程最多只能输出512个动态分区，否则引发运行时异常。
--   现阶段，任意动态分区SQL不允许生成超过2000个动态分区，否则引发运行时异常。
+-   目前，在使用动态分区功能的SQL中，在分布式环境下，**单个进程最多只能输出512个动态分区**，否则引发运行时异常。
+-   现阶段，任意动态分区SQL**不允许生成超过2000个动态分区**，否则引发运行时异常。
 -   动态生成的分区值不允许为NULL，也不支持含特殊字符和中文，否则会引发异常。
 
     ```
@@ -79,7 +79,7 @@ create table sale_detail_dypart like sale_detail;--创建示例目标表
     ```
 
 
-另外，旧版MaxCompute在进行动态分区时，如果分区列的类型与对应select列表中列的类型不严格一致，会报错。MaxCompute2.0则支持隐式类型转换，示例如下：
+旧版MaxCompute在进行动态分区时，如果分区列的类型与对应select列表中列的类型不严格一致，会报错。MaxCompute 2.0则支持[隐式类型转换](intl.zh-CN/用户指南/基本概念/数据类型.md#)，示例如下：
 
 ```
 create table parttable(a int, b double) partitioned by (p string);
@@ -93,6 +93,8 @@ select * from parttable;
 |:-|:-|:-|
 |0|NULL|2017-01-23 22:30:47.130406621|
 |0|NULL|2017-01-23 22:30:47.130406621|
+
+**说明：** 如果您的数据是有序的，动态分区插入会把数据随机打散，导致压缩率较低。推荐您使用[Tunnel命令](intl.zh-CN/用户指南/数据上传下载/Tunnel命令操作.md#)上传数据到动态分区，可以获取较好的压缩率。
 
 使用该命令的详细示例请参见[RDS迁移到MaxCompute实现动态分区](../../../../../intl.zh-CN/最佳实践/数据迁移/RDS迁移到MaxCompute实现动态分区.md#)。
 
