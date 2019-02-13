@@ -106,7 +106,7 @@ The preceding SQL includes 4 keywords \(one DISTINCT, one COUNT, one GROUP BY, a
 
 **Note:** When you need to mix the internal and external tables, you will pay separately.
 
-Since January 1, 2019, MaxCompute will begin charging for external table SQL tasks. The billing for one external table SQL task is calculated as follows.：
+Since March, 2019, MaxCompute will begin charging for external table SQL tasks. The billing for one external table SQL task is calculated as follows：
 
 ```
  Computing Cost of One SQL Task = DataInputSize x SQLComplexity x SQL Price
@@ -174,5 +174,5 @@ The price is as follows:
 
 -   MaxCompute sends you messages to notify you of the size of your downloads, and to provide you with your download costs the next day.
 -   Download data volume refers to the size of an HTTP body for one download request. The HTTP body that carries data uses protobuffer encoding, so it is generally smaller than the original data size, but larger than the data stored in MaxCompute after compression.
--   The different billing methods are applicable to different network environments, such as public networks, classic networks of Alibaba Cloud, or VPC networks. For more information, see Access domains and data centers.  For more information, see [Access domains and data centers](https://www.alibabacloud.com/help/zh/doc-detail/34951.htm).
+-   The different billing methods are applicable to different network environments, such as public networks, classic networks of Alibaba Cloud, or VPC networks. For more information, see [Configure Endpoint](../../../../../reseller.en-US/Prepare/Configure Endpoint.md#).
 
