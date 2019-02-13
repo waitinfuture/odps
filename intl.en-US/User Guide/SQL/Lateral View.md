@@ -1,6 +1,6 @@
 # Lateral View {#concept_sqj_zhk_52b .concept}
 
-Lateral view is used in conjunction with UDTF such as split, explode, etc. It can split a row of data into multiple rows, and aggregate the split data on this basis. The lateral view first calls UDTF for each row of the original table. UTDF splits a row into one or more rows. The lateral view combines the results to produce a virtual table that supports the alias table.
+Lateral view is used in conjunction with UDTF such as split, explode, etc. It can split a row of data into multiple rows, and aggregate the split data on this basis.
 
 ## Single Lateral View statement {#section_ih1_33k_52b .section}
 
