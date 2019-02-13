@@ -2,15 +2,17 @@
 
 本文将为您介绍MaxCompute Region的开通情况和连接方式，解答您在与其他云产品（ECS、TableStore、OSS）互访场景中遇到的网络连通性和下载数据收费等问题。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15482934881423_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15500476011423_zh-CN.png)
 
 由上图可知，从服务层面来看，MaxCompute为您提供了两大类服务连接地址，如下所示：
 
 -   MaxCompute服务本身的连接地址：您可以向MaxCompute发出除数据上传、下载外的所有请求，例如创建表、删除某个函数、创建一个作业等。
 -   MaxCompute Tunnel服务的连接地址：上传、下载数据的能力是通过MaxCompute Tunnel服务提供的。当您想通过Tunnel上传、下载数据时，可以通过Tunnel提供的链接地址发起请求。
 
-    **说明：** 由于各Region部署和网络连接状况不一致，在Tunnel数据的下载计费规则上也不统一。
+    **说明：** 
 
+    -   由于各Region部署和网络连接状况不一致，在Tunnel数据的下载计费规则上也不统一。
+    -   如果您不配置Tunnel Endpoint，则Tunnel可能自动路由到公网，从而产生下载费用。
 
 ## 访问来源及下载数据收费规则说明 {#section_ydd_51y_5db .section}
 
