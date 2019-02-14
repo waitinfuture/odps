@@ -109,7 +109,7 @@ The preceding SQL includes 4 keywords \(one DISTINCT, one COUNT, one GROUP BY, a
 Since March, 2019, MaxCompute will begin charging for external table SQL tasks. The billing for one external table SQL task is calculated as follows：
 
 ```
- Computing Cost of One SQL Task = DataInputSize x SQLComplexity x SQL Price
+ Computing Cost of One SQL Task = DataInputSize x SQL Price
 ```
 
 The SQL price is as follows.
@@ -117,13 +117,6 @@ The SQL price is as follows.
 |Item|Price|
 |:---|:----|
 |SQL task|0.0044 USD/GB|
-
-SQL complexity calculation:
-
--   If SQL keyword number is less than or equal to 3, the complexity is 1.
--   If SQL keyword number is less than or equal to 6, the complexity is 1.5.
--   If SQL keyword number is less than or equal to 19, the complexity is 2.
--   If SQL keyword number is greater than or equal to 20, the complexity is 4.
 
 The external table SQL task is charged according to I/O for each job and is separated from the billing of normal SQL tasks. All daily measurement information is paid next day.
 
