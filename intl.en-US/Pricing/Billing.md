@@ -118,6 +118,13 @@ The SQL price is as follows.
 |:---|:----|
 |SQL task|0.0044 USD/GB|
 
+SQL complexity calculation:
+
+-   If SQL keyword number is less than or equal to 3, the complexity is 1.
+-   If SQL keyword number is less than or equal to 6, the complexity is 1.5.
+-   If SQL keyword number is less than or equal to 19, the complexity is 2.
+-   If SQL keyword number is greater than or equal to 20, the complexity is 4.
+
 The external table SQL task is charged according to I/O for each job and is separated from the billing of normal SQL tasks. All daily measurement information is paid next day.
 
 Pay-As-You-Go for MapReduce
