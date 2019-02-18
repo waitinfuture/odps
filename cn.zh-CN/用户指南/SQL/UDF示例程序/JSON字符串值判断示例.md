@@ -9,11 +9,29 @@
 
     根据路径path得到json串中的值，与[JSON字符串获取示例](cn.zh-CN/用户指南/SQL/UDF示例程序/JSON字符串获取示例.md#)get\_json\_object类似。另外还能判断指定的path中，是否包含有value。$代表根节点，.取子节点，\[\]取数组下标。path只支持字母、数字、下划线。
 
--   **参数**
+-   **参数说明**
+
+    `UDFGetJsonObject(String jsonString, String pathString)`
+
     -   @jsonString：json字符串
     -   @pathString：路径
-    -   String UDFGetJsonObject\(String jsonString, String pathString\)
--   **使用示例**
+
+## UDF使用示例 {#section_btp_3yj_5gb .section}
+
+-   资源上传
+
+    实际在MaxCompute公共云运行时，由于沙箱等限制，需要把org.json包和UDF jar包分别作为资源上传MaxCompute，并且在DataWorks创建函数时**同时引用两个资源**，org.json包可以手动到[MVN](https://mvnrepository.com/artifact/org.json/json)下载。
+
+-   注册函数
+
+    本例中TestJson.jar是UDF打包后生成的jar，而json-20180813.jar是org.json包，如下图。
+
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/105851/155047936137569_zh-CN.png)
+
+-   使用示例
+
+    成功注册UDF后，执行命令：
+
     1.  ```language-sql
 select TestJson('{"LogA\":[{"id":"11562,20508"}, {"id":"11563,20509"}]}', "LogA[0]") from dual;
 ```
@@ -33,12 +51,6 @@ select bi_udf:bi_get_value('{"LogA\":[{"id":"11562,20508"}, {"id":"11563,20509"}
 ```
 
         结果：true
-
--   使用注意事项：
-
-    org.json包可以手动到https://mvnrepository.com/artifact/org.json/json下载，实际在MaxCompute公共云运行时，由于沙箱等限制，需要把org.json包和UDF jar包分别作为资源上传MaxCompute，并且在DataWorks创建函数时**同时引用两个资源**。如下图所示，本例中TestJson.jar是UDF打包后生成的jar，而json-20180813.jar是org.json包。
-
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/105851/154770859137569_zh-CN.png)
 
 
 ## UDF代码示例 {#section_ucz_g5g_mgb .section}
