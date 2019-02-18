@@ -24,7 +24,7 @@ This article will help you organize common problems in the application of MaxCom
 
     A: Select the **Autocommit** check box in the client.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20130/155048492111171_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20130/155049133811171_en-US.jpg)
 
 
  
