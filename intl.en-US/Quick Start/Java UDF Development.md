@@ -14,15 +14,15 @@ Users who use Maven can search odps-sdk-udf in the [Maven Library](http://search
 
 Currently, JAVA UDF can be developed in the following ways:
 
--   Using [MaxCompute Studio completes Java UDF development throughout the process](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Developing Java/Develop and debug UDF.md).
--   Use the [develop and debug JAVA UDF with Eclipse plug-ins](../../../../reseller.en-US/Tools and Downloads/Eclipse Plugins/UDF.md), export jar packages, then use the command or DataWorks to [add the resource](../../../../reseller.en-US/User Guide/Common commands/Resources.md) and then [register the function](../../../../reseller.en-US/User Guide/Common commands/Functions.md).
+-   Using [MaxCompute Studio completes Java UDF development throughout the process](../../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Developing Java/Develop and debug UDF.md).
+-   Use the [develop and debug JAVA UDF with Eclipse plug-ins](../../../../../reseller.en-US/Tools and Downloads/Eclipse Plugins/UDF.md), export jar packages, then use the command or DataWorks to [add the resource](../../../../../reseller.en-US/User Guide/Common commands/Resources.md) and then [register the function](../../../../../reseller.en-US/User Guide/Common commands/Functions.md).
 
 The code examples for UDF, UDAF, udtf are given separately in this article, and the complete process example for developing UDF in two methods will be displayed\(The steps of UDAF, UDTF are the same as that of UDF \).
 
 **Note:** 
 
--   For related statements about custom function registration and logout, and viewing function list, see [function](../../../../reseller.en-US/User Guide/Common commands/Functions.md).
--   For the data types mapping for Java and MaxCompute, see [parameters and return types](../../../../reseller.en-US/User Guide/SQL/UDF/Java UDF.md).
+-   For related statements about custom function registration and logout, and viewing function list, see [function](../../../../../reseller.en-US/User Guide/Common commands/Functions.md).
+-   For the data types mapping for Java and MaxCompute, see [parameters and return types](../../../../../reseller.en-US/User Guide/SQL/UDF/Java UDF.md).
 
 ## UDF example {#section_q5g_1zy_5db .section}
 
@@ -31,13 +31,13 @@ The following example shows how to develop a UDF to realize character lowercase 
 -   **Developing using MaxCompute Studio**
     1.  **Prepare tools and environment**.
 
-        Suppose that the environment has been prepared, which includes [installing Studio](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Tools Installation and version history/Install IntelliJ IDEA.md), creating a [MaxCompute project link](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Project space connection management.md) on Studio, and creating a [MaxCompute Java module](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Developing Java/Create MaxCompute Java Module.md).
+        Suppose that the environment has been prepared, which includes [installing Studio](../../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Tools Installation and version history/Install IntelliJ IDEA.md), creating a [MaxCompute project link](../../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Project space connection management.md) on Studio, and creating a [MaxCompute Java module](../../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Developing Java/Create MaxCompute Java Module.md).
 
     2.  **Write program**.
 
         Create a Java file under the configured Java Module.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15393157711573_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15505704311573_en-US.png)
 
         Select MaxCompute Java directly and enter the `package name in name text box, file name`.  Select UDF for Kind. Edit the code as following:
 
@@ -52,13 +52,13 @@ The following example shows how to develop a UDF to realize character lowercase 
         }
         ```
 
-        **Note:** If you want to debug Java locally UDF, see [develop and debug UDF](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Developing Java/Develop and debug UDF.md)
+        **Note:** If you want to debug Java locally UDF, see [develop and debug UDF](../../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Developing Java/Develop and debug UDF.md)
 
     3.  **Register MaxCompute UDF**.
 
         As shown in the following figure, right-click the UDF's Java file and select **Deploy to server**，select the MaxCompute project to be registered in the dialog box. enter a `function name`. The  resource name also can be modified.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15393157711574_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15505704311574_en-US.png)
 
         When all configurations are finished, click **OK**. There are prompts after the registration is successful.
 
@@ -66,14 +66,14 @@ The following example shows how to develop a UDF to realize character lowercase 
 
         Open the SQL script and execute the code such as `select Lower_test(‘ABC’);`. The result is shown in the following figure:
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15393157711575_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15505704311575_en-US.png)
 
-        **Note:** To write SQL scripts in Studio, see [writing SQL scripts](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Develop SQL procedure/Write SQL.md).
+        **Note:** To write SQL scripts in Studio, see [writing SQL scripts](../../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Develop SQL procedure/Write SQL.md).
 
 -   **Developing using the Eclipse plug-in**
     1.  **Creating a project**
 
-        Suppose that a MaxCompute \(formerly ODPS\) project has been created in the Eclipse plug-in, for more information, see [creating a MaxCompute project](../../../../reseller.en-US/Tools and Downloads/Eclipse Plugins/Create a project.md).
+        Suppose that a MaxCompute \(formerly ODPS\) project has been created in the Eclipse plug-in, for more information, see [creating a MaxCompute project](../../../../../reseller.en-US/Tools and Downloads/Eclipse Plugins/Create a project.md).
 
     2.  **Writing program**
 
@@ -95,13 +95,13 @@ The following example shows how to develop a UDF to realize character lowercase 
 
         **Note:** 
 
-        -   For more detailed introduction of developing debugging code, see [UDF](../../../../reseller.en-US/Tools and Downloads/Eclipse Plugins/UDF.md).
-        -   For more information about the SDK, see [UDF SDK](../../../../reseller.en-US/User Guide/SQL/UDF/UDF Summary.md) .
+        -   For more detailed introduction of developing debugging code, see [UDF](../../../../../reseller.en-US/Tools and Downloads/Eclipse Plugins/UDF.md).
+        -   For more information about the SDK, see [UDF SDK](../../../../../reseller.en-US/User Guide/SQL/UDF/UDF Summary.md) .
     3.  **Add Resource：**
 
         Specify the referenced UDF code before running UDF. Your code is added to MaxCompute in the form of resources.  Java  UDF must be compiled into the Jar package and added in MaxCompute as a Jar resource. The UDF framework loads the JAR package automatically and runs UDF.
 
-        **Note:** MaxCompute [MapReduce](../../../../reseller.en-US/User Guide/MapReduce/Summary/MapReduce.md) also describes the use of resources.
+        **Note:** MaxCompute [MapReduce](../../../../../reseller.en-US/User Guide/MapReduce/Summary/MapReduce.md) also describes the use of resources.
 
         Run the command:
 
@@ -118,7 +118,7 @@ The following example shows how to develop a UDF to realize character lowercase 
         The format of the command is as follows:
 
         ```
-        CREATE FUNCTION AS <package_to_class> USING <resource_list>;
+        CREATE FUNCTION <function_name> AS <package_to_class> USING <resource_list>;
         ```
 
         **Parameter description：**
@@ -151,7 +151,7 @@ The following example shows how to develop a UDF to realize character lowercase 
 
 ## UDAF example {#section_zvj_3bz_5db .section}
 
-The registration method for a UDAF is similar to for a UDF. Its use is consistent with the [Aggregation Function](../../../../reseller.en-US/User Guide/SQL/Builtin Function/Aggregate function.md).  The following example shows a UDAF code to calculate the average:
+The registration method for a UDAF is similar to for a UDF. Its use is consistent with the [Aggregation Function](../../../../../reseller.en-US/User Guide/SQL/Builtin functions/Aggregate functions.md).  The following example shows a UDAF code to calculate the average:
 
 ```
 

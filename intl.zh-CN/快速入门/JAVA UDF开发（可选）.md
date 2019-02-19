@@ -16,7 +16,7 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 
 通常情况下，JAVA UDF的开发可以通过以下几种方式：
 
--   使用[MaxCompute Studio完成JAVA UDF开发整个流程](../../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/开发和调试UDF.md)。
+-   使用[MaxCompute Studio完成JAVA UDF开发整个流程](../../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发Java程序/开发和调试UDF.md)。
 -   使用[Eclipse插件开发和调试JAVA UDF](../../../../../intl.zh-CN/工具及下载/Eclipse开发插件/UDF开发插件介绍.md)，导出Jar包，然后通过命令或者DataWorks[添加资源](../../../../../intl.zh-CN/用户指南/常用命令/资源操作.md)后再[注册函数](../../../../../intl.zh-CN/用户指南/常用命令/函数操作.md)。
 
 本文中会分别给出UDF、UDAF、UDTF的代码示例，并通过两种方式给出开发UDF完整流程步骤示例（UDAF、UDTF操作步骤与UDF操作步骤一样）。
@@ -33,13 +33,13 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 -   **使用MaxCompute Studio开发**
     1.  **准备工具环境并创建Java Module**。
 
-        这里假设已经完成环境准备，包括[安装Studio](../../../../../intl.zh-CN/工具及下载/MaxCompute Studio/工具安装与版本信息/安装IntelliJ IDEA.md)并在Studio上[创建MaxCompute项目链接](../../../../../intl.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md)以及[创建MaxCompute Java Module](../../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/创建MaxCompute Java Module.md)。
+        这里假设已经完成环境准备，包括[安装Studio](../../../../../intl.zh-CN/工具及下载/MaxCompute Studio/工具安装与版本信息/安装IntelliJ IDEA.md)并在Studio上[创建MaxCompute项目链接](../../../../../intl.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md)以及[创建MaxCompute Java Module](../../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发Java程序/创建MaxCompute Java Module.md)。
 
     2.  **编写代码**。
 
         在配置好的Java Module下创建Java文件。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15486658331573_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15505704191573_zh-CN.png)
 
         直接选择MaxCompute Java，然后在name一栏里输入`package名称.文件名`，Kind选择UDF。 之后编辑如下代码：
 
@@ -54,13 +54,13 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
         }
         ```
 
-        **说明：** 若需本地调试java udf，请参见[开发和调试UDF](../../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/开发和调试UDF.md)
+        **说明：** 若需本地调试java udf，请参见[开发和调试UDF](../../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发Java程序/开发和调试UDF.md)
 
     3.  **注册MaxCompute UDF**。
 
         如下图所示，右键单击UDF的Java文件，选择**Deploy to server**，弹框里选择注册到那个MaxCompute project，输入`function name`，Resource name也可以修改。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15486658331574_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15505704191574_zh-CN.png)
 
         填写好后，单击**OK**即可。注册成功后会有提示。
 
@@ -68,9 +68,9 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 
         打开SQL脚本，执行代码如`select Lower_test(‘ABC’);`结果如下图所示：
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15486658331575_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15505704191575_zh-CN.png)
 
-        **说明：** Studio中编写SQL脚本请参见[编写SQL脚本](../../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发 SQL 程序/编写SQL脚本.md)。
+        **说明：** Studio中编写SQL脚本请参见[编写SQL脚本](../../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发SQL程序/编写SQL脚本.md)。
 
 -   **使用Eclipse插件开发**
     1.  **创建工程**
@@ -118,7 +118,7 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
         **命令格式如下：**
 
         ```
-        CREATE FUNCTION AS <package_to_class> USING <resource_list>;
+        CREATE FUNCTION <function_name> AS <package_to_class> USING <resource_list>;
         ```
 
         **参数说明：**
