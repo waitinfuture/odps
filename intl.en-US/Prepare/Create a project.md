@@ -2,29 +2,31 @@
 
 A project is the basic unit of operation in MaxCompute.
 
-1.   Log on to the [DataWorks console](https://workbench.data.aliyun.com/console) and create a MaxCompute project in either of the two following ways. 
+1.  Log on to the [DataWorks console](https://partners-intl.aliyun.com) and create a MaxCompute project in either of the two following ways. 
     -   On the console overview page, go to **Common Functions** \> **Create Project**.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/15441858201414_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/15506529671414_en-US.png)
+
+        **Note:** Creating a workspace is creating a MaxCompute project.
 
     -   On the console overview page, click **Project List**, select the region, and then click **Create Project**.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/15441858211416_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/15506529671416_en-US.png)
 
-2.   Configure in the **Create Project** dialog box, select region and service. If  you do not buy related services for the selected region,  **'Service is not available for this region'** is displayed. The data development, O&M center, and data management are selected by default. as shown in the following figure:![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/15441858211417_en-US.png)
+2.   Configure in the **Create Project** dialog box, select region and service. If  you do not buy related services for the selected region,  **'Service is not available for this region'** is displayed. The data development, O&M center, and data management are selected by default. as shown in the following figure:![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/15506529671417_en-US.png)
 
  
 
     **Select calculation engine services:**
 
-    -   If you want to add and authorize users using DataWorks, see [Add Users and Roles](https://www.alibabacloud.com/help/doc-detail/58185.html).
+    -   If you want to add and authorize users using DataWorks, see [Add Users and Roles](../../../../../reseller.en-US/Preparation/Administrator Operations/Add users and roles.md#).
     **DataWorks service:**
 
-    -   Data integration: A data synchronization platform that provides stable, efficient, and elastically scalable services. The Data Integration is designed to implement fast and stable data movement and synchronization between multiple heterogeneous data sources in complex network environments.  For more information, see [Data Integration Overview](https://www.alibabacloud.com/help/doc-detail/47677.html).
-    -   Data development: The data development helps you to design data computing processes according to your business demands and make mutually dependent tasks be automatically run in the scheduling system.  For more information, see [Data Development Overview](https://www.alibabacloud.com/help/doc-detail/30276.html).
-    -   O&M center: The O&M Center is a place where tasks and instances are displayed and operated. You can view all your tasks in Task List and perform such operations on the displayed tasks.  For more information, see [O&M Center Overview](https://www.alibabacloud.com/help/doc-detail/30295.html).
-    -   Data management: The Data Management module of the Alibaba Cloud DTplus platform displays the global data view and metadata details of an organization, and enables operations such as divided permission management, data lifecycle management, and approval and management of data table/resource/function permissions.  For more information, see [data management overview](https://www.alibabacloud.com/help/doc-detail/30284.html).
-3.   Configure the basic information and advanced settings for the new project.![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/15441858211418_en-US.png)
+    -   Data integration: A data synchronization platform that provides stable, efficient, and elastically scalable services.  It is designed to implement fast and stable data movement and synchronization between various heterogeneous data sources in complex network environments. For more information, see [Data Integration Overview](../../../../../reseller.en-US/User Guide/Data integration/Data integration introduction/Data integration overview.md#).
+    -   Data development: The data development helps you to design data computing processes according to your business demands and make mutually dependent tasks be automatically run in the scheduling system. For more information, see [Data Development Overview](../../../../../reseller.en-US/User Guide/Data development/Solution.md#).
+    -   O&M center: The O&M Center is a place where tasks and instances are displayed and operated. You can view all your tasks in Task List and perform such operations on the displayed tasks.  For more information, see [O&M Center Overview](../../../../../reseller.en-US/User Guide/Operation center/Operation center overview.md#).
+    -   Data management: The Data Management module of the Alibaba Cloud DTplus platform displays the global data view and metadata details of an organization, and enables operations such as divided permission management, data lifecycle management, and approval and management of data table/resource/function permissions.  For more information, see [data management overview](../../../../../reseller.en-US/User Guide/Data management/Introduction.md#).
+3.   Configure the basic information and advanced settings for the new project.![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/15506529671418_en-US.png)
 
  
 
@@ -32,6 +34,7 @@ A project is the basic unit of operation in MaxCompute.
 
     -   project name: The length of the project name is between 3 and 27 characters.
     -   display name: The length of the display name is not more than 27 characters.
+    -   Workspace mode: The new version of Dataworks workspace has introduced simple and standard modes. For a detailed description, see[Simple mode and standard mode](../../../../../reseller.en-US/Product Introduction/Simple mode and standard mode.md#).
     **Advanced Configuration:**
 
     -   Enable scheduling frequency: Control the current project whether to enable or disable the scheduling system, and if it is disabled, it can not periodically schedule tasks.
