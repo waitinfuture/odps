@@ -19,7 +19,7 @@ You can renew instances on the **renewal management** page or the **project list
 2.  Go to **Bill Management** \> **Renew**.
 3.  Click **Manually Renew** and select **MaxCompute**, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/13800/15489194973742_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/13800/15507142303742_en-US.png)
 
 4.  Select the instance to renew, and click **Renew**.
 5.  Select the required renewal duration, and click **Pay**.
@@ -45,15 +45,15 @@ You can select **Auto-Renew** to renew instances automatically.
 3.  Select **MaxCompute** in **Renew**,  click **Manually Renew**. 
 4.  Click **Enable Auto-Renew**, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/13800/15489194973745_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/13800/15507142303745_en-US.png)
 
 5.  Select the Auto-renewal period, and click **Activate auto-renewal**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/13800/15489194973746_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/13800/15507142303746_en-US.png)
 
 6.  After configuration is complete, the page displays the notification that the **Auto-renewal feature has been activated**. Enter the auto-renewal page to see the auto-renewal instance information.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/13800/15489194973747_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/13800/15507142303747_en-US.png)
 
 7.  If you need to modify or cancel the Auto-Renew, click **Modify Auto-Renew** to **modify renewal cycle time**, click **Don’t Renew** to cancel the renewal activity, and click **OK**.
 
@@ -68,7 +68,7 @@ You can select **Auto-Renew** to renew instances automatically.
 
 If you do not want to renew your instances, or if you want to renew your instances manually, go to the Don’t Renew tab, and in the **Actions column** click Enable Manually Renew.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/13800/15489194973748_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/13800/15507142303748_en-US.png)
 
 **Note:** If you select the Don’t Renew option, the system does not send an expiration reminder. However, 3 days before expiration, the system will send a reminder to you to verify that the Don’t Renew option matches your requirements.
 
