@@ -77,65 +77,7 @@ public final class Lower extends UDF {
 
 UDF的使用方式与MaxCompute SQL中普通的内建函数相同，详情请参见 [内建函数](cn.zh-CN/用户指南/SQL/内建函数/数学函数.md)。
 
--   新版的MaxCompute支持定义Java UDF时，使用Writable类型作为参数和返回值。下面为MaxCompute类型和Java Writable类型的映射关系。
-
-    |MaxCompute Type|Java Writable Type|
-    |---------------|------------------|
-    |tinyint|ByteWritable|
-    |smallint|ShortWritable|
-    |int|IntWritable|
-    |bigint|LongWritable|
-    |float|FloatWritable|
-    |double|DoubleWritable|
-    |decimal|BigDecimalWritable|
-    |boolean|BooleanWritable|
-    |string|Text|
-    |varchar|VarcharWritable|
-    |binary|BytesWritable|
-    |datetime|DatetimeWritable|
-    |timestamp|TimestampWritable|
-    |interval\_year\_month|IntervalYearMonthWritable|
-    |interval\_day\_time|IntervalDayTimeWritable|
-    |array|暂不支持|
-    |map|暂不支持|
-    |struct|暂不支持|
-
-    使用Writable类型实现Concat的示例如下：
-
-    ```
-    package com.aliyun.odps.udf.example;
-    import com.aliyun.odps.io.Text;
-    import com.aliyun.odps.udf.UDF;
-    public class MyConcat extends UDF {
-      private Text ret = new Text();
-      public Text evaluate(Text a, Text b) {
-        if (a == null || b == null) {
-          return null;
-        }
-        ret.clear();
-        ret.append(a.getBytes(), 0, a.getLength());
-        ret.append(b.getBytes(), 0, b.getLength());
-        return ret;
-      }
-    }
-    ```
-
-    **说明：** 
-
-    所有的Writable类型所在的package为`com.aliyun.odps.io`。如果您要使用该类型，可到[API文档地址](https://www.javadoc.io/doc/com.aliyun.odps/odps-sdk-commons/0.30.9-public)下载odps-sdk-commons包。
-
-    MaxCompute提供的SDK包整体信息，如下表所示：
-
-    |包名|描述|
-    |--|--|
-    |odps-sdk-core|MaxCompute的基础功能，例如：对表，Project的操作，以及 Tunnel 均在此包中|
-    |odps-sdk-commons|一些Util封装|
-    |odps-sdk-udf|UDF功能的主体接口|
-    |odps-sdk-mapred|MapReduce功能|
-    |odps-sdk-graph|Graph Java SDK，搜索关键词“odps-sdk-graph”|
-
-    如果您想了解使用Intellij IDEA开发工具完成完整的Java UDF开发示例，请参见[IntelliJ IDEA Java UDF开发最佳实践](../../../../../cn.zh-CN/最佳实践/数据开发/IntelliJ IDEA Java UDF开发最佳实践.md#)。使用Eclipse开发工具完成完整的Java UDF开发示例，请参见[Eclipse Java UDF开发最佳实践](../../../../../cn.zh-CN/最佳实践/数据开发/Eclipse Java UDF开发最佳实践.md#)。
-
+如果您想了解使用Intellij IDEA开发工具完成完整的Java UDF开发示例，请参见[IntelliJ IDEA Java UDF开发最佳实践](../../../../../cn.zh-CN/最佳实践/数据开发/IntelliJ IDEA Java UDF开发最佳实践.md#)。使用Eclipse开发工具完成完整的Java UDF开发示例，请参见[Eclipse Java UDF开发最佳实践](../../../../../cn.zh-CN/最佳实践/数据开发/Eclipse Java UDF开发最佳实践.md#)。
 
 ## 其他UDF示例 {#section_rlw_t33_wgb .section}
 
@@ -201,7 +143,7 @@ public abstract class Aggregator implements ContextFunction {
 
 以实现求平均值avg为例，下图简要说明了在MaxCompute UDAF中这一函数的实现逻辑及计算流程：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15508083521855_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15508113041855_zh-CN.jpg)
 
 在上图中，输入数据被按照一定的大小进行分片（有关分片的描述请参见 [MapReduce](cn.zh-CN/用户指南/MapReduce/概要/MapReduce概述.md)），每片的大小适合一个worker在适当的时间内完成。这个分片大小的设置需要您手动配置完成。
 
