@@ -10,7 +10,7 @@ This topic describes how to use the data integration feature of DataWorks to ext
 
 2.  Prepare data.
 
-    Upload data to your MongoDB. In this example, [Alibaba Cloud ApsaraDB for MongoDB](../../../../../reseller.en-US/.md#) is used. The network type is VPC. \(An Internet IP address is required for MongoDB to communicate with the default resource group of DataWorks.\) The test data is as follows:
+    Upload data to your MongoDB. In this example, Alibaba Cloud ApsaraDB for MongoDB is used. The network type is VPC. \(An Internet IP address is required for MongoDB to communicate with the default resource group of DataWorks.\) The test data is as follows:
 
     ```
     
@@ -46,9 +46,7 @@ This topic describes how to use the data integration feature of DataWorks to ext
     }
     ```
 
-    Log on to the DMS console of MongoDB. In this example, the database name is admin and the collection is userlog. You can run the db.userlog.find\(\).limit\(10\) command in the query window to view the uploaded data, as shown in the following figure.
-
-    ![](images/32875_en-US.png)
+    Log on to the DMS console of MongoDB. In this example, the database name is admin and the collection is userlog. You can run the db.userlog.find\(\).limit\(10\) command in the query window to view the uploaded data.
 
 
 ## Use DataWorks to extract data to MaxCompute {#section_sk4_zq2_xfb .section}
@@ -57,37 +55,31 @@ This topic describes how to use the data integration feature of DataWorks to ext
 
     In the DataWorks console, go to the [Data Integration](../../../../../reseller.en-US/User Guide/Data integration/Data integration introduction/Data integration overview.md#) page and add a [MongoDB](../../../../../reseller.en-US/User Guide/Data integration/Data source configuration/Configure MongoDB data source.md#) data source.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/155056960132876_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/155080408532876_en-US.png)
 
     The parameters are shown in the following figure. Click **Complete** after the connectivity test is successful. In this example, the network type of MongoDB is VPC. Therefore, the **Data Source Type** must be set to **Public IP Address Available**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/155056960132877_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/155080408532877_en-US.png)
 
     To obtain the IP address and the port number, log on to the and click the target instance. Example parameters are shown in the following figure.
-
-    ![](images/32878_en-US.png)
 
 -   **2. Create a data synchronization task.**
 
     In the DataWorks console, create a data synchronization node. For more information, see [Configure OSS Reader](../../../../../reseller.en-US/User Guide/Data integration/Task configuration/Configure reader plug-in/Configure OSS Reader.md#).
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/155056960132879_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/155080408532879_en-US.png)
 
     At the same time, create a table named mqdata in DataWorks to store JSON data. For more information, see [Create a table](../../../../../reseller.en-US/User Guide/Data development/Table Management.md#).
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/155056960138569_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/155080408538569_en-US.png)
 
     You can set the table parameters on the graphical interface. The mqdata table has only one column, which is named MQ data. The data type is string.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155056960131545_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155080408531545_en-US.png)
 
 -   **3. Set the parameters.**
 
-    After creating a table, you can set the data synchronization task parameters on the graphical interface. First, set the destination data source to odps\_first and the destination table to mqdata. Then, set the original data source to MongoDB and select mongodb\_userlog. After completing the preceding settings, click **Switch to script mode**, as shown in the following figure.
-
-    ![](images/32880_en-US.png)
-
-    The following is an example of the code in script mode:
+    After creating a table, you can set the data synchronization task parameters on the graphical interface. First, set the destination data source to odps\_first and the destination table to mqdata. Then, set the original data source to MongoDB and select mongodb\_userlog. After completing the preceding settings, click **Switch to script mode**. The following is an example of the code in script mode:
 
     ```
     
@@ -151,16 +143,12 @@ This topic describes how to use the data integration feature of DataWorks to ext
 
     After completing the preceding settings, click **Run**. If the following information is displayed, the code has run successfully.
 
-    ![](images/31550_en-US.png)
-
 
 ## Verify the result {#section_cwq_bcf_xfb .section}
 
 Create an ODPS SQL node in your [Business Flow](../../../../../reseller.en-US/User Guide/Data development/Business flow/Business flow.md#).
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155056960131551_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155080408631551_en-US.png)
 
 Enter the `SELECT * from mqdata;` statement to view the data in the mqdata table. You can also run the SELECT \* from mqdata; command on the [MaxCompute client](../../../../../reseller.en-US/Tools and Downloads/Client.md#) to view the data.
-
-![](images/32881_en-US.png)
 
