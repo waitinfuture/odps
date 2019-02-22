@@ -4,7 +4,7 @@ MaxCompute的UDF包括UDF，UDAF 和UDTF三种函数，本文将重点介绍如�
 
 ## 参数与返回值类型 {#section_uhs_43f_vdb .section}
 
-MaxCompute 2.0版本升级后，Java UDF支持的数据类型从原来的Bigint，String，Double，Boolean扩展了更多基本的数据类型，同时还扩展支持了ARRAY，MAP，STRUCT等复杂类型，以及Writable参数。
+MaxCompute 2.0版本升级后，Java UDF支持的数据类型从原来的Bigint，String，Double，Boolean扩展了更多基本的数据类型，同时还扩展支持了ARRAY，MAP，STRUCT等复杂类型。
 
 -   Java UDF使用新基本类型的方法，如下所示：
     -   UDTF通过@Resolve注解来获取signature，如：`@Resolve("smallint->varchar(10)")`。
@@ -143,7 +143,7 @@ public abstract class Aggregator implements ContextFunction {
 
 以实现求平均值avg为例，下图简要说明了在MaxCompute UDAF中这一函数的实现逻辑及计算流程：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15508113041855_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15508114591855_zh-CN.jpg)
 
 在上图中，输入数据被按照一定的大小进行分片（有关分片的描述请参见 [MapReduce](cn.zh-CN/用户指南/MapReduce/概要/MapReduce概述.md)），每片的大小适合一个worker在适当的时间内完成。这个分片大小的设置需要您手动配置完成。
 
