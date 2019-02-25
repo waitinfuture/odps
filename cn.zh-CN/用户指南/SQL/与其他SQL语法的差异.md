@@ -29,7 +29,7 @@
 |SELECT—PIVOT|N|N|N|Y|Y|
 |SEMI JOIN|Y|Y \(corelated expression must be in WHERE, EXISTS must be corelated\)|Y|N \(has IN and EXISTS, but no SEMI JOIN grammer\)|N \(has IN and EXISTS, but no SEMI JOIN grammer\)|
 |SELEC TRANSFROM|Y|Y|N|N|N|
-|SELECT—corelated subquery|N|Y \(corelated expression must be in WHERE, EXISTS must be corelated\)|Y|Y|Y|
+|SELECT—corelated subquery|Y|Y \(corelated expression must be in WHERE, EXISTS must be corelated\)|Y|Y|Y|
 |ORDER BY NULLS FIRST/LAST|Y|Y|Y|Y|Y|
 |LATERAL VIEW|Y|Y|N|Y \(LATERAL keyword\)|Y \(CROSS APPLY keyword\)|
 |SET OPERATOR—UNION \(disintct\)|Y|Y|Y|Y|Y|
