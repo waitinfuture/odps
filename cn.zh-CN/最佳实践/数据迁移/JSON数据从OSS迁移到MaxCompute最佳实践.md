@@ -44,7 +44,7 @@
 
     将applog.txt文件上传到OSS，本文中OSS Bucket位于华东2区。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155109384031516_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117496631516_zh-CN.png)
 
 
 ## 使用DataWorks将JSON数据从OSS迁移到MaxCompute {#section_zcj_s3d_5fb .section}
@@ -53,39 +53,39 @@
 
     进入DataWorks[数据集成](../../../../../intl.zh-CN/使用指南/数据集成/数据集成简介/数据集成概述.md#)控制台，新增[OSS类型数据源](../../../../../intl.zh-CN/使用指南/数据集成/数据源配置/配置OSS数据源.md#)。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155109384031532_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117496631532_zh-CN.png)
 
     具体参数如下所示，测试数据源连通性通过即可点击完成。Endpoint地址本例中为http://oss-cn-shanghai.aliyuncs.com或http://oss-cn-shanghai-internal.aliyuncs.com
 
     **说明：** 由于本文中OSS和DataWorks项目处于同一个region中，本文选用后者，通过内网连接。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155109384031536_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117496631536_zh-CN.png)
 
 -   **步骤2：新建数据同步任务**
 
     在DataWorks上新建[数据同步类型节点。](../../../../../intl.zh-CN/使用指南/数据集成/作业配置/配置Reader插件/配置OSS Reader.md#)
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155109384031543_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117496731543_zh-CN.png)
 
     新建的同时，在DataWorks新建一个[建表任务](../../../../../intl.zh-CN/使用指南/数据开发/表管理.md#)，用于存放JSON数据，本例中新建表名为mqdata。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155109384031544_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117496731544_zh-CN.png)
 
     表参数可以通过图形化界面完成。本例中mqdata表仅有一列，类型为string，列名为MQ data。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155109384031545_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117496731545_zh-CN.png)
 
 -   **步骤3：配置同步任务参数**
 
     完成上述新建后，您可以在图形化界面配置数据同步任务参数，如下图所示。选择目标数据源名称为odps\_first，选择目标表为刚建立的mqdata。数据来源类型为OSS，Object前缀可填写文件路径及名称。如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155109384031546_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117496731546_zh-CN.png)
 
     **说明：** 列分隔符使用TXT文件中不存在的字符即可，本文中使用^（对于OSS中的TXT格式数据源，Dataworks支持多字符分隔符，所以您可以使用例如%&%\#^$$^%这样很难出现的字符作为列分隔符，保证分割为一列）。
 
     映射方式选择默认的同行映射即可，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155109384031548_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117496731548_zh-CN.png)
 
     点击左上方的切换脚本按钮，切换为脚本模式。修改fileFormat参数为：`"fileFormat":"binary"`。脚本模式代码示例如下。
 
@@ -162,24 +162,24 @@
 
     完成上述配置后，点击运行接即可。运行成功日志示例如下所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155109384031550_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117496731550_zh-CN.png)
 
 
 ## JSON数据从OSS迁移到MaxCompute结果验证 {#section_opc_bp3_pgb .section}
 
 1.  在您的[业务流程](../../../../../intl.zh-CN/使用指南/数据开发/业务流程/业务流程介绍.md#)中新建一个ODPS SQL节点，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155109384031551_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117496731551_zh-CN.png)
 
 2.  查看当前mqdata表中数据，输入`SELECT * from mqdata;`语句，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155109384031552_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117496731552_zh-CN.png)
 
     **说明：** 这一步及后续步骤，也可以直接在[MaxCompute客户端](../../../../../intl.zh-CN/工具及下载/客户端.md#)中输入命令运行。
 
 3.  确认导入表中的数据结果无误后，使用`SELECT GET_JSON_OBJECT(mqdata.MQdata,'$.expensive') FROM mqdata;`获取JSON文件中的expensive值，如下图所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155109384031553_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117496731553_zh-CN.png)
 
 
 ## 更多信息 {#section_y4g_zlb_pgb .section}

@@ -51,35 +51,35 @@ This topic describes how to use the data integration feature of DataWorks to mig
 
     In the DataWorks console, go to the [Data Integration](../../../../../reseller.en-US/User Guide/Data integration/Data integration introduction/Data integration overview.md#) page and add an OSS data source. For more information, see [Configure OSS data source](../../../../../reseller.en-US/User Guide/Data integration/Data source configuration/Configure OSS data source.md#).
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155080414231532_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117497731532_en-US.png)
 
     The parameters are shown in the following figure. Click **Complete** after the connectivity test is successful. The endpoints in this topic include http://oss-cn-shanghai.aliyuncs.com and http://oss-cn-shanghai-internal.aliyuncs.com.
 
     **Note:** Because the OSS and DataWorks projects are located in the same region, the intranet endpoint `http://oss-cn-shanghai-internal.aliyuncs.com` is used.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155080414231536_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117497731536_en-US.png)
 
 -   **2. Create a data synchronization task.**
 
     In the DataWorks console, create a data synchronization node. For more information, see [Configure OSS Reader](../../../../../reseller.en-US/User Guide/Data integration/Task configuration/Configure reader plug-in/Configure OSS Reader.md#). At the same time, create a table named mqdata in DataWorks to store the JSON data. For more information, see [Create a table](../../../../../reseller.en-US/User Guide/Data development/Table Management.md#).
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155080414231544_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117497731544_en-US.png)
 
     You can set the table parameters on the graphical interface. The mqdata table has only one column, which is named MQ data. The data type is string.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155080414231545_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117497731545_en-US.png)
 
 -   **3. Set the parameters.**
 
     After creating a table, you can set the data synchronization task parameters on the graphical interface, as shown in the following figure. First, set the destination data source to odps\_first and the destination table to mqdata. Then, set the original data source to OSS and enter the file path and name as the object prefix.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155080414231546_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117497731546_en-US.png)
 
     **Note:** You can set the column delimiter to caret \(^\) or any other character that is not contained in the TXT file. DataWorks supports multiple column delimiters for the TXT data sources in OSS. Therefore, you can use characters such as %&%\#^$$^% to separate the data into a column.
 
     Select **Enable Same Line Mapping**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155080414231548_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117497731548_en-US.png)
 
     Click the script switching button in the upper-left corner to switch to the script mode. Set fileFormat to `"fileFormat":"binary"`. The following is an example of the code in script mode:
 
@@ -161,15 +161,15 @@ This topic describes how to use the data integration feature of DataWorks to mig
 
 1.  Create an ODPS SQL node in your [Business Flow](../../../../../reseller.en-US/User Guide/Data development/Business flow/Business flow.md#).
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155080414331551_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117497731551_en-US.png)
 
-2.  Enter the `SELECT*from mqdata;` statement to view the data in the mqdata table.
+2.  Enter the `SELECT * from mqdata;` statement to view the data in the mqdata table.
 
-    **Note:** You can also run the `SELECT*from mqdata;` command on the [MaxCompute client](../../../../../reseller.en-US/Tools and Downloads/Client.md#) to view the data and perform subsequent steps.
+    **Note:** You can also run the `SELECT * from mqdata;` command on the [MaxCompute client](../../../../../reseller.en-US/Tools and Downloads/Client.md#) to view the data and perform subsequent steps.
 
 3.  Verify that the data imported to the table is correct and use `SELECT GET_JSON_OBJECT(mqdata.MQdata,'$.expensive') FROM mqdata;` to obtain the value of expensive in the JSON file.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155080414331553_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/155117497731553_en-US.png)
 
 
 ## Additional information {#section_y4g_zlb_pgb .section}
