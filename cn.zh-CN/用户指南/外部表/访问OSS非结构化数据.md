@@ -2,18 +2,15 @@
 
 本文将为您介绍如何在MaxCompute上轻松访问OSS的数据。
 
-关于处理非结构化数据的原理性介绍请参见[外部表概述](cn.zh-CN/用户指南/外部表/外部表概述.md#)。
+关于处理非结构化数据的原理性介绍请参见[外部表概述](intl.zh-CN/用户指南/外部表/外部表概述.md#)。
 
 ## STS模式授予权限 {#section_uv5_1fb_wdb .section}
 
-MaxCompute需要直接访问OSS的数据，前提需要将OSS的数据相关权限赋给MaxCompute的访问账号，您可通过以下两种方式授予权限。
+MaxCompute需要直接访问OSS的数据，前提需要将OSS的数据相关权限赋给MaxCompute的访问账号，您可通过以下方式授予权限：
 
 -   当MaxCompute和OSS的owner是同一个账号时，可以直接登录阿里云账号后，[点击此处完成一键授权](https://ram.console.aliyun.com/?spm=5176.100239.blogcont281191.24.uJg9dR#/role/authorize?request=%7B%22Requests%22:%20%7B%22request1%22:%20%7B%22RoleName%22:%20%22AliyunODPSDefaultRole%22,%20%22TemplateId%22:%20%22DefaultRole%22%7D%7D,%20%22ReturnUrl%22:%20%22https:%2F%2Fram.console.aliyun.com%2F%22,%20%22Service%22:%20%22ODPS%22%7D)。
 -   自定义授权。
-    1.  首先需要在[RAM](https://www.aliyun.com/product/ram)中授予MaxCompute访问OSS的权限。登录 [RAM控制台](https://ram.console.aliyun.com/#/overview)（若MaxCompute和OSS不是同一个账号，此处需由OSS账号登录进行授权），通过控制台中的 [角色管理](https://ram.console.aliyun.com/#/role/list) 创建角色 ，角色名如`AliyunODPSDefaultRole`或`AliyunODPSRoleForOtherUser`。如下图所示：
-
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12074/15489873165234_zh-CN.png)
-
+    1.  首先需要在[RAM](https://www.alibabacloud.com/zh/product/ram)中授予MaxCompute访问OSS的权限。登录[RAM控制台](https://account.alibabacloud.com/login/login.html)（若MaxCompute和OSS不是同一个账号，此处需由OSS账号登录进行授权），通过控制台中的[角色管理](https://ram.console.aliyun.com/#/role/list)创建角色 ，角色名如`AliyunODPSDefaultRole`或`AliyunODPSRoleForOtherUser`。
     2.  修改角色策略内容设置，如下所示。
 
         ```
@@ -77,9 +74,9 @@ MaxCompute需要直接访问OSS的数据，前提需要将OSS的数据相关权�
 
 ## 内置extractor访问OSS数据 {#section_ukx_nfb_wdb .section}
 
-访问外部数据源时，需要用户自定义不同的Extractor，同时您也可以使用MaxCompute内置的Extractor，来读取按照约定格式存储的[OSS](https://www.aliyun.com/product/oss)数据。只需要创建一个外部表，便可把这张表作为源表进行查询。
+访问外部数据源时，需要用户自定义不同的Extractor，同时您也可以使用MaxCompute内置的Extractor，来读取按照约定格式存储的[OSS](https://www.alibabacloud.com/product/oss)数据。只需要创建一个外部表，便可把这张表作为源表进行查询。
 
-假设有一份CSV数据存在[OSS](https://www.aliyun.com/product/oss)上，endpoint为`oss-cn-shanghai-internal.aliyuncs.com`，bucket为`oss-odps-test`，数据文件的存放路径为/demo/vehicle.csv。
+假设有一份CSV数据存在[OSS](https://www.alibabacloud.com/product/oss)上，endpoint为`oss-cn-shanghai-internal.aliyuncs.com`，bucket为`oss-odps-test`，数据文件的存放路径为/demo/vehicle.csv。
 
 ## 创建外部表 {#section_b23_tfb_wdb .section}
 
@@ -111,7 +108,7 @@ LOCATION 'oss://oss-cn-shanghai-internal.aliyuncs.com/oss-odps-test/Demo/'; -- (
 -   LOCATION必须指定一个OSS目录，默认系统会读取这个目录下所有的文件。
     -   建议您使用OSS提供的内网域名，否则将产生OSS流量费用。
     -   建议您存放OSS数据的区域对应您开通MaxCompute的区域。由于MaxCompute只有在部分区域部署，我们不承诺跨区域的数据连通性。
-    -   OSS的连接格式为`oss://oss-cn-shanghai-internal.aliyuncs.com/Bucket名称/目录名称/`。目录后不要加文件名称，如下的集中用法都是错误的：
+    -   OSS的连接格式为`oss://oss-cn-shanghai-internal.aliyuncs.com/Bucket名称/目录名称/`。目录后不要加文件名称，如下的几种用法都是错误的：
 
         ```
         http://oss-odps-test.oss-cn-shanghai-internal.aliyuncs.com/Demo/  -- 不支持http连接
@@ -170,51 +167,6 @@ select recordId, patientId, direction from ambulance_data_csv_external where pat
 | 10         | 31         | N         |
 +------------+------------+-----------+
 ```
-
-## 读取gzip压缩的CSV/TSV数据 {#section_qd2_dgr_zdb .section}
-
-MaxCompute目前只支持通过内置extractor读取OSS上gzip压缩的CSV/TSV数据。与读取非压缩文件相比，主要区别是SERDEPROPERTIES指定的属性。
-
-**说明：** 如果OSS上的数据文件为归档文件，请登录[OSS](../../../../../cn.zh-CN/产品简介/什么是对象存储 OSS.md#)，对文件进行解冻。
-
-创建外部表的代码示例，如下所示：
-
-```
-CREATE EXTERNAL TABLE IF NOT EXISTS ambulance_data_csv_external
-(
-vehicleId bigint,
-recordId bigint,
-patientId bigint,
-calls bigint,
-locationLatitute double,
-locationLongtitue double,
-recordTime string,
-direction string
-)
-STORED BY 'com.aliyun.odps.CsvStorageHandler'
-WITH SERDEPROPERTIES (
- 'odps.properties.rolearn'='acs:ram::xxxxx:role/aliyunodpsdefaultrole'
- [,'odps.text.option.gzip.input.enabled'='true']
- [,'name3'='value3']
-)
-LOCATION 'oss://oss-cn-hangzhou-zmf.aliyuncs.com/oss-odps-test/Demo/SampleData/CSV/AmbulanceData/';
-```
-
-目前SERDEPROPERTIES还支持的属性项，如下所示：
-
-|属性名|属性值|默认值|说明|
-|:--|:--|:--|:-|
-|odps.text.option.gzip.input.enabled|true/false|false|打开/关闭读压缩|
-|odps.text.option.gzip.output.enabled|true/false|false|打开/关闭写压缩|
-|odps.text.option.header.lines.count|非负整数|0|跳过文本文件头N行|
-|odps.text.option.null.indicator|字符串|空字符串|在解析或者写出NULL值时代表NULL的字符串|
-|odps.text.option.ignore.empty.lines|true/false|true|是否忽略空行|
-|odps.text.option.encoding|UTF-8/UTF-16/US-ASCII|UTF-8|指定文本的字符编码|
-|odps.text.option.delimiter|单个字符|,（英文逗号）|指定文本的列分隔符|
-
-**说明：** 
-
-当关联OSS压缩数据的外部表，读（select）、写（insert）操作也需要进行，那么创建这个外部表时，需要同时设置odps.text.option.gzip.input.enabled和odps.text.option.gzip.output.enabled两个属性为true。
 
 ## 自定义Extractor访问OSS {#section_lbc_ngb_wdb .section}
 
@@ -539,7 +491,7 @@ where sentence_snr > 10.0;
     ...
     ```
 
-    **说明：** 以上这些操作与标准的MaxCompute内部表操作一样，分区的详情请参见[分区](../../../../../cn.zh-CN/用户指南/基本概念/分区.md#)。在数据准备好并且PARTITION信息引入MaxCompute之后，即可通过SQL语句对OSS外表数据的分区进行操作。
+    **说明：** 以上这些操作与标准的MaxCompute内部表操作一样，分区的详情请参见[分区](../../../../../intl.zh-CN/用户指南/基本概念/分区.md#)。在数据准备好并且PARTITION信息引入MaxCompute之后，即可通过SQL语句对OSS外表数据的分区进行操作。
 
     此时分析数据时，可以指定指需分析某天的数据，如只想分析2016年6月1号当天，有多少不同的IP出现在LOG里面，可以通过如下语句实现。
 

@@ -2,13 +2,15 @@
 
 本文将为您介绍如何在MaxCompute上轻松访问OSS的数据。
 
+关于处理非结构化数据的原理性介绍请参见[外部表概述](intl.zh-CN/用户指南/外部表/外部表概述.md#)。
+
 ## STS模式授予权限 {#section_uv5_1fb_wdb .section}
 
-MaxCompute需要直接访问OSS的数据，前提需要将OSS的数据相关权限赋给MaxCompute的访问账号，您可通过以下两种方式授予权限。
+MaxCompute需要直接访问OSS的数据，前提需要将OSS的数据相关权限赋给MaxCompute的访问账号，您可通过以下方式授予权限：
 
--   **当MaxCompute和OSS的owner是同一个账号时**，可以直接登录阿里云账号后，[点击此处完成一键授权](https://ram.console.aliyun.com/?spm=5176.100239.blogcont281191.24.uJg9dR#/role/authorize?request=%7B%22Requests%22:%20%7B%22request1%22:%20%7B%22RoleName%22:%20%22AliyunODPSDefaultRole%22,%20%22TemplateId%22:%20%22DefaultRole%22%7D%7D,%20%22ReturnUrl%22:%20%22https:%2F%2Fram.console.aliyun.com%2F%22,%20%22Service%22:%20%22ODPS%22%7D)。
+-   当MaxCompute和OSS的owner是同一个账号时，可以直接登录阿里云账号后，[点击此处完成一键授权](https://ram.console.aliyun.com/?spm=5176.100239.blogcont281191.24.uJg9dR#/role/authorize?request=%7B%22Requests%22:%20%7B%22request1%22:%20%7B%22RoleName%22:%20%22AliyunODPSDefaultRole%22,%20%22TemplateId%22:%20%22DefaultRole%22%7D%7D,%20%22ReturnUrl%22:%20%22https:%2F%2Fram.console.aliyun.com%2F%22,%20%22Service%22:%20%22ODPS%22%7D)。
 -   自定义授权。
-    1.  首先需要在[RAM](https://www.alibabacloud.com/zh/product/ram)中授予MaxCompute访问OSS的权限。登录[RAM控制台](https://account.alibabacloud.com/login/login.html)（若MaxCompute和OSS不是同一个账号，此处需由OSS账号登录进行授权），通过控制台中的[角色管理](https://ram.console.aliyun.com/#/role/list)创建角色 ，角色名如AliyunODPSDefaultRole或AliyunODPSRoleForOtherUser。
+    1.  首先需要在[RAM](https://www.alibabacloud.com/zh/product/ram)中授予MaxCompute访问OSS的权限。登录[RAM控制台](https://account.alibabacloud.com/login/login.html)（若MaxCompute和OSS不是同一个账号，此处需由OSS账号登录进行授权），通过控制台中的[角色管理](https://ram.console.aliyun.com/#/role/list)创建角色 ，角色名如`AliyunODPSDefaultRole`或`AliyunODPSRoleForOtherUser`。
     2.  修改角色策略内容设置，如下所示。
 
         ```
@@ -44,7 +46,7 @@ MaxCompute需要直接访问OSS的数据，前提需要将OSS的数据相关权�
         }
         ```
 
-    3.  授予角色访问OSS必要的权限**AliyunODPSRolePolicy**，如下所示。
+    3.  授予角色访问OSS必要的权限`AliyunODPSRolePolicy`，如下所示。
 
         ```
         {
@@ -106,7 +108,7 @@ LOCATION 'oss://oss-cn-shanghai-internal.aliyuncs.com/oss-odps-test/Demo/'; -- (
 -   LOCATION必须指定一个OSS目录，默认系统会读取这个目录下所有的文件。
     -   建议您使用OSS提供的内网域名，否则将产生OSS流量费用。
     -   建议您存放OSS数据的区域对应您开通MaxCompute的区域。由于MaxCompute只有在部分区域部署，我们不承诺跨区域的数据连通性。
-    -   OSS的连接格式为`oss://oss-cn-shanghai-internal.aliyuncs.com/Bucket名称/目录名称/`。目录后不要加文件名称，如下的集中用法都是错误的：
+    -   OSS的连接格式为`oss://oss-cn-shanghai-internal.aliyuncs.com/Bucket名称/目录名称/`。目录后不要加文件名称，如下的几种用法都是错误的：
 
         ```
         http://oss-odps-test.oss-cn-shanghai-internal.aliyuncs.com/Demo/  -- 不支持http连接
@@ -185,7 +187,7 @@ select recordId, patientId, direction from ambulance_data_csv_external where pat
 1|10|31|1|46.81006|-92.08174|9/14/2014 0:00|N
 ```
 
--   **定义Extractor**
+-   定义Extractor
 
     写一个通用的Extractor，将分隔符作为参数传进来，可以处理所有类似格式的text文件。如下所示：
 
@@ -206,10 +208,10 @@ select recordId, patientId, direction from ambulance_data_csv_external where pat
       // no particular usage for execution context in this example
       @Override
       public void setup(ExecutionContext ctx, InputStreamSet inputs, DataAttributes attributes) {
-        this.inputs = inputs; //  inputs 是一个 InputStreamSet，每次调用 next() 返回一个 InputStream，这个 InputStream 可以读取一个 OSS 文件的所有内容。
+        this.inputs = inputs; //  inputs是一个InputStreamSet，每次调用next()返回一个 InputStream，这个InputStream可以读取一个 OSS文件的所有内容。
         this.attributes = attributes;
         // check if "delimiter" attribute is supplied via SQL query
-        String columnDelimiter = this.attributes.getValueByKey("delimiter"); //delimiter 通过 DDL 语句传参。
+        String columnDelimiter = this.attributes.getValueByKey("delimiter"); //delimiter通过DDL语句传参。
         if ( columnDelimiter != null)
         {
           this.columnDelimiter = columnDelimiter;
@@ -217,12 +219,12 @@ select recordId, patientId, direction from ambulance_data_csv_external where pat
         // note: more properties can be inited from attributes if needed
       }
       @Override
-      public Record extract() throws IOException {//extactor() 调用返回一条 Record，代表外部表中的一条记录。
+      public Record extract() throws IOException {//extactor() 调用返回一条Record，代表外部表中的一条记录。
         String line = readNextLine();
         if (line == null) {
-          return null; // 返回 NULL 来表示这个表中已经没有记录可读。
+          return null; // 返回NULL来表示这个表中已经没有记录可读。
         }
-        return textLineToRecord(line); // textLineToRecord 将一行数据按照 delimiter 分割为多个列。
+        return textLineToRecord(line); // textLineToRecord将一行数据按照delimiter分割为多个列。
       }
       @Override
       public void close(){
@@ -233,7 +235,7 @@ select recordId, patientId, direction from ambulance_data_csv_external where pat
 
     textLineToRecord将数据分割的完整实现请参见[此处](https://github.com/aliyun/aliyun-odps-java-sdk/blob/master/odps-sdk-impl/odps-udf-example/src/main/java/com/aliyun/odps/udf/example/text/TextExtractor.java)。
 
-    **定义StorageHandler**
+-   定义StorageHandler
 
     StorageHandler作为External Table自定义逻辑的统一入口。
 
@@ -251,7 +253,7 @@ select recordId, patientId, direction from ambulance_data_csv_external where pat
     }
     ```
 
-    **编译打包**
+-   编译打包
 
     将自定义代码编译打包，并上传到MaxCompute。
 
@@ -259,11 +261,11 @@ select recordId, patientId, direction from ambulance_data_csv_external where pat
     add jar odps-udf-example.jar;
     ```
 
--   **创建External表**
+-   创建External表
 
     与使用内置Extractor相似，首先需要创建一张外部表，不同的是在指定外部表访问数据的时候，需要使用自定义的StorageHandler。
 
-    创建外部表语句如下:
+    创建外部表语句如下，其中delimeter是您自定义的分割方法名称:
 
     ```
     CREATE EXTERNAL TABLE IF NOT EXISTS ambulance_data_txt_external
@@ -277,16 +279,16 @@ select recordId, patientId, direction from ambulance_data_csv_external where pat
     recordTime string,
     direction string
     )
-    STORED BY 'com.aliyun.odps.udf.example.text.TextStorageHandler' --STORED BY 指定自定义 StorageHandler 的类名。
+    STORED BY 'com.aliyun.odps.udf.example.text.TextStorageHandler' --STORED BY指定自定义StorageHandler的类名。
       with SERDEPROPERTIES (
-    'delimiter'='\\|',  --SERDEPROPERITES 可以指定参数，这些参数会通过 DataAttributes 传递到 Extractor 代码中。
+    'delimiter'='\\|',  --SERDEPROPERITES可以指定参数，这些参数会通过DataAttributes传递到Extractor代码中。
     'odps.properties.rolearn'='acs:ram::xxxxxxxxxxxxx:role/aliyunodpsdefaultrole'
     )
     LOCATION 'oss://oss-cn-shanghai-internal.aliyuncs.com/oss-odps-test/Demo/SampleData/CustomTxt/AmbulanceData/'
     USING 'odps-udf-example.jar'; --同时需要指定类定义所在的jar包。
     ```
 
--   **查询外部表**
+-   查询外部表
 
     执行如下SQL语句：
 
@@ -424,14 +426,14 @@ where sentence_snr > 10.0;
 
 ## 数据的分区 {#section_avv_rhb_wdb .section}
 
-在前面的例子中，一个外部表关联的数据通过LOCATION上指定的OSS目录来实现，而在处理的时候，MaxCompute是读取目录下的所有数据，**包括子目录中的所有文件**。在数据量比较大，尤其是对于随着时间不断积累的数据目录，对全目录扫描可能带来不必要的I/O以及数据处理时间。 解决这个问题通常有两种做法：
+在前面的例子中，一个外部表关联的数据通过LOCATION上指定的OSS目录来实现，而在处理的时候，MaxCompute是读取目录下的所有数据，包括子目录中的所有文件。在数据量比较大，尤其是对于随着时间不断积累的数据目录，对全目录扫描可能带来不必要的I/O以及数据处理时间。 解决这个问题通常有两种做法：
 
 -   直接的方法：您对数据存放地址做好规划，考虑使用多个EXTERNAL TABLE来描述不同部分的数据，让每个EXTERNALTABLE的LOCATION指向数据的一个子集。
--   数据分区方法：EXTERNAL TABLE与内部表一样，**支持分区表的功能**，可以通过这个功能来对数据做系统化的管理。
+-   数据分区方法：EXTERNAL TABLE与内部表一样，支持分区表的功能，可以通过这个功能来对数据做系统化的管理。
 
 本章节主要介绍EXTERNAL TABLE的分区功能。
 
--   **分区数据在OSS上的标准组织方式和路径格式**
+-   分区数据在OSS上的标准组织方式和路径格式
 
     与MaxCompute内部表不同，对于存放在外部存储上\(如OSS\)上面的数据，MaxComput没有数据的管理权，因此如果需要使用分区表功能，在OSS上数据文件的存放路径必须符合一定的格式，路径格式如下：
 
@@ -439,9 +441,9 @@ where sentence_snr > 10.0;
     partitionKey1=value1\partitionKey2=value2\...
     ```
 
-    **场景示例**
+    场景示例
 
-    将每天产生的LOG文件存放在OSS上，并需要通过MaxCompute进行数据处理，数据处理时需按照粒度为“天”来访问一部分数据。假设这些LOG文件为CSV格式且可以用内置extractor访问（复杂自定义格式用法也类似），那么**外部分区表**定义数据如下：
+    将每天产生的LOG文件存放在OSS上，并需要通过MaxCompute进行数据处理，数据处理时需按照粒度为“天”来访问一部分数据。假设这些LOG文件为CSV格式且可以用内置extractor访问（复杂自定义格式用法也类似），那么外部分区表定义数据如下：
 
     ```
     CREATE EXTERNAL TABLE log_table_external (
@@ -489,7 +491,7 @@ where sentence_snr > 10.0;
     ...
     ```
 
-    **说明：** 以上这些操作与标准的MaxCompute内部表操作一样，分区的详情请参见[分区](../../../../intl.zh-CN/产品简介/基本概念/分区.md#)。在数据准备好并且PARTITION信息引入MaxCompute之后，即可通过SQL语句对OSS外表数据的分区进行操作。
+    **说明：** 以上这些操作与标准的MaxCompute内部表操作一样，分区的详情请参见[分区](../../../../../intl.zh-CN/用户指南/基本概念/分区.md#)。在数据准备好并且PARTITION信息引入MaxCompute之后，即可通过SQL语句对OSS外表数据的分区进行操作。
 
     此时分析数据时，可以指定指需分析某天的数据，如只想分析2016年6月1号当天，有多少不同的IP出现在LOG里面，可以通过如下语句实现。
 
@@ -497,7 +499,7 @@ where sentence_snr > 10.0;
     SELECT count(distinct(ip)) FROM log_table_external WHERE year = '2016' AND month = '06' AND day = '01';
     ```
 
-    该语句对log\_table\_external这个外表对应的目录，将只访问`log_data/year=2016/month=06/day=01`子目录下的文件（logfile和logfile.1），**不会对整个**log\_data/**目录作全量数据扫描，避免大量无用的I/O操作。**
+    该语句对log\_table\_external这个外表对应的目录，将只访问`log_data/year=2016/month=06/day=01`子目录下的文件（logfile和logfile.1），不会对整个log\_data/，避免大量无用的I/O操作。
 
     同样如果只希望对2016年下半年的数据做分析，则执行如下语句。
 
@@ -508,7 +510,7 @@ where sentence_snr > 10.0;
 
     只访问OSS上面存储的下半年的LOG数据。
 
--   **分区数据在OSS上的自定义路径**
+-   分区数据在OSS上的自定义路径
 
     如果事先存在OSS上的历史数据，但是又不是根据`partitionKey1=value1\partitionKey2=value2\...`路径格式来组织存放，也需要通过MaxCompute的分区方式来进行访问计算时，MaxCompute也提供了通过自定义路径来引入partition的方法。
 
