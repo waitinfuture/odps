@@ -30,6 +30,8 @@ set odps.stage.num=               --修改MaxCompute 指定任务的所有阶段
 set odps.sql.type.system.odps2=   -- 默认为false，SQL（Create、select、insert等操作）中涉及到新数据类型（TINYINT、SMALLINT、 INT、 FLOAT、VARCHAR、TIMESTAMP BINARY）时需要设置为true。
 ```
 
+**说明：** Set操作命令仅支持小写。
+
 ## Show Flags {#section_ft4_jff_vdb .section}
 
 命令格式如下：
