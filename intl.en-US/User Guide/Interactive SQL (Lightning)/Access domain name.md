@@ -31,6 +31,7 @@ The following tables describe the MaxCompute Lightning service connection status
 |China East 2 Financial Cloud|In service|lightning.cn-shanghai-finance.maxcompute.aliyun-inc.com|
 |China North 2|In service|lightning.cn-beijing.maxcompute.aliyun-inc.com|
 |Southern China 1|In service|lightning.cn-shenzhen.maxcompute.aliyun-inc.com|
+|Hong Kong|Beta|lightning.cn-hongkong.maxcompute.aliyun-inc.com|
 |Asia Pacific SE 1|Beta|lightning.ap-southeast-1.maxcompute.aliyun-inc.com|
 |Other regions|Not activated|-|
 
