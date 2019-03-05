@@ -12,8 +12,6 @@ This article takes a SQL perspective. and introduces MaxCompute by comparing Max
 |CREATE TABLE—EXTERNAL TABLE|Y\(OSS, OTS, TDDL\)|Y|N|N|N|
 |CREATE TABLE—TEMPORARY TABLE|N|Y|Y|Y|Y （with \#prefix）|
 |INDEX—CREATE INDEX|N|Y|Y|Y|Y|
-|VIRTUAl COLUMN—VIRTUAl COLUMN|N|N\(only 2 predefined\)|N|Y|Y|
-|INDEX—CREATE INDEX|N|Y|Y|Y|Y|
 |VIRTUAL COLUMN|N|N \(only 2 predefined\)|N|Y|Y|
 
 ## DML syntax not supported by MaxCompute {#section_ws2_vvf_vdb .section}
