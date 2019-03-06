@@ -10,7 +10,7 @@ MaxCompute提供Java SDK和Python SDK接口实现创建、查看、删除MaxComp
 
     使用说明可参考MaxCompute文档[SDK 参考 \> Java SDK](../../../../../cn.zh-CN/SDK 参考/Java SDK.md#)。
 
-    较为常用的MaxCompute核心接口详情请参见[ODPS SDK Java DOC](https://www.javadoc.io/doc/com.aliyun.odps/odps-sdk-core/0.30.9-public)。更多信息可参考GitHub [aliyun-odps-java-sdk](https://github.com/aliyun/aliyun-odps-java-sdk)。
+    较为常用的MaxCompute核心接口详情请参见[ODPS SDK Java DOC](https://www.javadoc.io/doc/com.aliyun.odps/odps-sdk-core/0.30.9-public)。更多信息可参考GitHub [ODPS SDK for Java Developers](https://github.com/aliyun/aliyun-odps-java-sdk)。
 
     **服务支持方式**：您可通过访问官方文档和在线提交工单的方式获取支持。
 
@@ -21,21 +21,21 @@ MaxCompute提供Java SDK和Python SDK接口实现创建、查看、删除MaxComp
     -   了解更多关于PyODPS的开发内容，请参见[PyODPS开发指南](cn.zh-CN/用户指南/PyODPS/工具平台使用指南/DataWorks用户使用指南.md#)。在您开始使用PyODPS之前请先安装PyODPS，详细内容请参见[PyODPS安装指南](cn.zh-CN/用户指南/PyODPS/安装指南.md#)。
     -   关于PyODPS的社区信息请参见[PyODPS云栖社区专辑](https://yq.aliyun.com/album/19?spm=a2c4g.11186623.2.25.5ce96074vn9tRs)。
     -   欢迎各位开发者参与到PyODPS的生态开发中，详情请参见[PyODPS DataFrame概述](cn.zh-CN/用户指南/PyODPS/DataFrame/DataFrame概述.md#)。
-    -   欢迎反馈问题和需求，加快PyODPS生态成长，更多详情请参见GitHub [aliyun-odps-python-sdk](https://github.com/aliyun/aliyun-odps-python-sdk)。
+    -   欢迎反馈问题和需求，加快PyODPS生态成长，更多详情请参见GitHub [ODPS Python SDK and data analysis framework](https://github.com/aliyun/aliyun-odps-python-sdk)。
     **服务支持方式**：您可通过访问官方文档和在线提交工单的方式获取支持。
 
 
 ## MaxCompute rodps {#section_tq4_vtr_zgb .section}
 
-MaxCompute R语言插件：rodps。具体使用说明请参考GitHub [aliyun-odps-r-plugin](https://github.com/aliyun/aliyun-odps-r-plugin)。
+MaxCompute R语言插件：rodps。具体使用说明请参考GitHub [ODPS Plugin for R](https://github.com/aliyun/aliyun-odps-r-plugin)。
 
-**服务支持方式**：在Github [aliyun-odps-r-plugin](https://github.com/aliyun/aliyun-odps-r-plugin)中留言或新建issue。
+**服务支持方式**：在Github [ODPS Plugin for R](https://github.com/aliyun/aliyun-odps-r-plugin)中留言或新建issue。
 
 ## MaxCompute JDBC {#section_myz_2ms_zgb .section}
 
-odps-jdbc是MaxCompute官方提供的JDBC驱动，它向Java程序提供了一套执行SQL任务的接口。项目托管在GiyHub [aliyun-odps-jdbc](https://github.com/aliyun/aliyun-odps-jdbc)。
+odps-jdbc是MaxCompute官方提供的JDBC驱动，它向Java程序提供了一套执行SQL任务的接口。项目托管在GiyHub [ODPS JDBC](https://github.com/aliyun/aliyun-odps-jdbc)。
 
-**服务支持方式**：在GitHub [aliyun-odps-r-plugin](https://github.com/aliyun/aliyun-odps-r-plugin)中留言或新建issue。
+**服务支持方式**：在GitHub中留言或新建issue。
 
 ## Mars {#section_d1c_54s_zgb .section}
 
@@ -45,7 +45,7 @@ Mars已经在Github上开源代码，让更多同学来一起参与共建Mars。
 
 关于Mars的更多说明信息请参见[Mars开发指南](https://mars-project.readthedocs.io/en/latest/)。您还可通过云栖文章了解Mars，请参见[Mars相关文档](https://yq.aliyun.com/search?q=Mars)。
 
-**服务支持方式**：在Github [Mars](https://github.com/mars-project/mars)中留言或新建issue。
+**服务支持方式**：在Github中留言或新建issue。
 
 ## Data collector {#section_ghz_sps_zgb .section}
 
@@ -62,5 +62,7 @@ Data Collector是MaxCompute主要开源数据采集工具的集合，包括：
     从这些数据采集工具的实现技术上来看，Flume和OGG插件是基于DataHub的SDK实现，而Sqoop，Kettle以及Hive Data Transfer UDTF是基于Tunnel的SDK实现。DataHub和Tunnel分别是MaxCompute系统的实时和批量数据通道。这样，Flume插件和OGG插件是面向于实时数据传输，而Sqoop，Kettle和Hive Data Transfer UDTF则是适合用于离线批量的数据传输。
 
 
-参考源代码请参见GitHub源码[aliyun-maxcompute-data-collectors](https://github.com/aliyun/aliyun-maxcompute-data-collectors)。插件说明请参见[wiki](https://github.com/aliyun/aliyun-maxcompute-data-collectors/wiki)。
+参考源代码请参见GitHub源码[Aliyun MaxCompute Data Collectors](https://github.com/aliyun/aliyun-maxcompute-data-collectors)。插件说明请参见[wiki](https://github.com/aliyun/aliyun-maxcompute-data-collectors/wiki)。
+
+**服务支持方式**：在Github中留言或新建issue。
 
