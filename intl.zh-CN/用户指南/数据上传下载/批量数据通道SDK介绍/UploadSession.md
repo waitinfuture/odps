@@ -4,23 +4,23 @@
 
 ## UploadSession接口定义 {#section_cyg_f41_wfb .section}
 
-```
+```language-java
 public class UploadSession {
-        UploadSession(Configuration conf, String projectName, String tableName,
-            String partitionSpec) throws TunnelException;
-        UploadSession(Configuration conf, String projectName, String tableName, 
-            String partitionSpec, String uploadId) throws TunnelException;
-        public void commit(Long[] blocks);
-        public Long[] getBlockList();
-        public String getId();
-        public TableSchema getSchema();
-        public UploadSession.Status getStatus();
-        public Record newRecord();
-        public RecordWriter openRecordWriter(long blockId);
-        public RecordWriter openRecordWriter(long blockId, boolean compress);
-        public RecordWriter openBufferedWriter();
-        public RecordWriter openBufferedWriter(boolean compress);
-    }
+    UploadSession(Configuration conf, String projectName, String tableName,
+                  String partitionSpec) throws TunnelException;
+    UploadSession(Configuration conf, String projectName, String tableName, 
+                  String partitionSpec, String uploadId) throws TunnelException;
+    public void commit(Long[] blocks);
+    public Long[] getBlockList();
+    public String getId();
+    public TableSchema getSchema();
+    public UploadSession.Status getStatus();
+    public Record newRecord();
+    public RecordWriter openRecordWriter(long blockId);
+    public RecordWriter openRecordWriter(long blockId, boolean compress);
+    public RecordWriter openBufferedWriter();
+    public RecordWriter openBufferedWriter(boolean compress);
+}
 ```
 
 ## UploadSession接口说明 {#section_vcf_k41_wfb .section}
