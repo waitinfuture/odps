@@ -25,11 +25,11 @@ Consider the following points:
 -   When a table is created, an error is returned if the same name table exists without specifying the "if not exists" option. If the option is specified, no matter whether a same name table exists and even if the source table structure and the target table structure are inconsistent, all return successfully. The Meta information of the existing table does not change.
 -   Both the table name and column name are case insensitive and cannot have special characters. It must begin with a letter and can include a-z, A-Z, digits, and underscores \(\_\). The name length cannot exceed 128 bytes.
 -   1200 column definitions are allowed in a table.
--   The data types support Bigint、Double、Boolean、Datetime、Decimal and String, MaxCompute2.0 extends many [data types](../../../../reseller.en-US/User Guide/Definition/Data types.md).
+-   The data types support Bigint、Double、Boolean、Datetime、Decimal and String, MaxCompute2.0 extends many [data types](../../../../../reseller.en-US/User Guide/Definitions/Data types.md).
 
     **Note:** Once data type such asTinyint、Smallint、 Int、 Float、Varchar or TIMESTAMP BINARY is involved when running an SQL statement, `set odps.sql.type.system.odps2=true;` must be added before the SQL statement. The set statement and SQL statement are submitted simultaneously.
 
--   Use Partitioned by to specify the [partition](../../../../reseller.en-US/User Guide/Definition/Partition.md) and now Tinyint、Smallint、 Int、 Bigint、Varchar and String are supported.
+-   Use Partitioned by to specify the [partition](../../../../../reseller.en-US/User Guide/Definitions/Partition.md) and now Tinyint、Smallint、 Int、 Bigint、Varchar and String are supported.
 
     The partition value cannot have a double byte characters \(for example, Chinese\), and must begin with an uppercase or a lowercase letter, followed by letter or a number. The name length cannot exceed 128 bytes. Special characters can be used, which include space, colon \(:\), underscore \(\_\), dollar sign \($\), pound sign \(\#\), period \(.\), exclamation point \(!\), and ’@’. Other characters such as \(\\t\), \(\\n\), \(/\), and so on are considered as undefined characters. When using partition fields in a partition table, to improve the processing efficiency, a full table scan is not needed to add, update, and read the data in a partition.
 
