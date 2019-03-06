@@ -14,15 +14,15 @@
 
 **接口定义如下：**
 
-```
+```language-java
 public class TunnelBufferedWriter implements RecordWriter {
-        public TunnelBufferedWriter(TableTunnel.UploadSession session, CompressOption option) throws IOException;
-        public long getTotalBytes();
-        public void setBufferSize(long bufferSize);
-        public void setRetryStrategy(RetryStrategy strategy);
-        public void write(Record r) throws IOException;
-        public void close() throws IOException;
-    }
+    public TunnelBufferedWriter(TableTunnel.UploadSession session, CompressOption option) throws IOException;
+    public long getTotalBytes();
+    public void setBufferSize(long bufferSize);
+    public void setRetryStrategy(RetryStrategy strategy);
+    public void write(Record r) throws IOException;
+    public void close() throws IOException;
+}
 ```
 
 **TunnelBufferedWriter 对象：**
@@ -34,7 +34,7 @@ public class TunnelBufferedWriter implements RecordWriter {
 -   缓冲区控制：可以通过setBufferSize接口修改缓冲区占内存的字节数（bytes），建议设置大于等于64MB，避免服务端产生过多小文件，影响性能。最小可设置为1MB，最大1000MB，通常无需设置，维持默认值64M即可。
 -   重试策略设置：您可以选择三种重试回避策略：指数回避（EXPONENTIAL\_BACKOFF）、线性时间回避（LINEAR\_BACKOFF）、常数时间回避（CONSTANT\_BACKOFF）。例如：下面这段代码可以将Write的重试次数调整为6，每一次重试之前先分别回避4s、8s、16s、32s、64s和128s（从4开始的指数递增的序列），这个也是默认的行为，一般情况不建议调整。
 
-    ```
+    ```language-java
     RetryStrategy retry 
       = new RetryStrategy(6, 4, RetryStrategy.BackoffStrategy.EXPONENTIAL_BACKOFF)
     writer = (TunnelBufferedWriter) uploadSession.openBufferedWriter();
