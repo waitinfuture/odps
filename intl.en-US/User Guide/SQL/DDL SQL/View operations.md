@@ -2,7 +2,7 @@
 
 ## Create view {#section_jpr_4z1_wdb .section}
 
-**Statement format:**
+Statement format:
 
 ```
 CREATE [OR REPLACE] VIEW [IF NOT EXISTS] view_name
@@ -16,11 +16,11 @@ CREATE [OR REPLACE] VIEW [IF NOT EXISTS] view_name
 -   To create a view, you must have ‘read’ privilege on the table referenced by view.
 -   Views can only contain one valid ‘select’ statement.
 -   Other views can be referenced by a view, but this view cannot reference itself. Circular reference is not supported.
--   Writing the data into a view is not allowed, such as, using ‘insert into’ or ‘insert overwrite’ to operate view
+-   Writing the data into a view is not allowed, such as, using insert into or insert overwrite to operate view
 -   After a view was created,it may be inaccessable if the referenced table is altered, such as deleting a referenced table.  You must maintain corresponding relationship between referenced tables and views.
--   If the option ‘if not exists’ is not specified and the view has already existed, using ‘create view’ causes abnormality.  If this situation occurs, use ‘create or replace view’ to recreate a view.  After reconstruction, the privileges keep unchanged.
+-   If the option ‘if not exists’ is not specified and the view has already existed, using create viewcauses abnormality.  If this situation occurs, use create or replace view to recreate a view.  After reconstruction, the privileges keep unchanged.
 
-**Example:**
+Example:
 
 ```
 create view if not exists sale_detail_view
@@ -31,7 +31,7 @@ as select * from sale_detail;
 
 ## Drop view {#section_ynd_xz1_wdb .section}
 
-**Statement format:**
+Statement format:
 
 ```
 DROP VIEW [IF EXISTS] view_name;
@@ -39,7 +39,7 @@ DROP VIEW [IF EXISTS] view_name;
 
 **Note:** If the view does not exist and the option \[if exists\] is not specified, error occurs.
 
-**Example:**
+Example:
 
 ```
 DROP VIEW IF EXISTS sale_detail_view;
@@ -47,7 +47,7 @@ DROP VIEW IF EXISTS sale_detail_view;
 
 ## Rename view {#section_y2p_11b_wdb .section}
 
-**Statement format:**
+Statement format:
 
 ```
 ALTER VIEW view_name RENAME TO new_view_name;
@@ -55,7 +55,7 @@ ALTER VIEW view_name RENAME TO new_view_name;
 
 **Note:** If the same name view has already existed, error occurs.
 
-**Example:**
+Example:
 
 ```
 create view if not exists sale_detail_view
