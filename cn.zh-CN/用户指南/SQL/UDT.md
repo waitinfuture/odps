@@ -50,9 +50,9 @@ UDT所提供的所有扩展能力，实际上用UDF都可以实现。如上述�
     ```
     package com.aliyun.odps.test;
     public class IntegerMaxValue extends com.aliyun.odps.udf.UDF {
-    public Integer evaluate() {
-     return Integer.MAX_VALUE;
-    } 
+      public Integer evaluate() {
+         return Integer.MAX_VALUE;
+      } 
     }
     ```
 
@@ -94,7 +94,7 @@ select /*+mapjoin(b)*/ x.add(y).toString() from @a a join @b b;   -- 实例方�
 
 上述示例还表现了一种用UDF比较不好实现的功能：子查询的结果允许UDT类型的列。如上面变量a的x列是java.math.BigInteger类型，而不是内置类型。UDT类型的数据可以被带到下一个operator中再调用其他方法，甚至能参与数据shuffle。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22183/154459547713239_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22183/155186483613239_zh-CN.png)
 
 如上图可知，该UDT共有三个STAGE：M1、R2和J3。如果您熟悉MapReduce原理便会知道，由于join的存在需要做数据reshuffle，所以会出现多个stage。一般情况下，不同stage不仅是在不同进程，甚至是在不同物理机器上运行的。
 
@@ -155,7 +155,7 @@ select /*+mapjoin(b)*/ x.add(y).toString() from @a a join @b b;   -- 实例方�
     -   内置类型的数据能够直接调用其映射到的Java类型的方法，如`'123'.length() , 1L.hashCode()`。
     -   UDT类型能够直接参与内置函数或者UDF的运算， 如`chr(Long.valueOf('100'))`，其中`Long.valueOf`返回的是`java.lang.Long`类型的数据，而内置函数chr接受的数据类型是内置类型BIGINT。
     -   Java的primitive类型可以自动转化为其boxing类型，并应用前两条规则。
-    **说明：** 部分内置的[新数据类型](../../../../intl.zh-CN/用户指南/基本概念/数据类型.md#)需要设置`set odps.sql.type.system.odps2=true;` 方可使用，否则会报错。
+    **说明：** 部分内置的[新数据类型](../../../../../intl.zh-CN/用户指南/基本概念/数据类型.md#)需要设置`set odps.sql.type.system.odps2=true;` 方可使用，否则会报错。
 
 -   UDT对泛型有比较完整的支持，如`java.util.Arrays.asList(new java.math.BigInteger('1'))`，编译器能够根据参数类型知道该方法的返回值是`java.util.List<java.math.BigInteger>`类型。
 
