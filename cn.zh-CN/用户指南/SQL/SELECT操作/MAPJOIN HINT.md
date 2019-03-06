@@ -25,8 +25,8 @@ select /* + mapjoin(a) */
         a.shop_name,
         b.customer_id,
         b.total_price
-    from shop a join sale_detail b
-    on a.shop_name = b.shop_name;
+from shop a join sale_detail b
+on a.shop_name = b.shop_name;
 ```
 
 MaxCompute SQL不支持在普通Join的on条件中使用不等值表达式，or逻辑等复杂的Join条件，但是在MapJoin中可以进行如上操作。
@@ -37,7 +37,7 @@ MaxCompute SQL不支持在普通Join的on条件中使用不等值表达式，or�
 select /*+ mapjoin(a) */
         a.total_price,
         b.total_price
-    from shop a join sale_detail b
-    on a.total_price < b.total_price or a.total_price + b.total_price < 500;
+from shop a join sale_detail b
+on a.total_price < b.total_price or a.total_price + b.total_price < 500;
 ```
 
