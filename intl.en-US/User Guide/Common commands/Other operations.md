@@ -2,7 +2,7 @@
 
 ## Alias command {#section_kcp_t2f_vdb .section}
 
-The ALIAS command reads different resources \(data\) using a fixed resource name in [MapReduce](reseller.en-US/User Guide/MapReduce/Summary/MapReduce.md) or [UDF](reseller.en-US/User Guide/SQL/UDF/UDF Summary.md) without modifying the code.
+The ALIAS command reads different resources \(data\) using a fixed resource name in [MapReduce](intl.en-US/User Guide/MapReduce/Summary/MapReduce.md) or [UDF](intl.en-US/User Guide/SQL/UDF/UDF Summary.md) without modifying the code.
 
 Command format:
 
