@@ -2,7 +2,7 @@
 
 This article will show you how to create, delete and view tables using common commands through the MaxCompute client.
 
-If you want to operate a table, use common commands in the client. Moreover it is more convenient to collect tables, apply permissions, and view partitions using the visible data table manager in DataWorks. For more information, see [Table Details](../../../../reseller.en-US/User Guide/Data management/Table detail page.md#).
+If you want to operate a table, use common commands in the client. Moreover it is more convenient to collect tables, apply permissions, and view partitions using the visible data table manager in DataWorks. For more information, see [Table Details](../../../../../reseller.en-US/User Guide/Data management/Table detail page.md#).
 
 ## Create tables {#section_wpz_zk2_vdb .section}
 
