@@ -2,7 +2,7 @@
 
 本文通过代码示例向您介绍如何使用BufferedWriter接口实现多线程上传。
 
-```
+```language-java
 class UploadThread extends Thread {
   private UploadSession session;
   private static int RECORD_COUNT = 1200;
@@ -31,6 +31,6 @@ public class Example {
    t1.join();
    t2.join();
    uploadSession.commit();
- }
+}
 ```
 
