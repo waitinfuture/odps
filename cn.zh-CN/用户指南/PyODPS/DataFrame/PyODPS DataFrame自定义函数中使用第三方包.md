@@ -6,7 +6,7 @@
 
 PyODPS DataFrame不仅支持类似pandas的map和apply方法，也提供了MapReduce API来扩展pandas语法以适应大数据环境。
 
-PyODPS的自定义函数是序列化到MaxCompute上执行，MaxCompute的Python环境仅包含numpy第三方包。现在，MaxCompute在sprint 27及更高版本的isolation，可以实现在自定义函数中使用pandas、scipy或scikit-learn等包含c代码的库。
+PyODPS的自定义函数是序列化到MaxCompute上执行，MaxCompute的Python环境仅包含numpy第三方包。现在，MaxCompute可以实现在自定义函数中使用pandas、scipy或scikit-learn等包含c代码的库。
 
 **说明：** PyODPS需要0.7.4及以上版本 。
 
@@ -28,7 +28,7 @@ PyODPS的自定义函数是序列化到MaxCompute上执行，MaxCompute的Python
 
 您可进入[python-dateutils](http://mirrors.aliyun.com/pypi/simple/python-dateutil/)找到[python-dateutil-2.6.0.zip](http://mirrors.aliyun.com/pypi/packages/95/8e/71125f3f24771f50e630b5a6fa9fd209a9f167dcbc3aad65a48cb3dd5694/python-dateutil-2.6.0.zip#md5=530f7b56e36fa42ada6c02a17b15660c)进行下载。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/15204/15434586846659_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/15204/15519475906659_zh-CN.png)
 
 重命名为python-dateutil.zip，通过MaxCompute Console上传资源。
 
