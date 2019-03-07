@@ -4,7 +4,7 @@
 
 ## UDJ概述 {#section_p1f_kk4_hfb .section}
 
-目前MaxCompute内置了多种[Join](intl.zh-CN/用户指南/SQL/SELECT操作/JOIN操作.md#)操作，包括inner/right join、outer/left jion、outer/full join、outer/semi/anti-semi join等。这些内置的join操作功能强大，能够满足很大一部分需求，但是其标准的join实现，无法满足很多跨表操作的需求。
+目前MaxCompute内置了多种[Join](intl.zh-CN/用户指南/SQL/SELECT操作/JOIN.md#)操作，包括inner/right join、outer/left jion、outer/full join、outer/semi/anti-semi join等。这些内置的join操作功能强大，能够满足很大一部分需求，但是其标准的join实现，无法满足很多跨表操作的需求。
 
 很多情况下，可以通过UDF（User Defined Function）描述您的代码框架，但现有的UDF/UDTF/UDAF接口主要是针对在单个数据表上的操作而设计，一旦涉及多表的自定义操作，经常还需要依赖于内置**join +**各种UDF/UDTF, 并配合比较复杂的SQL语句来完成。甚至在一些多表操作的场景上，您不得不放弃SQL而转向传统的完全自定义MapReduce，才能完成所需的计算。
 
@@ -117,14 +117,14 @@
     import com.aliyun.odps.udf.annotation.Resolve;
     import java.util.ArrayList;
     import java.util.Iterator;
-    /** For each record of right table, find the nearest record of left table and
-     * merge two records.
+    /** 对于右表的每个记录，找到最近的左表记录和
+     * 合并两条记录。
      */
     @Resolve("->string,bigint,string")
     public class PayUserLogMergeJoin extends UDJ {
       private Record outputRecord;
-      /** Will be called prior to the data processing phase. User could implement
-       * this method to do initialization work.
+      /** 将在数据处理阶段之前调用。 用户可以实施
+       * 这个方法做初始化工作。
        */
       @Override
       public void setup(ExecutionContext executionContext, DataAttributes dataAttributes) {
@@ -135,20 +135,20 @@
           new Column("content", OdpsType.STRING)
         });
       }
-      /** Override this method to implement join logic.
-       * @param key Current join key
-       * @param left Group of records of left table corresponding to the current key
-       * @param right Group of records of right table corresponding to the current key
-       * @param output Used to output the result of UDJ
+      /** 重写此方法以实现连接逻辑。
+       * @param key 当前连接键
+       * @param 左表对应当前键的记录组
+       * @param right对应当前键的右表记录组
+       * @param output用于输出UDJ的结果
        */
       @Override
       public void join(Record key, Iterator<Record> left, Iterator<Record> right, Yieldable<Record> output) {
         outputRecord.setString(0, key.getString(0));
         if (!right.hasNext()) {
-          // Empty right group, do nothing.
+          // 空右组，什么都不做。
           return;
         } else if (!left.hasNext()) {
-          // Empty left group. Output all records of right group without merge.
+          // 空左组。 输出右侧组的所有记录而不合并。
           while (right.hasNext()) {
             Record logRecord = right.next();
             outputRecord.setBigint(1, logRecord.getDatetime(0).getTime());
@@ -158,17 +158,17 @@
           return;
         }
         ArrayList<Record> pays = new ArrayList<>();
-        // The left group of records will be iterated from the start to the end
-        // for each record of right group, but the iterator cannot be reset.
-        // So we save every records of left to an ArrayList.
+        // 左侧记录组将从开始到结束迭代
+        // 对于右组的每个记录，但迭代器无法重置。
+        // 所以我们将左边的每个记录保存到ArrayList。
         left.forEachRemaining(pay -> pays.add(pay.clone()));
         while (right.hasNext()) {
           Record log = right.next();
           long logTime = log.getDatetime(0).getTime();
           long minDelta = Long.MAX_VALUE;
           Record nearestPay = null;
-          // Iterate through all records of left, and find the pay record that has
-          // the minimal difference in terms of time.
+          // 迭代左边的所有记录，找到有的记录
+          // 时间上的微小差异。
           for (Record pay: pays) {
             long delta = Math.abs(logTime - pay.getDatetime(0).getTime());
             if (delta < minDelta) {
@@ -176,7 +176,7 @@
               nearestPay = pay;
             }
           }
-          // Merge the log record with nearest pay record and output to the result.
+          // 将日志记录与最近的支付记录合并，并输出到结果。
           outputRecord.setBigint(1, log.getDatetime(0).getTime());
           outputRecord.setString(2, mergeLog(nearestPay.getString(1), log.getString(1)));
           output.yield(outputRecord);
@@ -195,7 +195,7 @@
 
     从代码中可以看到，在每次调用UDJ的join方法时，两张表中各有一组对应着同一个key数据，提供给了我们。因此，只需遍历右表\(user\_client\_log\)的分组，对于每一个log记录，遍历一遍左表\(payment\)的分组，找出时间相差最小的记录，将日志内容合并然后输出即可。
 
-    这里假设同一个用户的支付记录数比较少，可以预先将左表分组全部加载到内存\(通常情况下，内存足以存放一个用户在一天内产生的支付数据\)。但若这个假设不成立应该如何解决？文章后面一节“使用SORT BY预排序”会解决这个问题。
+    这里假设同一个用户的支付记录数比较少，可以预先将左表分组全部加载到内存\(通常情况下，内存足以存放一个用户在一天内产生的支付数据\)。但若这个假设不成立应该如何解决？文章后面内容使用[SORT BY预排序](intl.zh-CN/用户指南/SQL/UDJ.md#section_p1f_kk4_hfb)会解决这个问题。
 
 -   在MaxCompute中创建UDJ
 
@@ -207,7 +207,7 @@
     add jar odps-udj-example.jar;
     ```
 
-    通过create function语句注册UDJ函数，指定UDJ在SQL中的函数名pay\_user\_log\_merge\_join，以及关联上它对应的jar资源odps-udj-example.jar和在jar包中的类名
+    通过create function语句注册UDJ函数，指定UDJ在SQL中的函数名`pay_user_log_merge_join`，以及关联上它对应的jar资源odps-udj-example.jar和在jar包中的类名
 
     `com.aliyun.odps.udf.example.udj.PayUserLogMergeJoin:`
 
@@ -230,7 +230,7 @@
 
     2.  制造演示数据：
 
-        ```
+        ```language-xml
         --制造payment表数据
         INSERT OVERWRITE TABLE payment VALUES
         ('1335656', datetime '2018-02-13 19:54:00', 'PEqMSHyktn'),
@@ -287,7 +287,7 @@
         -   \(user\_id, time, content\)是UDJ产生的结果的列名。
         运行上面这条SQL，结果为：
 
-        ```
+        ```language-sql
         +---------+------------+---------+
         | user_id | time       | content |
         +---------+------------+---------+
@@ -321,7 +321,7 @@
 
     java UDJ代码如下：
 
-    ```
+    ```language-java
     @Override
     public void join(Record key, Iterator<Record> left, Iterator<Record> right, Yieldable<Record> output) {
       outputRecord.setString(0, key.getString(0));
@@ -343,15 +343,15 @@
       while (true) {
         long delta = logRecord.getDatetime(0).getTime() - payRecord.getDatetime(0).getTime();
         if (left.hasNext() && delta > 0) {
-          // The delta of time between two records is decreasing, we can still
-          // explore the left group to try to gain a smaller delta.
+          //两个记录之间的时间差正在减少，我们仍然可以操作
+          //探索左侧组以尝试获得更小的增量。
           lastPayRecord = payRecord.clone();
           prevDelta = delta;
           payRecord = left.next();
         } else {
-          // Hit to the point of minimal delta. Check with the last pay record,
-          // output the merge result and prepare to process the next record of
-          // right group.
+         //到达最小delta点。 检查最后的工资记录，
+         //输出合并结果并准备处理下一条记录
+         //右组.
           Record nearestPay = Math.abs(delta) < prevDelta ? payRecord : lastPayRecord;
           outputRecord.setBigint(1, logRecord.getDatetime(0).getTime());
           String mergedString = mergeLog(nearestPay.getString(1), logRecord.getString(1));
