@@ -1,5 +1,7 @@
 # WordCount示例 {#concept_rtv_dhg_vdb .concept}
 
+本文向您介绍MapReduce WordCount示例程序。
+
 ## 测试准备 {#section_bjk_nxg_vdb .section}
 
 1.  准备好测试程序的Jar包，假设名字为mapreduce-examples.jar，本地存放路径为data\\resources。
