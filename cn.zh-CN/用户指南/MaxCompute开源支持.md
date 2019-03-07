@@ -35,7 +35,7 @@ MaxCompute R语言插件：rodps。具体使用说明请参考GitHub [ODPS Plugi
 
 odps-jdbc是MaxCompute官方提供的JDBC驱动，它向Java程序提供了一套执行SQL任务的接口。项目托管在GiyHub [ODPS JDBC](https://github.com/aliyun/aliyun-odps-jdbc)。
 
-**服务支持方式**：在GitHub中留言或新建issue。
+**服务支持方式**：在GitHub[ODPS JDBC](https://github.com/aliyun/aliyun-odps-jdbc)中留言或新建issue。
 
 ## Mars {#section_d1c_54s_zgb .section}
 
@@ -43,9 +43,9 @@ Mars是一个基于张量的统一分布式计算框架。使用Mars进行科学
 
 Mars已经在Github上开源代码，让更多同学来一起参与共建Mars。请参见GitHub开源代码[Mars](https://github.com/mars-project/mars) 。
 
-关于Mars的更多说明信息请参见[Mars开发指南](https://mars-project.readthedocs.io/en/latest/)。您还可通过云栖文章了解Mars，请参见[Mars相关文档](https://yq.aliyun.com/search?q=Mars)。
+关于Mars的更多说明信息请参见[Mars开发指南](https://mars-project.readthedocs.io/en/latest/)。您还可通过云栖文章了解Mars，请参见 [Mars相关文档](https://yq.aliyun.com/search?q=Mars)。
 
-**服务支持方式**：在Github中留言或新建issue。
+**服务支持方式**：在Github [Mars](https://github.com/mars-project/mars)中留言或新建issue。
 
 ## Data collector {#section_ghz_sps_zgb .section}
 
@@ -64,5 +64,5 @@ Data Collector是MaxCompute主要开源数据采集工具的集合，包括：
 
 参考源代码请参见GitHub源码[Aliyun MaxCompute Data Collectors](https://github.com/aliyun/aliyun-maxcompute-data-collectors)。插件说明请参见[wiki](https://github.com/aliyun/aliyun-maxcompute-data-collectors/wiki)。
 
-**服务支持方式**：在Github中留言或新建issue。
+**服务支持方式**：在Github [Aliyun MaxCompute Data Collectors](https://github.com/aliyun/aliyun-maxcompute-data-collectors)中留言或新建issue。
 
