@@ -19,7 +19,7 @@ USING 'unix_command_line'
 说明如下：
 
 -   `SELECT TRANSFORM`关键字可以用`MAP`关键字或者`REDUCE`关键字来替换，无论使用哪个关键字语义是完全一样的。为了使语法更清晰，推荐您使用`SELECT TRANSFORM`。
--   `arg1,arg2...`是transform的参数，其格式和select子句的item类似。默认的格式下，参数的各个表达式的结果会在隐式转换成string后，用\\t拼起来，输入到子进程中（此格式可以进行配置，详情请参见下文对ROW FORMAT的说明）。
+-   `arg1,arg2...`是transform的参数，其格式和select子句的item类似。默认的格式下，参数的各个表达式的结果会在隐式转换成STRING后，用\\t拼起来，输入到子进程中（此格式可以进行配置，详情请参见下文对ROW FORMAT的说明）。
 -   Using指定要启动的子进程的命令。
 
     **说明：** 
@@ -32,18 +32,18 @@ USING 'unix_command_line'
 -   支持在SQL语句前使用`set odps.sql.session.resources=foo.sh,bar.txt;`来指定。注意这种配置是全局的，意味着整个SQL中所有的select transform都可以访问这个setting配置的资源。
 -   ROW FORMAT子句允许自定义输入输出的格式。
 
-    语法中有两个row format子句，第一个子句指定输入的格式，第二个指定输出的格式。 默认情况下使用\\t来作为列的分隔符，\\n作为行的分隔符，Null使用\\N（注意是两个字符，反斜杠字符和字符N）来表示。
+    语法中有两个row format子句，第一个子句指定输入的格式，第二个指定输出的格式。 默认情况下使用`\t`来作为列的分隔符，`\n`作为行的分隔符，Null使用\\N（注意是两个字符，反斜杠字符和字符N）来表示。
 
     **说明：** 
 
     -   field\_delimiter，character\_escape和line\_separator只接受一个字符，如果指定的是字符串，则以第一个字符为准。
-    -   Hive指定格式的各种语法，如inputRecordReader、outputRecordReader、Serde等，MaxCompute也都支持，不过需要打开Hive兼容模式才能用，即在SQL语句前加set语句`set odps.sql.hive.compatible=true；`，详情请参见[Hive的文档](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Transform#LanguageManualTransform-TRANSFORMExamples)。
+    -   Hive指定格式的各种语法，如inputRecordReader、outputRecordReader、Serde等，MaxCompute也都支持，不过需要打开Hive兼容模式才能用，即在SQL语句前加set语句`set odps.sql.hive.compatible=true;`，详情请参见[Hive的文档](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Transform#LanguageManualTransform-TRANSFORMExamples)。
     -   若使用Hive的inputRecordReader、outputRecordReader等自定义类，可能会降低执行性能。
 -   AS子句指定输出列。
-    -   输出列可以不指定类型，默认为String类型，如as\(col1, col2\)。也可以指定类型，如as\(col1:bigint, col2:boolean\)。
-    -   由于输出实际是parse子进程stdout获取的，如果指定的类型不是String，系统会隐式调用Cast函数，而Cast有可能出现runtime exception。
+    -   输出列可以不指定类型，默认为STRING类型，如as\(col1, col2\)。也可以指定类型，如as\(col1:bigint, col2:boolean\)。
+    -   由于输出实际是parse子进程stdout获取的，如果指定的类型不是STRING，系统会隐式调用Cast函数，而Cast有可能出现runtime exception。
     -   输出列类型不支持部分指定部分不指定，如as\(col1, col2:bigint\)。
-    -   as可以省略，此时默认stdou的输出中第一个\\t之前的字段为key，后面的部分全部为value，相当于as\(key, value\)。
+    -   as可以省略，此时默认stdou的输出中第一个`\t`之前的字段为key，后面的部分全部为value，相当于as\(key, value\)。
 
 ## 调用Shell脚本示例 {#section_q4t_mbc_wdb .section}
 
@@ -84,7 +84,7 @@ while line:
 add py ./myplus.py -f;
 ```
 
-您也可通过DataWorks控制台进行新增资源操作。
+**说明：** 您也可通过DataWorks控制台进行新增资源操作。
 
 接下来使用select transform语法调用资源。
 
@@ -134,23 +134,25 @@ SELECT  TRANSFORM('for i in xrange(1, 50):  print i;') USING 'python' AS (data);
 准备好Jar文件，假设脚本文件名为Sum.jar，Java代码如下所示：
 
 ```
-package com.aliyun.odps.test; 
-import java.util.Scanner;
+package com.aliyun.odps.test;
+
+import java.util.Scanner
+
 public class Sum {
-  public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    while (sc.hasNext()) {
-      String s = sc.nextLine();
-      String[] tokens = s.split("\t");
-      if (tokens.length < 2) {
-        throw new RuntimeException("illegal input");
-      }
-      if (tokens[0].equals("\\N") || tokens[1].equals("\\N")) {
-        System.out.println("\\N");
-      }
-      System.out.println(Long.parseLong(tokens[0]) + Long.parseLong(tokens[1]));
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String s = sc.nextLine();
+            String[] tokens = s.split("\t");
+            if (tokens.length < 2) {
+                throw new RuntimeException("illegal input");
+            }
+            if (tokens[0].equals("\\N") || tokens[1].equals("\\N")) {
+                System.out.println("\\N");
+            }
+            System.out.println(Long.parseLong(tokens[0]) + Long.parseLong(tokens[1]));
+        }
     }
-  }
 }
 ```
 
