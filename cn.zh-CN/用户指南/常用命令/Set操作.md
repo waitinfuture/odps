@@ -37,25 +37,21 @@ set odps.sql.executionengine.coldata.deep.buffer.size.max=   --调整MaxCompute�
 
 `set odps.sql.executionengine.coldata.deep.buffer.size.max`
 
-**作用**：调整MaxCompute写表过程中为单个复杂类型的列预先申请缓存大小，以便提高写入性能。
+-   **作用**：调整MaxCompute写表过程中为单个复杂类型的列预先申请缓存大小，以便提高写入性能。
+-   **使用场景**
+    1.  输出的表中含有的复杂数据类型过多。
+    2.  输出的表中含有的某个单独的复杂类型变量size过大。
+-   **使用说明**
+    -   默认值为67108864（64M），默认单位为byte。
+    -   如果输出的表有3个列的schema是复杂类型，如列类型为（string，map，struct，array，binary），则默认情况下MaxCompute将会为写表操作预留64M \* 3大小的内存。为每一列预先申请的缓存将会用来存放这一列batch row count行的数据。
+    -   如果预先可知道表的复杂类型变量占用的空间比较小，则建议把这个值调小。例如，如果每个复杂类型变量大小不会超过1024 byte，同时batch row count值使用的是默认值（1024），则可以将flag设置为1024 \* 1024，如下所示：
 
-**使用场景**
+        ```language-sql
+        set odps.sql.executionengine.coldata.deep.buffer.size.max=1048576;
+        ```
 
-1.  输出的表中含有的复杂数据类型过多。
-2.  输出的表中含有的某个单独的复杂类型变量size过大。
-
-**使用说明**
-
--   默认值为67108864（64M），默认单位为byte。
--   如果输出的表有3个列的schema是复杂类型，如列类型为（string，map，struct，array，binary），则默认情况下MaxCompute将会为写表操作预留64M \* 3大小的内存。为每一列预先申请的缓存将会用来存放这一列batch row count行的数据。
--   如果预先可知道表的复杂类型变量占用的空间比较小，则建议把这个值调小。例如，如果每个复杂类型变量大小不会超过1024 byte，同时batch row count值使用的是默认值（1024），则可以将flag设置为1024 \* 1024，如下所示：
-
-    ```language-sql
-    set odps.sql.executionengine.coldata.deep.buffer.size.max=1048576;
-    ```
-
--   如果您预先知道每个复杂类型的值都在7M到8M之间，同时指定了batch row count为32，则这个值可以被调整为8M \* 32。
--   如果任务的输出带有复杂类型，或者任务的mapjoin小表带有复杂类型，这个值的调整会影响到任务执行过程中使用的内存。根据前面的计算方法，值设的过大有可能导致任务OOM内存溢出。
+    -   如果您预先知道每个复杂类型的值都在7M到8M之间，同时指定了batch row count为32，则这个值可以被调整为8M \* 32。
+    -   如果任务的输出带有复杂类型，或者任务的mapjoin小表带有复杂类型，这个值的调整会影响到任务执行过程中使用的内存。根据前面的计算方法，值设的过大有可能导致任务OOM内存溢出。
 
 ## Show Flags {#section_ft4_jff_vdb .section}
 
