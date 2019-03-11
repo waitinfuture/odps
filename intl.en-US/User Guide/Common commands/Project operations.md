@@ -41,7 +41,21 @@ odps:my_project>select * from my_project2.test_src;
 
 The returned data is the data in my\_project2, not the initial data of test\_src in my\_project.
 
-MaxCompute does not support commands to create or delete workspce. You can use the MaxCompute console for additional configurations and operations as needed.For details, see [project list](../../../../../reseller.en-US/User Guide/Workbench/Workspace list.md#)
+MaxCompute does not support commands to create or delete workspce. You can use the MaxCompute console for additional configurations and operations as needed.For details, see [project list](../../../../../intl.en-US/User Guide/Workbench/Workspace list.md#)
+
+## Query workspace {#section_znx_vxc_bhb .section}
+
+Command format:
+
+```
+list projects;
+```
+
+Features:
+
+Used to view the list of items created by the primary account.
+
+**Note:** This command is supported from odpscmd 0.30.2.
 
 ## SetProject {#section_pyt_mff_vdb .section}
 
