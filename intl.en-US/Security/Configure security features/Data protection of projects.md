@@ -8,6 +8,8 @@ As a MaxCompute Project Space Administrator, do you have similar security requir
 
 For example, the owner of Project Space prj1 may encounter a situation that prj1's user Alice will transfer the data to prj2, only because she has access to prj2.
 
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12100/15523612302795_en-US.png)
+
 More specifically, assume that Alice has been granted access to myprj, which is the Select permission for table1, and then she is also granted create table permission by the administrator of prj2.
 
 By these permissions, Alice is able to transfer the data to prj2 in any of the following ways:
