@@ -335,6 +335,8 @@ Return value:
 
 Datetime type date value. If ‘unixtime’ is NULL, return NULL.
 
+**Note:** If you have `set odps.sql.hive.compatible=true;`, and the input type is string, the reture type will be string too.
+
 For example:
 
 ```
