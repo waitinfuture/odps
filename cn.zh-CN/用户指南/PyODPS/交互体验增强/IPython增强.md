@@ -53,7 +53,7 @@ odps.Table
 
 ## 对象名补全 {#section_zct_lj4_cfb .section}
 
-PyODPS拓展了IPython原有的代码补全功能，支持在书写 `o.get_xxx` 这样的语句时，自动补全对象名。
+PyODPS拓展了IPython原有的代码补全功能，支持在书写`o.get_xxx` 这样的语句时，自动补全对象名。
 
 例如，在IPython中输入下列语句（<tab\>不是实际输入的字符，而是当所有输入完成后，将光标移动到相应位置， 并按 Tab 键）：
 
@@ -129,7 +129,7 @@ Out[3]:
 0    False  2012-03-30 23:59:58  2012-03-30 23:59:59
 ```
 
-设置SQL运行时参数，可以通过 `%set`设置到全局，或者在sql的cell里用SET进行局部设置。
+设置SQL运行时参数，可以通过`%set`设置到全局，或者在sql的cell里用SET进行局部设置。
 
 ```
 In [17]: %%sql
