@@ -2,11 +2,11 @@
 
 ## 背景信息 {#section_jtx_vwq_pgb .section}
 
-阿里云大数据计算服务MaxCompute是一款商业化的大数据分析平台，其计算资源的计费方式分为预付费和后付费两种，产品每天会以Project为维度进行计量计费（账单会在第二天6点前产出）。
+阿里云大数据计算服务MaxCompute是一款商业化的大数据分析平台，其计算资源的计费方式分为预付费和后付费两种，产品每天会以Project为维度进行计量计费（账单会在第二天上午6点前产出）。
 
 关于MaxCompute计量计费说明，详情请参见[计量计费说明](https://help.aliyun.com/document_detail/27989.html)文档。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947238289_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245509938289_zh-CN.png)
 
 通常情况下，我们会在数据开发阶段或者在产品上线前夕发布账单波动（通常情况下为增大）信息。用户可以通过自助的方式来分析账单波动情况，再对自己的作业进行优化。阿里云费用中心就是一个很好的通道，阿里云所有商业化收费的产品都可以在其中下载费用明细。
 
@@ -17,21 +17,21 @@
 -   步骤1：使用主账号或者被授权的RAM子账号来登录[阿里云管控台](https://home.console.aliyun.com/new?spm=5176.8142029.388261.3.5fc16d3eb27Z8R#/)。
 -   步骤2：右上角进入费用中心，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947238292_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245509938292_zh-CN.png)
 
 -   步骤3：在费用中心-消费记录-消费明细中，选择产品和账单日期，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947238293_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245509938293_zh-CN.png)
 
     **说明：** 包年包月中的**后付费**是指项目开通包年包月计算计费模式后，产生的存储、下载对应的费用（存储、下载费用只有后付费）。
 
 -   步骤4：为了方便批量分析数据，我们选择下载使用记录csv文件在本地分析，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947238295_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245509938295_zh-CN.png)
 
     下载csv文件如下，可以在本地打开进行分析，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947238298_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245509938298_zh-CN.png)
 
     ```
     --csv的表头
@@ -44,7 +44,7 @@
 使用记录明细字段解释：
 
 -   项目编号：当前账号或子账号对应的主账号的MaxCompute Project列表。
--   计量信息编号：其中会包含存储、计算、上传和下载的计费信息编号，SQL为instanceid，上传和下载为Tunnel sessionid。
+-   计量信息编号：其中会以存储、计算、上传和下载的任务id为计费信息编号，SQL为instanceid，上传和下载为Tunnel sessionid。
 -   数据分类：Storage（存储）、ComputationSql（计算）、UploadIn（内网上传）、UploadEx（外网上传）、DownloadIn（内网下载）、DownloadEx（外网下载）。按照计费规则其中只有红色为实际计费项目。
 -   开始时间/结束时间：按照实际作业执行时间进行计量，只有Storage是按照每个小时取一次数据。
 -   存储（Byte）：每小时读取的存储量单位为Byte。
@@ -58,7 +58,7 @@
 
 1.  确认CSV文件数据，尤其是列分隔符等（推荐使用UE）。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947238301_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245509938301_zh-CN.png)
 
     **说明：** 数据以逗号分隔，且单元格值都带有双引号。
 
@@ -66,7 +66,7 @@
 
     **说明：** 替换为不用填写。直接点击**全部替换**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947238304_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245509938304_zh-CN.png)
 
 3.  创建MaxCompute表，存储下载的消费明细。
 
@@ -98,13 +98,13 @@
     odps@ sz_mc>tunnel upload /Users/yangyi/Desktop/ODPS_2019-01-12_2019-01-14.csv maxcomputefee -c "UTF-8" -h "true" -dfp "yyyy-MM-dd HH:mm:ss";
     ```
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947338310_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245509938310_zh-CN.png)
 
     **说明：** 用户也可以通过DataWorks数据导入的功能来进行，具体请参见[操作步骤](../../../../../cn.zh-CN/快速开始/步骤一：建表并上传数据.md#)。
 
 5.  验证数据。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947338312_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245510038312_zh-CN.png)
 
 
 ## 通过SQL分析账单数据 {#section_m5f_t5r_pgb .section}
@@ -114,11 +114,11 @@
     **说明：** 云上客户使用MaxCompute，95%的用户通过SQL即可满足需求，SQL也在消费成长中占据了绝大部分。
 
     ```
-    SQL费用=一次SQL计算费用 = 计算输入数据量 SQL复杂度0.3元/GB
+    SQL费用=一次SQL计算费用 = 计算输入数据量*SQL复杂度*0.3元/GB
     ```
 
     ```
-    --分析SQL消费，按照SQL进行排行
+    --分析SQL消费，按照sqlmoney行排行
     SELECT  to_char(endtime,'yyyymmdd') as ds,feeid as instanceid
             ,projectid
             ,computationsqlcomplexity  --复杂度
@@ -137,25 +137,25 @@
 
     -   查询结果
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947338316_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245510038316_zh-CN.png)
 
         根据此段SQL执行结果可以得到如下结论：
 
-        1.  **大作业**可以优化的点：\*\*是否可以减小数据读取量、降低复杂度来优化费用成本。
+        1.  **大作业**可以优化的点：是否可以减小数据读取量、降低复杂度来优化费用成本。
         2.  也可以按照ds字段（按照天）进行汇总，分析某个时间段内的SQL消费金额走势。比如利用本地excel或云上QuickBI等工具绘制折线图等方式，更直观的反应作业的趋势。
         3.  拿到具体的instanceid，在console或者DataWorks脚本执行`wait instanceid;`命令查看具体作业和SQL。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947338317_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245510038317_zh-CN.png)
 
             在浏览器中打开logview的url地址（关于logview的介绍详见[Logview](../../../../../cn.zh-CN/用户指南/Job运行信息查看/Logview.md#)），如下图。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947338318_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245510038318_zh-CN.png)
 
             从logview中获取DataWorks节点名称：
 
             在logview中打开SourceXML可以查看到具体执行信息，如SKYNET\_NODENAME表示DataWorks的节点名称（当然只有被调度系统执行的作业才有值，临时查询为空，如下图所示）。拿到节点名称可以快速的在DataWorks找到该节点进行优化或查看责任人，如下图。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947338319_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245510038319_zh-CN.png)
 
 2.  分析作业增长趋势
 
@@ -178,7 +178,7 @@
 
     -   执行结果
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947338322_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245510038322_zh-CN.png)
 
         从执行结果可以看出来12-14日提交到MaxCompute且执行成功的作业数的波动趋势。
 
@@ -214,11 +214,11 @@
 
     -   执行结果
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947338323_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245510038323_zh-CN.png)
 
         根据计算结果可以分析得出结论：
 
-        1.  存储在13日为最高有一个增长的过程，但是在14日是有降低。
+        1.  存储在12日为最高有一个增长的过程，但是在14日是有降低。
         2.  存储优化，建议表设置生命周期，删除长期不使用的临时表等。
 4.  分析下载费用
 
@@ -244,7 +244,7 @@
 
     按照执行结果也可以分析出某个时间段内的下载费用走势。另外可以通过tunnel show history查看具体历史信息，具体命令详见[Tunnel命令操作](../../../../../cn.zh-CN/用户指南/数据上传下载/Tunnel命令操作.md#)。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/154876947338324_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/122299/155245510038324_zh-CN.png)
 
     以下几种计算作业与SQL类似，按照[计量计费说明](../../../../../cn.zh-CN/产品定价/计量计费说明.md#)编写SQL即可。
 
