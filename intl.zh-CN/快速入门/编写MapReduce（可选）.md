@@ -57,7 +57,7 @@
 
 4.  开发MapReduce程序并上传MaxCompute
 
-    MaxCompute为您提供了便捷的[Eclipse开发插件](../../../../../intl.zh-CN/工具及下载/Eclipse开发插件/安装Eclipse插件.md#)，方便您快速开发MapReduce程序，并提供了本地调试MapReduce的功能。您也可以使用[MaxCompute Studio](../../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/创建MaxCompute Java Module.md#)进行MapReduce程序开发，本文以Eclipse举例。
+    MaxCompute为您提供了便捷的[Eclipse开发插件](../../../../../intl.zh-CN/工具及下载/Eclipse开发插件/安装Eclipse插件.md#)，方便您快速开发MapReduce程序，并提供了本地调试MapReduce的功能。您也可以使用[MaxCompute Studio](../../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发Java程序/创建MaxCompute Java Module.md#)进行MapReduce程序开发，本文以Eclipse举例。
 
     您需要先在Eclipse中创建一个项目工程，而后在此工程中编写MapReduce程序。本地调试通过后，将编译好的程序（Jar 包，如[Word-count-1.0.jar](../../../../../intl.zh-CN/用户指南/MapReduce/示例程序/WordCount示例.md)）导出并上传至MaxCompute。详情请参见[MapReduce开发插件介绍](../../../../../intl.zh-CN/工具及下载/Eclipse开发插件/安装Eclipse插件.md)。
 
