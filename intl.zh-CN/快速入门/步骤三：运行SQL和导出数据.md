@@ -36,7 +36,7 @@ GROUP BY education;
 
 您可以使用`select * from result_table;`查看result\_table表中的数据，如下图所示，可以看到当前受到各阶段教育的单身人士数量。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/155134716737072_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/155287077437072_zh-CN.png)
 
 上述过程仅仅是一个最简单的数据加工举例，您在实际应用的过程中，可能需要使用多个SQL对多个表进行加工操作。推荐您使用DataWorks完成复杂的数据加工[业务流程](../../../../../intl.zh-CN/使用指南/数据开发/业务流程/业务流程介绍.md#)。
 
@@ -50,7 +50,7 @@ tunnel download result_table D:\result.txt;
 
 导出成功后如下图所示，可以看到**download OK**字样。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/155134716737074_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/155287077437074_zh-CN.png)
 
 **说明：** 如果您需要将数据导出到MySQL或其他数据源，推荐您使用[数据集成](../../../../../intl.zh-CN/使用指南/数据集成/数据集成简介/数据集成概述.md#)。
 
