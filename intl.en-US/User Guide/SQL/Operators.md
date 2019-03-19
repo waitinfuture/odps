@@ -14,7 +14,7 @@ Operators are used to perform program code operations. This article introduces f
 |A\>=B|If A or B is NULL, NULL is returned; if A is not less than B, TRUE is returned; otherwise, FALSE is returned.|
 |A IS NULL|If A is NULL, TRUE is returned; otherwise, FALSE is returned.|
 |A IS NOT NULL|If A is NULL, TRUE is returned; otherwise FALSE is returned.|
-|A LIKE B|If A or B is NULL, NULL is returned. If String A matches the SQL simple regular B TRUE is returned; otherwise FALSE is returned. The \( %\) character in B matches an arbitrary number of characters and the \(\_\) character in B matches any character in A. To match \(%\) or\_'\), use by the escape characters '\(%'\)' and \(\_'\).```
+|A LIKE B|If A or B is NULL, NULL is returned. If String A matches the SQL simple regular B TRUE is returned; otherwise FALSE is returned. The \( %\) character in B matches an arbitrary number of characters and the \(\_\) character in B matches any character in A. To match \(%\) or\(\_\), use by the escape characters \('%'\)'and \('\_'\).```
 ‘aaa’ like‘a_’= TRUE 
 ‘aaa’ like‘a%’ = TRUE
 ‘aaa’ like‘aab’= FALSE 
