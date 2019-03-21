@@ -2,7 +2,7 @@
 
 当一个大表和一个或多个小表做Join时，可以使用MapJoin，性能比普通的Join要快很多。
 
-MapJoin 的基本原理为：在小数据量情况下，SQL会将您指定的小表全部加载到执行Join操作的程序的内存中，从而加快Join的执行速度。
+MapJoin 的基本原理：在小数据量情况下，SQL会将您指定的小表全部加载到执行Join操作的程序的内存中，从而加快Join的执行速度。
 
 **说明：** 当您使用 MapJoin 时，要注意以下问题：
 
@@ -18,7 +18,7 @@ MapJoin 的基本原理为：在小数据量情况下，SQL会将您指定的小
 -   多个表Join时，最左边的两个表不能同时是MapJoin的表。
 -   您可以通过mapjoin on 1 = 1来实现笛卡尔乘积，但请注意可能会带来计算量的膨胀。
 
-**示例如下：**
+**示例：**
 
 ```
 select /* + mapjoin(a) */
@@ -29,9 +29,9 @@ from shop a join sale_detail b
 on a.shop_name = b.shop_name;
 ```
 
-MaxCompute SQL不支持在普通Join的on条件中使用不等值表达式，or逻辑等复杂的Join条件，但是在MapJoin中可以进行如上操作。
+MaxCompute SQL不支持在普通Join的on条件中使用不等值表达式，or逻辑等复杂的Join条件，但是在MapJoin中可以进行上述操作。
 
-**示例如下：**
+**示例：**
 
 ```
 select /*+ mapjoin(a) */
@@ -40,4 +40,6 @@ select /*+ mapjoin(a) */
 from shop a join sale_detail b
 on a.total_price < b.total_price or a.total_price + b.total_price < 500;
 ```
+
+MapJoin多个小表示例请参考[**用Mapjoin缓存多张小表**](https://help.aliyun.com/knowledge_detail/40270.html)。
 
