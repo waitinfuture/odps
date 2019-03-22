@@ -6,7 +6,7 @@ This topic describes how to use MaxCompute to analyze IP sources. The procedure 
 
 The query APIs of [Taobao IP address library](http://ip.taobao.com/) are [IP address strings](http://ip.taobao.com/service/getIpInfo.php?ip=[ip%E5%9C%B0%E5%9D%80%E5%AD%97%E4%B8%B2]). The following is an example.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155056978631905_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155322778231905_en-US.png)
 
 HTTP requests are not directly allowed in MaxCompute. However, you can query IP addresses in MaxCompute using one of the following methods:
 
@@ -21,7 +21,7 @@ The following further describes the third method.
 1.  You need to obtain data from an IP address library. This section provides a [demo of an incomplete UTF-8 IP address library](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/102762/cn_zh/1547530733280/ipdata.txt.utf8).
 2.  Download the **UTF-8** IP address library and check the data format, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155056978631907_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155322778231907_en-US.png)
 
     The first four strings of data are the starting and ending IP addresses, among which the first two are decimal integers and the second two are expressed in dot-decimal notation. The decimal integer format is used to check whether an IP address belongs to the target network segment.
 
@@ -55,18 +55,16 @@ The following further describes the third method.
 
     You can use the `select count(*) from ipresource;` SQL statement to view the uploaded data. Generally, the quantity of data increases in the library due to regular updates and maintenance.
 
-3.  Use the `select count(*) from ipresource limit 0,10;` SQL statement to view the first 10 pieces of data in the ipresource table, as shown in the following figure.
+3.  Use the `select count(*) from ipresource limit 10;` SQL statement to view the first 10 pieces of data in the ipresource table, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155056978631909_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155322778231909_en-US.png)
 
 
 ## Write a UDF {#section_uht_3kl_5fb .section}
 
-You can write a Python-based UDF to convert IP addresses in dot-decimal notation to decimal integers. The following is an example of how to convert IP addresses by using the [PyODPS node](../../../../../reseller.en-US/.md#) of DataWorks:
-
 1.  Choose **Data Studio** \> **Business Flow** \> **Resource**. Right-click **Resource** and choose **Create Resource** \> **Python**. In the displayed dialog box, enter the name of the Python resource, select **Upload to ODPS** and click **OK**, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155056978631910_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155322778231910_en-US.png)
 
 2.  Write code for the Python resource. The following is an example:
 
@@ -83,17 +81,17 @@ You can write a Python-based UDF to convert IP addresses in dot-decimal notation
 
     Click **Submit and Unlock**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155056978631911_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155322778331911_en-US.png)
 
 3.  Choose **Data Studio** \> **Business Flow** \> **Function**. Right-click **Function** and select **Create Function**.
 
     Set the function class name to `ipint.ipint`, and the folder to the resource name, and click **Submit and Unlock**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155056978631913_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155322778331913_en-US.png)
 
 4.  Create an ODPS SQL node and run the SQL statement to check whether the ipint function works as expected. The following is an example.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155056978631914_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155322778331914_en-US.png)
 
 
 You can also create a local ipint.py file and use the [MaxCompute client](../../../../../reseller.en-US/Tools and Downloads/Client.md#) to upload the resource.
@@ -105,7 +103,7 @@ OK: Resource 'ipint.py' have been created.
 
 ```
 
-After uploading the resource, use the client to [register the function](../../../../../reseller.en-US/User Guide/Common commands/Functions.md#).
+After uploading the resource, use the client to [register the function](../../../../../reseller.en-US/User Guide/Common commands/Functions operations.md#).
 
 ```
 
@@ -166,7 +164,7 @@ WHERE ipint('1.2.24.2') >= start_ip
 AND ipint('1.2.24.2') <= end_ip
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155056978631915_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/155322778331915_en-US.png)
 
 To ensure the data accuracy, you can regularly obtain data from the Taobao IP address library to maintain the ipresource table.
 
