@@ -4,7 +4,7 @@ This article takes a SQL perspective. and introduces MaxCompute by comparing Max
 
 ## DDL syntax not supported by MaxCompute {#section_ed4_pvf_vdb .section}
 
-|Syntax|MaxCompute|Hive|MySql|Oracle|Sql Server|
+|Syntax|MaxCompute|Hive|MySQL|Oracle|SQL Server|
 |:-----|:---------|:---|:----|:-----|:---------|
 |CREATE TABLE—PRIMARY KEY|N|N|Y|Y|Y|
 |CREATE TABLE—NOT NULL|N|N|Y|Y|Y|
@@ -16,7 +16,7 @@ This article takes a SQL perspective. and introduces MaxCompute by comparing Max
 
 ## DML syntax not supported by MaxCompute {#section_ws2_vvf_vdb .section}
 
-|Syntax|MaxCompute|Hive|MySql|Oracle|Sql Server|
+|Syntax|MaxCompute|Hive|MySQL|Oracle|SQL Server|
 |:-----|:---------|:---|:----|:-----|:---------|
 |CTE|Y|Y|Y|Y|Y|
 |SELECT—recursive CTE|N|N|N|Y|Y|
@@ -43,10 +43,11 @@ This article takes a SQL perspective. and introduces MaxCompute by comparing Max
 |ANALYTIC—CURRENT ROW|Y|Y|N|Y|Y|
 |ANALYTIC—UNBOUNDED|Y|N|Y|Y|Y|
 |ANALYTIC—RANGE …|N|Y|N|Y|Y|
+|WHILE DO|N|N|Y|Y|Y|
 
 ## SCRIPTING syntax not supported by MaxCompute {#section_ppz_kfq_kgb .section}
 
-|Syntax|MaxCompute|Hive|MySql|Oracle|Sql Server|
+|Syntax|MaxCompute|Hive|MySQL|Oracle|SQL Server|
 |------|----------|----|-----|------|----------|
 |TABLE VARIABLE|Y|Y \(TEMPORARY TABLE\)|Y \(TEMPORARY TABLE\)|Y \(TEMPLORARY TABLE\)|Y|
 |SCALER VARIABLE|Y|Y|Y \(DECLARE x INT\)|Y|Y|

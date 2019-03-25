@@ -4,7 +4,7 @@
 
 ## MaxCompute不支持的DDL语法 {#section_ed4_pvf_vdb .section}
 
-|语法|MaxCompute|Hive|MySql|Oracle|Sql Server|
+|语法|MaxCompute|Hive|MySQL|Oracle|SQL Server|
 |:-|:---------|:---|:----|:-----|:---------|
 |CREATE TABLE—PRIMARY KEY|N|N|Y|Y|Y|
 |CREATE TABLE—NOT NULL|N|N|Y|Y|Y|
@@ -16,7 +16,7 @@
 
 ## MaxCompute不支持的DML语法 {#section_ws2_vvf_vdb .section}
 
-|语法|MaxCompute|Hive|MySql|Oracle|Sql Server|
+|语法|MaxCompute|Hive|MySQL|Oracle|SQL Server|
 |:-|:---------|:---|:----|:-----|:---------|
 |CTE|Y|Y|Y|Y|Y|
 |SELECT—recursive CTE|N|N|N|Y|Y|
@@ -43,10 +43,11 @@
 |ANALYTIC—CURRENT ROW|Y|Y|N|Y|Y|
 |ANALYTIC—UNBOUNDED|Y|N|Y|Y|Y|
 |ANALYTIC—RANGE …|N|Y|N|Y|Y|
+|WHILE DO|N|N|Y|Y|Y|
 
 ## MaxCompute不支持的SCRIPTING语法 {#section_ppz_kfq_kgb .section}
 
-|语法|MaxCompute|Hive|MySql|Oracle|Sql Server|
+|语法|MaxCompute|Hive|MySQL|Oracle|SQL Server|
 |--|----------|----|-----|------|----------|
 |TABLE VARIABLE|Y|Y \(TEMPORARY TABLE\)|Y \(TEMPORARY TABLE\)|Y \(TEMPLORARY TABLE\)|Y|
 |SCALER VARIABLE|Y|Y|Y \(DECLARE x INT\)|Y|Y|
