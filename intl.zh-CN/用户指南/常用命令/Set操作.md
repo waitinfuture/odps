@@ -12,7 +12,7 @@ set <KEY>=<VALUE>
 
 **行为说明**
 
-您可以使用set命令设置MaxCompute或影响MaxCompute的行为。
+您可以使用Set命令设置MaxCompute或影响MaxCompute的行为。
 
 MaxCompute支持的系统变量如下所示：
 
@@ -31,11 +31,9 @@ set odps.sql.type.system.odps2=   -- 默认为false，SQL（Create、select、in
 set odps.sql.executionengine.coldata.deep.buffer.size.max=   --调整MaxCompute写表过程中为单个复杂类型的列预先申请的缓存大小，以提高写入性能。
 ```
 
-**说明：** Set操作命令仅支持小写。
+**说明：** Set操作命令仅支持字母小写。
 
-**命令说明**
-
-`set odps.sql.executionengine.coldata.deep.buffer.size.max`
+set odps.sql.executionengine.coldata.deep.buffer.size.max说明
 
 -   **作用**：调整MaxCompute写表过程中为单个复杂类型的列预先申请缓存大小，以便提高写入性能。
 -   **使用场景**
@@ -52,6 +50,15 @@ set odps.sql.executionengine.coldata.deep.buffer.size.max=   --调整MaxCompute�
 
     -   如果您预先知道每个复杂类型的值都在7M到8M之间，同时指定了batch row count为32，则这个值可以被调整为8M \* 32。
     -   如果任务的输出带有复杂类型，或者任务的mapjoin小表带有复杂类型，这个值的调整会影响到任务执行过程中使用的内存。根据前面的计算方法，值设的过大有可能导致任务OOM内存溢出。
+
+set odps.stage.mapper.split.size说明
+
+-   **作用**：等同于`odps.sql.mapper.split.size`，用于调整每个mapper读取数据的大小，单位是MB，举例如下 。
+
+    ```
+    set odps.stage.mapper.split.size=256
+    ```
+
 
 ## Show Flags {#section_ft4_jff_vdb .section}
 
