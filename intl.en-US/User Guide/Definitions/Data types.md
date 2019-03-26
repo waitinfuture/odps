@@ -87,7 +87,7 @@ When you use new data types in MaxCompute, pay attention to the following inform
 
         -   Before the new type flag is enabled, the statement is `SELECT * FROM t1 UNION ALL SELECT * FROM ( SELECT * FROM t2 limit 10) t2;`.
         -   After the new type flag is enabled, the statement is `SELECT * FROM (SELECT * FROM t1 UNION ALL SELECT * FROM t2 ) t limit 10;`.
-        Actions of the [UNION, INTERSECT, and EXCEPT](reseller.en-US/User Guide/SQL/Select Operation/UNION, INTERSECT, and EXCEPT.md#), INTERSECT, EXCEPT, LIMIT, [ORDER BY](https://help.aliyun.com/document_detail/98773.html), DISTRIBUTE BY, SORT BY, and CLUSTER BY statements are also changed if the new type flag is enabled.
+        Actions of the [UNION, INTERSECT, and EXCEPT](reseller.en-US/User Guide/SQL/Select Operation/UNION, INTERSECT, and EXCEPT.md#), INTERSECT, EXCEPT, LIMIT, ORDER BY, DISTRIBUTE BY, SORT BY, and CLUSTER BY statements are also changed if the new type flag is enabled.
 
     -   The resolutions of the IN expression are different.
 
