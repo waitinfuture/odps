@@ -107,7 +107,7 @@ select age+10, age-10, age%10, -age, age*age, age/10 from user;
 |FALSE or NULL=NULL|
 |NULL or FALSE=NULL|
 |TRUE or NULL=TRUE|
-|NULL or FALSE=NULL|
+|NULL or TRUE=TRUE|
 |NULL or NULL=NULL|
 |NOT A|If A is NULL, NULL is returned.|
 |If A is TRUE, FALSE is returned.|
