@@ -27,14 +27,14 @@ CREATE FUNCTION <function_name> AS <package_to_class> USING <resource_list>;
 -   Suppose a Java UDF class org.alidata.odps.udf.examples.Lower is in my\_lower.jar, create function my\_lower as follows:
 
     ```
-    CREATE FUNCTION test_lower AS org.alidata.odps.udf.examples.Lower USING my_lower.jar;
+    CREATE FUNCTION my_lower AS org.alidata.odps.udf.examples.Lower USING my_lower.jar;
     USING 'my_lower.jar';
     ```
 
 -   Suppose a Python UDF MyLower is used in project pyudf\_test.py,create function my\_lower  as follows:
 
     ```
-     create function test_lower as 'pyudf_test.MyLower'
+    create function my_lower as 'pyudf_test.MyLower'
     using 'test_project/resources/pyudf_test.py';
     ```
 
