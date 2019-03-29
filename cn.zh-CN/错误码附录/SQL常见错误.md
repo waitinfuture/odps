@@ -22,10 +22,10 @@
 |ODPS-0120011:Authorization exception|权限不足|
 |ODPS-0120021:the delimitor must be the same in wm\_concat|相同group中separator不同|
 |ODPS-0120031：Instance has been cancelled|某instance被cancel多次|
-|ODPS-0121011:Invalid regular expression pattern|[内建函数](../../../../intl.zh-CN/用户指南/SQL/内建函数/数学函数.md)中的正则处理函数接收到了不能识别的正则表达式。|
+|ODPS-0121011:Invalid regular expression pattern|[内建函数](../../../../../intl.zh-CN/用户指南/SQL/内建函数/数学函数.md)中的正则处理函数接收到了不能识别的正则表达式。|
 |ODPS-0121021:Regexec call failed|匹配正则时引起的错误|
 |ODPS-0120031：Instance has been cancelled|某instance被cancel多次|
-|ODPS-0121035:Illegal implicit type cast|类型转换错误。一般为不支持的隐式类型转换错误。通常情况下是由于违背[隐式类型转换](../../../../intl.zh-CN/用户指南/SQL/SQL概述.md)规则引起的。[内建函数](../../../../intl.zh-CN/用户指南/SQL/内建函数/数学函数.md)也有不同的隐式转换规则。|
+|ODPS-0121035:Illegal implicit type cast|类型转换错误。一般为不支持的隐式类型转换错误。通常情况下是由于违背[隐式类型转换](../../../../../intl.zh-CN/用户指南/SQL/SQL概述.md)规则引起的。[内建函数](../../../../../intl.zh-CN/用户指南/SQL/内建函数/数学函数.md)也有不同的隐式转换规则。|
 |ODPS-0121045:Unsupported return type|不支持的返回值|
 |ODPS-0121055:Empty argument value|参数是空串或者NULL|
 |ODPS-0121065:Argument value out of range|参数值错误|
@@ -36,7 +36,7 @@
 |ODPS-0121115:Column reference expected|需要输入列名，但输入常数|
 |ODPS-0121125:Unsupported function or operation|不支持的UDF或其它操作|
 |ODPS-0121135:Malloc memory failed|内存分配异常|
-|ODPS-0121145:Data overflow|数据溢出，超出数据类型的[值域范围](../../../../intl.zh-CN/用户指南/基本概念/数据类型.md)。通常情况下有可能是”除零”错误或聚合函数，例如：sum导致的数据移出。|
+|ODPS-0121145:Data overflow|数据溢出，超出数据类型的[值域范围](../../../../../intl.zh-CN/用户指南/基本概念/数据类型.md)。通常情况下有可能是”除零”错误或聚合函数，例如：sum导致的数据移出。|
 |ODPS-0123019:Distributed file operation exception|磁盘读写异常|
 |ODPS-0123023:Unsupported reduce type|不支持的Reduce|
 |ODPS-0123031:Partition exception|分区异常|
@@ -45,9 +45,9 @@
 |ODPS-0123065:Join exception|Join异常|
 |ODPS-0123075:Hash exception|哈希异常|
 |ODPS-0123081:Invalid datetime string|datetime字符串异常|
-|ODPS-0123091:Illegal type cast|非法类型转换。通常情况下，是由于非法的[显式类型转换](../../../../intl.zh-CN/用户指南/SQL/SQL概述.md)造成的。|
+|ODPS-0123091:Illegal type cast|非法类型转换。通常情况下，是由于非法的[显式类型转换](../../../../../intl.zh-CN/用户指南/SQL/SQL概述.md)造成的。|
 |ODPS-0123105： Job got killed|作业被kill|
-|ODPS-0123111:Format string does not match datetime string|格式串不匹配日期字符串。用户在SQL中手动输入的日期格式不符合MaxCompute的格式要求，或者对DataTime相关内建函数使用不当。MaxCompute DataTime类型的显示格式可参考[数据类型](../../../../intl.zh-CN/用户指南/基本概念/数据类型.md)中的示例，或[内建函数](../../../../intl.zh-CN/用户指南/SQL/内建函数/数学函数.md)中有关日期函数的介绍。|
+|ODPS-0123111:Format string does not match datetime string|格式串不匹配日期字符串。用户在SQL中手动输入的日期格式不符合MaxCompute的格式要求，或者对DataTime相关内建函数使用不当。MaxCompute DataTime类型的显示格式可参考[数据类型](../../../../../intl.zh-CN/用户指南/基本概念/数据类型.md)中的示例，或[内建函数](../../../../../intl.zh-CN/用户指南/SQL/内建函数/数学函数.md)中有关日期函数的介绍。|
 |ODPS-0123121:Mapjoin exception|MAPJOIN异常。通常情况是Mapjoin的小表超过512MB的系统限制造成的。|
 |ODPS-0123131:User defined function exception|自定义函数异常|
 |ODPS-0123141： Exstore exception|极限存储异常|
@@ -64,7 +64,7 @@
 |ODPS-0130071:Semantic analysis exception - Partition not found|语法解析异常。没有找到所指定分区值的分区。|
 |ODPS-0130071:Semantic analysis exception - SELECT DISTINCT and GROUP BY can not be in the same query|Distinct和Group By不能出现在同一个Select子句中。|
 |ODPS-0130071:Semantic analysis exception - Cannot insert into target table because column number/types are different|向目标表插入数据时，源表和目标表的列数量或类型不匹配。|
-|ODPS-0130071:Semantic analysis exception - physical plan generation failed: java.lang.RuntimeException: Table\(xxxx\) is full scan with all partitions, please specify partition predicates.|表所属项目禁止了分区表全表扫描，需要指定分区条件|
+|ODPS-0130071:Semantic analysis exception - physical plan generation failed: java.lang.RuntimeException: Table\(xxxx\) is full scan with all partitions, please specify partition predicates.|表所属项目禁止了分区表全表扫描，需要指定分区条件。若确实需要允许当前sql进行全表扫描，可以在sql语句前加`set odps.sql.allow.fullscan=true;`语句并一起提交运行，但要注意：全表扫描会导致输入量增加从而及时成本增加。|
 |ODPS-0130071:Semantic analysis exception - xxxx type is not enabled in current mode|没有开启新数据类型设置。要使用新数据类型（Tinyint、Smallint、Int、Float、Varchar、TIMESTAMP和BINARY）需在建表语句前加上set语句。session级别：`set odps.sql.type.system.odps2=true;`
 
 project级别：`setproject odps.sql.type.system.odps2=true;`
@@ -74,7 +74,7 @@ project级别：`setproject odps.sql.type.system.odps2=true;`
 |ODPS-0130091:Invalid parameters|UDF参数不合法|
 |ODPS-0130101:Ambiguous data type|数据类型不合法|
 |ODPS-0130111:Subquery partition pruning exception|in条件判断语句中的子查询 动态分区优化异常|
-|ODPS-0130121:Invalid argument type|非法参数类型。一般情况下，是[内建函数](../../../../intl.zh-CN/用户指南/SQL/内建函数/数学函数.md)接收到的参数类型不正确。|
+|ODPS-0130121:Invalid argument type|非法参数类型。一般情况下，是[内建函数](../../../../../intl.zh-CN/用户指南/SQL/内建函数/数学函数.md)接收到的参数类型不正确。|
 |ODPS-0130131:Table not found|表不存在。在操作DDL或DML语句时，被操作的表并不存在。|
 |ODPS-0130141:Illegal implicit type cast|不允许的隐式类型转换|
 |ODPS-0130151:Illegal data type|无效的数据类型|
@@ -111,4 +111,5 @@ project级别：`setproject odps.sql.type.system.odps2=true;`
 |ODPS-0140181:Sql plan exception|由于某种原因导致的SQL作业无法生成执行计划。遇到这种错误，用户可以重试提交作业，多次提交仍失败，可通过工单系统联系我们。|
 |ODPS-0123049: buffer overflow|内存溢出，如join里边相同key的数据太多了,内存放不下，需检查数据是否有问题。|
 |ODPS-0140178: Internal system failure|系统异常。一般重试可成功。|
+|ODPS-0420061: Invalid parameter in HTTP request - Fetched data is larger than the rendering limitation. Please try to reduce your limit size or column number.|屏显数量过大导致报错，可能是您的字段内容过大。|
 
