@@ -75,9 +75,9 @@ CUBE会枚举指定列的所有可能组合作为Grouping Sets，而ROLLUP会以
 示例如下：
 
 ```
-GROUP BY CUBE(a, b, c)等价于GROUPING SETS((a,b,c),(a,b),(a,c),(b,c),(a),(b),(c),())。
+GROUP BY CUBE(a, b, c)  等价于  ROUPING SETS((a,b,c),(a,b),(a,c),(b,c),(a),(b),(c),())
 
-GROUP BY ROLLUP(a, b, c)等价于GROUPING SETS((a,b,c),(a,b),(a))。
+GROUP BY ROLLUP(a, b, c)  等价于  GROUPING SETS((a,b,c),(a,b),(a), ())
 ```
 
 ## GROUPING和GROUPING\_ID函数 {#section_d4j_kdw_hfb .section}
