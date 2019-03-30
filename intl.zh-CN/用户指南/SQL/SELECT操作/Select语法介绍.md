@@ -18,7 +18,7 @@ FROM table_reference
 
 使用Select语句时的**注意事项**请参见本章后续部分。
 
-## 列表达式select\_expr {#section_xwx_cv2_ggb .section}
+## 列表达式 {#section_xwx_cv2_ggb .section}
 
 **Select**操作从表中读取数据，要读的列可以用列名指定，或者用\*代表所有的列，一个简单的Select语句，如下所示：
 
@@ -83,6 +83,23 @@ select distinct region, sale_date from sale_detail;
 -- distinct多列，distinct的作用域是 Select 的列集合，不是单个列。
 ```
 
+## select\_expr正则表达式 {#section_hk3_mvl_ghb .section}
+
+MaxCompute sql支持使用select\_expr正则表达式选列。
+
+使用select\_expr正则表达式时，需要使用\`（反单引号）将正则表达式括起来，举例如下。
+
+-   `SELECT `abc.*` FROM t;`选出 t 表中所有列名以abc开头的列。
+-    `SELECT `(ds)?+.+` FROM t;`选出t表中列名不为ds的所有列。
+-    `SELECT `(ds|pt)?+.+` FROM t;`选出t表中排除ds和pt两列的其他列。
+-    `SELECT `(d.*)?+.+` FROM t;`选出t表中排除列名以d开头的其他列。
+
+**说明：** 
+
+在排除多个列时，如果col2是col1的前缀，则需保证col1写在col2的前面（较长的col写前面）。例如，一个表有2个分区无需被select，一个分区名为ds，另一个为dshh。则正确表达式为`SELECT `(dshh|ds)?+.+` FROM tbl;`。
+
+错误表达式：`SELECT `(ds|dshh)?+.+` FROM tbl;`。
+
 ## Where子句过滤 {#section_lwx_cv2_ggb .section}
 
 **Where**子句支持的过滤条件，如下表所示：
@@ -146,7 +163,7 @@ select region, total_price from sale_detail group by region, total_price;
     -- 报错返回，order by没有与limit共同使用
     select * from sale_detail order by region limit 100;
     select region as r from sale_detail order by region limit 100;
-    -- 报错返回，order by后面必须加列的别名。
+    -- 报错返回，order by后面必须加列的别名
     select region as r from sale_detail order by r limit 100;
     ```
 
