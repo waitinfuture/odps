@@ -26,9 +26,9 @@ LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/';
 
 -   STORED AS关键字，在该语法格式中不是[普通非结构化外表](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)用的STORED BY关键字，这是目前在读取开源兼容数据时独有的。
 
-    STORED AS后面接的是文件格式名字， 比如ORC/PARQUET/RCFILE/SEQUENCEFILE/TEXTFILE等。
+    STORED AS后面接的是文件格式名字，例如ORC/PARQUET/RCFILE/SEQUENCEFILE/TEXTFILE等。
 
--   外部表的column schemas必须与具体OSS上存储存储数据的schema相符合。
+-   外部表的column schemas必须与具体OSS上存储的数据的schema相符合。
 -   ROW FORMAT SERDE：非必选选项，只有在使用一些特殊的格式上，比如TEXTFILE时才需要使用。
 -   WITH SERDEPROPERTIES：当关联OSS权限使用[STS模式授权](intl.zh-CN/用户指南/外部表/OSS的STS模式授权.md)时，需要该参数指定odps.properties.rolearn属性，属性值为RAM中具体使用的Role的Arn的信息。您可以在配置STORED AS <file format\>的同时也通过<serde class\>说明file format文件格式。以ORC文件格式为例，如下所示。
 
@@ -267,9 +267,9 @@ LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/';
     GROUP BY l_returnflag, l_linestatus;
     ```
 
-    外表tpch\_lineitem\_parquet被当作一个普通的内部表一样使用，不同在于MaxCompute内部计算引擎是直接从OSS读取对应的PARQUET数据进行处理。
+    外表tpch\_lineitem\_parquet被当作一个普通的内部表一样使用，不同之处在于，MaxCompute内部的计算引擎是直接从OSS读取对应的PARQUET数据进行处理的。
 
-    前文创建的关联textfile的外部分区表tpch\_lineitem\_textfile，因为使用了`ROW FORMAT` + `STORED AS`，需要手动设置flag（只使用STORED AS，odps.sql.hive.compatible默认为FALSE），再进行读取，否则会有报错。
+    前文创建的关联textfile的外部分区表tpch\_lineitem\_textfile，因为使用了`ROW FORMAT` + `STORED AS`，需要手动设置flag `set odps.sql.hive.compatible=true;`（只使用STORED AS，odps.sql.hive.compatible默认为FALSE）再创建外部表或读取数据，否则会有报错。
 
     ```
     SELECT * FROM tpch_lineitem_textfile LIMIT 1;
@@ -287,7 +287,7 @@ LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/';
 
     **说明：** 直接使用外表，每次读取数据都需要涉及外部OSS的I/O操作，且MaxCompute系统本身针对内部存储做的许多高性能优化都用不上，如此一来性能上就会有所损失。 因此如果是需要对数据进行反复计算以及对计算的高效性比较敏感的场景，推荐使用下文介绍的用法：先将数据导入MaxCompute内部再进行计算。
 
-    SQL（ create、select、insert等操作）中涉及到这几个复杂数据类型，需在SQL语句前加语句`set odps.sql.type.system.odps2=true;`，执行时set语句和SQL语句一起提交执行。详情请参见[数据类型](../../../../intl.zh-CN/用户指南/基本概念/数据类型.md#)。
+    SQL（ create、select、insert等操作）中涉及到这几个复杂数据类型，需在SQL语句前加语句`set odps.sql.type.system.odps2=true;`，执行时set语句和SQL语句一起提交执行。详情请参见[数据类型](../../../../../intl.zh-CN/用户指南/基本概念/数据类型.md#)。
 
 -   将OSS的开源数据导入MaxCompute再进行计算
 
