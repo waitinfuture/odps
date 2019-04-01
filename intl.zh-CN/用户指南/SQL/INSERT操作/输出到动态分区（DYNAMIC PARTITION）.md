@@ -1,6 +1,6 @@
 # 输出到动态分区（DYNAMIC PARTITION） {#concept_b1p_qdb_wdb .concept}
 
-在Insert overwrite到一张分区表时，可以在分区中指定一个分区列名，但不给出值。相应地，在select子句中的对应列提供分区的值。
+在INSERT OVERWRITE到一张分区表时，可以在分区中指定一个分区列名，但不给出值。相应地，在SELECT子句中的对应列提供分区的值。
 
 ## 动态分区语法 {#section_aky_dyy_bgb .section}
 
@@ -53,7 +53,7 @@ create table sale_detail_dypart like sale_detail;--创建示例目标表
     ```
 
     -   此时sale\_detail表中，sale\_date的值决定目标表的sale\_date分区值，region的值决定目标表的region分区值。
-    -   动态分区中，select\_statement字段和目标表动态分区的对应是按字段顺序决定的。如该示例中，select语句若写成`select shop_name,customer_id,total_price,region,sale_date from sale_detail;`，则sale\_detail表中，region值决定决定目标表的 sale\_date分区值，sale\_date的值决定目标表的region分区值。
+    -   动态分区中，select\_statement字段和目标表动态分区的对应是按字段顺序决定的。如该示例中，select语句若写成`select shop_name,customer_id,total_price,region,sale_date from sale_detail;`，则sale\_detail表中，region值决定目标表的 sale\_date分区值，sale\_date的值决定目标表的region分区值。
 -   示例二：
 
     ```
