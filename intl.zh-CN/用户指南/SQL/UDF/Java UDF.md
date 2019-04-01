@@ -77,7 +77,7 @@ public final class Lower extends UDF {
 
 UDF的使用方式与MaxCompute SQL中普通的内建函数相同，详情请参见 [内建函数](intl.zh-CN/用户指南/SQL/内建函数/数学函数.md)。
 
-**说明：** 如果1个SQL中同时使用2个UDF，执行时2个UDF会共享一个classpath，不会隔离。如果两个UDF引用的resource资源都包含同一个class，则classloader会引用哪个class是不确定的。因此，请您尽量避免此种情况出现。
+**说明：** 如果1个SQL中同时使用2个UDF，执行时2个UDF会共享一个classpath，不会隔离。如果2个UDF引用的resource资源都包含同一个class，则classloader会引用哪个class是不确定的。因此，请您尽量避免此种情况出现。
 
 -   新版的MaxCompute支持定义Java UDF时，使用Writable类型作为参数和返回值。下面为MaxCompute类型和Java Writable类型的映射关系。
 
@@ -207,7 +207,7 @@ public abstract class Aggregator implements ContextFunction {
 
 以实现求平均值avg为例，下图简要说明了在MaxCompute UDAF中这一函数的实现逻辑及计算流程：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15541128121855_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15541130381855_zh-CN.jpg)
 
 在上图中，输入数据被按照一定的大小进行分片（有关分片的描述请参见 [MapReduce](intl.zh-CN/用户指南/MapReduce/概要/MapReduce概述.md)），每片的大小适合一个worker在适当的时间内完成。这个分片大小的设置需要您手动配置完成。
 
