@@ -28,7 +28,7 @@ USING 'unix_command_line'
     -   Using中的格式和Shell的语法非常类似，但并非真的启动Shell来执行，而是直接根据命令的内容来创建了子进程。因此，很多Shell的功能不能使用，例如输入输出重定向、管道、循环等。若有需要，Shell本身也可以作为子进程命令来使用。
 -   RESOURCES子句：允许指定子进程能够访问的资源，支持以下两种方式指定资源
     -   支持使用resources子句：如`using 'sh foo.sh bar.txt' Resources 'foo.sh','bar.txt'`。
-    -   支持在SQL语句前使用`set odps.sql.session.resources=foo.sh,bar.txt;`来指定。注意这种配置是全局的，意味着整个SQL中所有的Select Transdorm都可以访问这个setting配置的资源。
+    -   支持在SQL语句前使用`set odps.sql.session.resources=foo.sh,bar.txt;`来指定。注意这种配置是全局的，意味着整个SQL中所有的Select Transform都可以访问这个setting配置的资源。
 -   ROW FORMAT子句：允许自定义输入输出的格式
 
     语法中有两个row format子句，第一个子句指定输入的格式，第二个指定输出的格式。 默认情况下使用`\t`来作为列的分隔符，`\n`作为行的分隔符，Null使用\\N（注意是两个字符，反斜杠字符和字符N）来表示。
@@ -85,13 +85,13 @@ add py ./myplus.py -f;
 
 **说明：** 您也可通过DataWorks控制台进行新增资源操作。
 
-使用Select Transdorm语法调用资源
+使用Select Transform语法调用资源
 
 ```
 Create table testdata(c1 bigint,c2 bigint);--创建测试表
 insert into Table testdata values (1,4),(2,5),(3,6);--测试表中插入测试数据
 
---接下来执行Select Transdorm如下： 
+--接下来执行Select Transform如下： 
 SELECT 
 TRANSFORM (testdata.c1, testdata.c2) 
 USING 'python myplus.py'resources 'myplus.py' 
@@ -128,7 +128,7 @@ SELECT  TRANSFORM('for i in xrange(1, 50):  print i;') USING 'python' AS (data);
 
 ## 调用Java脚本示例 {#section_dsx_ccc_wdb .section}
 
-与之前调用Python脚本类似，在本例中，您需要编辑好Java文件，导出Jar包，再通过add file方式将Jar包加为MaxCompute资源，最后用于Select Transdorm调用。
+与之前调用Python脚本类似，在本例中，您需要编辑好Java文件，导出Jar包，再通过add file方式将Jar包加为MaxCompute资源，最后用于Select Transform调用。
 
 准备好Jar文件，假设脚本文件名为Sum.jar，Java代码如下所示。
 
@@ -159,12 +159,12 @@ public class Sum {
 add jar ./Sum.jar -f;
 ```
 
-接下来使用Select Transdorm语法调用资源。
+接下来使用Select Transform语法调用资源。
 
 ```
 Create table testdata(c1 bigint,c2 bigint);--创建测试表
 insert into Table testdata values (1,4),(2,5),(3,6);--测试表中插入测试数据
---接下来执行Select Transdorm如下： 
+--接下来执行Select Transform如下： 
 SELECT TRANSFORM(testdata.c1, testdata.c2) USING 'java -cp Sum.jar com.aliyun.odps.test.Sum' resources 'Sum.jar' from testdata;
 --或者
 set odps.sql.session.resources=Sum.jar;
@@ -185,11 +185,11 @@ SELECT TRANSFORM(testdata.c1, testdata.c2) USING 'java -cp Sum.jar com.aliyun.od
 
 大多数Java的utility可以直接使用本方法运行。
 
-**说明：** Java和Python虽然有现成的UDTF框架，但是用Select Transdorm编写更简单，并且不需要额外依赖，也没有格式要求，甚至可以实现直接使用离线脚本（Java和Python离线脚本的实际路径，可以从JAVA\_HOME和PYTHON\_HOME环境变量中得到）。
+**说明：** Java和Python虽然有现成的UDTF框架，但是用Select Transform编写更简单，并且不需要额外依赖，也没有格式要求，甚至可以实现直接使用离线脚本（Java和Python离线脚本的实际路径，可以从JAVA\_HOME和PYTHON\_HOME环境变量中得到）。
 
 ## 调用其他脚本语言 {#section_p4m_pcc_wdb .section}
 
-Select Transdorm不仅仅支持上述语言扩展，还支持其它的常用Unix命令或脚本解释器，如awk、Perl等。
+Select Transform不仅仅支持上述语言扩展，还支持其它的常用Unix命令或脚本解释器，如awk、Perl等。
 
 以调用awk，把第二列原样输出为例，如下所示。
 
@@ -207,7 +207,7 @@ SELECT TRANSFORM (testdata.c1, testdata.c2) USING "perl -e 'while($input = <STDI
 
 ## 串联使用示例 { .section}
 
-Select Transdorm还可以串联使用，如使用distribute by和sort by对输入数据做预处理。
+Select Transform还可以串联使用，如使用distribute by和sort by对输入数据做预处理。
 
 ```
 SELECT TRANSFORM(key, value) USING 'cmd2' from 
