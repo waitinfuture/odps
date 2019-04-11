@@ -248,8 +248,8 @@ Example:
 修改data.txt文件为如下内容：
 
 ```
-shop9,97,100
-shop10,10,200
+shopx,x_id,100
+shopy,y_id,200
 ```
 
 修复执行上传数据，如下所示：
@@ -399,6 +399,95 @@ $ ./tunnel download sale_detail/sale_date=201312,region=hangzhou result.txt;
 shopx,x_id,100.0
 shopy,y_id,200.0
 ```
+
+**下载Instance数据**
+
+方法一：使用tunnel download命令将特定Instance的执行结果下载到本地文件。
+
+命令
+
+```
+tunnel download instance://<[project_name/]instance_id> <path>
+```
+
+参数说明：
+
+-   project\_name：Instance所在的项目名称。
+-   instance\_id：待下载数据的Instance ID。
+
+示例
+
+```
+// 执行一条 select 查询：
+odps@ odps_test_project>select * from wc_in;
+ID = 20170724071705393ge3csfb8
+... ...
+
+// 使用 Instance Tunnel Download 命令下载执行结果到本地文件
+odps@ odps_test_project>tunnel download instance://20170724071705393ge3csfb8 result;
+2017-07-24 15:18:47  -  new session: 2017072415184785b6516400090ca8    total lines: 8
+2017-07-24 15:18:47  -  file [0]: [0, 8), result
+downloading 8 records into 1 file
+2017-07-24 15:18:47  -  file [0] start
+2017-07-24 15:18:48  -  file [0] OK. total: 44 bytes
+download OK
+
+// 查看结果
+cat result
+slkdfj
+hellp
+apple
+tea
+peach
+apple
+tea
+teaa
+```
+
+方法二：通过配置参数使SQL查询默认采用InstanceTunnel方式输出执行结果。
+
+在MaxCompute Console中打开`use_instance_tunnel`选项后，执行的SELECT query会默认使用InstanceTunnel来下载结果，从而避免在MaxCompute平台获取SQL查询结果时所遇到的获取数据超时和获取数据量受限的问题。打开该配置有以下两种方法：
+
+-   在最新版本的 [Console](../../../../../intl.zh-CN/工具及下载/客户端.md#)中，odps\_config.ini文件里已经默认打开此选项，并且`instance_tunnel_max_record`被默认设置成了10000。
+
+    ```
+    # download sql results by instance tunnel
+    use_instance_tunnel=true
+    # the max records when download sql results by instance tunnel
+    instance_tunnel_max_record=10000
+    ```
+
+    **说明：** `instance_tunnel_max_record`用来设置通过InstanceTunnel下载SQL查询结果的条数。若不设置该项，则下载条数不受限制。
+
+-   将`set console.sql.result.instancetunnel`设置为true来开启此功能。
+
+    ```
+    // 打开 Instance tunnel 选项
+    odps@ odps_test_tunnel_project>set console.sql.result.instancetunnel=true;
+    OK
+    
+    // 运行 select query
+    odps@ odps_test_tunnel_project>select * from wc_in;
+    ID = 20170724081946458g14csfb8
+    Log view:
+    http://logview/xxxxx.....
+    +------------+
+    | key        |
+    +------------+
+    | slkdfj     |
+    | hellp      |
+    | apple      |
+    | tea        |
+    | peach      |
+    | apple      |
+    | tea        |
+    | teaa       |
+    +------------+
+    A total of 8 records fetched by instance tunnel.
+    ```
+
+    **说明：** 如果用InstanceTunnel的方式来输出SELECT查询结果，系统在最后一行会打印一条提示，此示例中Instance的执行结果共有8条数据。同理，您可以将`set console.sql.result.instancetunnel`设置为false来关闭此功能。
+
 
 ## Purge {#section_l3y_51g_vdb .section}
 
