@@ -2,14 +2,14 @@
 
 This article explains how to use common commands to operate functions in the MaxCompute client. 
 
-You can also operate functions using the visualized online data development tools in DataWorks. For more information, see [Function Management](../../../../../intl.en-US/User Guide/Data management/Create a table.md#).
+You can also operate functions using the visualized online data development tools in DataWorks. For more information, see [Function Management](../../../../../reseller.en-US/User Guide/Data management/Create a table.md#).
 
 ## Create a Function {#section_rrq_12f_vdb .section}
 
 **Command format:**
 
 ```
-CREATE FUNCTION <function_name> AS 'package_to_class' USING <resource_list>;
+CREATE FUNCTION <function_name> AS <package_to_class> USING <resource_list>;
 ```
 
 **Parameters**
@@ -27,21 +27,19 @@ CREATE FUNCTION <function_name> AS 'package_to_class' USING <resource_list>;
 -   Suppose a Java UDF class org.alidata.odps.udf.examples.Lower is in my\_lower.jar, create function my\_lower as follows:
 
     ```
-    CREATE FUNCTION my_lower AS org.alidata.odps.udf.examples.Lower USING my_lower.jar;
-    USING 'my_lower.jar';
+    CREATE FUNCTION my_lower AS 'org.alidata.odps.udf.examples.Lower' USING 'my_lower.jar';
     ```
 
 -   Suppose a Python UDF MyLower is used in project pyudf\_test.py,create function my\_lower  as follows:
 
     ```
-    create function my_lower as 'pyudf_test.MyLower'
-    using 'test_project/resources/pyudf_test.py';
+    create function my_lower as 'pyudf_test.MyLower' using 'test_project/resources/pyudf_test.py';
     ```
 
 -   Suppose a Java UDF class com.aliyun.odps.examples.udf.UDTFResource is in udtfexample1.jar, and it depends on file resource file\_resource.txt and table resource table\_resource1,create function  test\_udtf as follows:
 
     ```
-    create function test_udtf as com.aliyun.odps.examples.udf.UDTFResource using 'udtfexample1.jar, file_resource.txt, table_resource1,test_archive.zip';
+    create function test_udtf as 'com.aliyun.odps.examples.udf.UDTFResource' using 'udtfexample1.jar, file_resource.txt, table_resource1,test_archive.zip';
     ```
 
 
