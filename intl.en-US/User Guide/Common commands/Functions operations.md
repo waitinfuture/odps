@@ -2,14 +2,14 @@
 
 This article explains how to use common commands to operate functions in the MaxCompute client. 
 
-You can also operate functions using the visualized online data development tools in DataWorks. For more information, see [Function Management](../../../../../reseller.en-US/User Guide/Data management/Create a table.md#).
+You can also operate functions using the visualized online data development tools in DataWorks. For more information, see [Function Management](../../../../../intl.en-US/User Guide/Data management/Create a table.md#).
 
 ## Create a Function {#section_rrq_12f_vdb .section}
 
 **Command format:**
 
 ```
-CREATE FUNCTION <function_name> AS <package_to_class> USING <resource_list>;
+CREATE FUNCTION <function_name> AS 'package_to_class' USING <resource_list>;
 ```
 
 **Parameters**
