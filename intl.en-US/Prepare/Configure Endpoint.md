@@ -2,15 +2,17 @@
 
 This sections details the regions where MaxCompute is available, and connection methods. Problems such as network connectivity and downloading charges related to use of other Alibaba Cloud products \(such as ECS, TableStore, OSS, and so on\) are also detailed.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15482934991423_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15554040691423_en-US.png)
 
 MaxCompute provides two types of service connection addresses as follows:
 
 -   **The connection address of the MaxCompute service itself**: All requests except uploading and downloading data can be sent to MaxCompute, such as creating a table, deleting a function, creating a job, and so on.
 -   **The connection address of MaxCompute Tunnel service**: The ability to upload and download data is provided by MaxCompute Tunnel service. When you want to upload and download data through the Tunnel, you can initiate a request through the link address provided by the Tunnel.
 
-    **Note:** Because the deployment and network connection status for every region are different, the billing rules for downloading data through Tunnel are also different.
+    **Note:** 
 
+    -   Because the deployment and network connection status for every region are different, the billing rules for downloading data through Tunnel are also different.
+    -   If you do not configure a tunnel endpoint, your tunnel is automatically routed to a tunnel point associated with the network where your service endpoint resides. For example, if your service endpoint resides on the Internet, your tunnel is routed to a tunnel endpoint on the Internet. Additionally, if your service point resides on an Intranet, your tunnel is routed to a tunnel point on the Intranet. If you continue to manually configure a tunnel endpoint, the tunnel endpoint that you manually specify takes priority, and your tunnel is not automatically routed.
 
 ## Accessing method and data downloading billing rule {#section_ydd_51y_5db .section}
 
@@ -30,7 +32,7 @@ Data uploading is free-of-charge, regardless of which kind of network configurat
 
 According to the Tunnel service request to download data, and from which region of the ECS server, the charging rules are as follows.
 
--   If requester and requestee are both in the same region, the tunnel download request through Alibaba Cloud classic network or VPC network is **free**. **Note that the tunnel endpoint must be configured at this time, otherwise the data is routed to the outer network for download across the region, the cost is generated**.
+-   If requester and requestee are both in the same region, the tunnel download request through Alibaba Cloud classic network or VPC network is **free**.
 -   If requester and requestee are not in the same region or cannot meet the same region access, then the request is a cross-region access, and data download **fees** are calculated under this condition.
 
     **Note:** Due to deployment and network conditions of cross-regional **access of Alibaba Cloud products and services**, MaxCompute cannot be **guaranteed** a permanent connection. Some fees may apply.
@@ -38,7 +40,7 @@ According to the Tunnel service request to download data, and from which region 
 
 ## The connectivity configuration {#section_d2d_51y_5db .section}
 
-MaxCompute 2.0 supports reading and writing OSS object, and also supports reading and writing tables of Table Store. For more information, see [Access OSS Unstructured Data](../../../../../reseller.en-US/User Guide/External table/Access OSS unstructured data.md) and [Access Table Store Data](../../../../../reseller.en-US/User Guide/External table/Access Table Store data.md).
+MaxCompute 2.0 supports reading and writing OSS object, and also supports reading and writing tables of Table Store. For more information, see [Access OSS Unstructured Data](../../../../intl.en-US/User Guide/External table/Access OSS unstructured data.md) and [Access Table Store Data](../../../../intl.en-US/User Guide/External table/Access Table Store data.md).
 
 Configuration instructions about network connectivity are as follows:
 
@@ -51,7 +53,7 @@ The table as follows gives information about deployment of MaxCompute in differe
 
 **Note:** External endpoints\(aliyun\) support both HTTP and HTTPS. If you need to encrypt your requests, use HTTPS. Internal endpoints\(aliyun-inc\) only support HTTP.
 
--   **External MaxCompute activation and service connections by region**
+-   **External MaxCompute activation and service connections by region** 
 
     |Region name|City|Service status|Internet endpoint|Internet tunnel endpoint|
     |:----------|:---|:-------------|:----------------|:-----------------------|
@@ -68,11 +70,11 @@ The table as follows gives information about deployment of MaxCompute in differe
     |Central Europe 1|Frankfurt|In service|http://service.eu-central-1.maxcompute.aliyun.com/api|http://dt.eu-central-1.maxcompute.aliyun.com|
     |West USA 1|Silicon Valley|In service|http://service.us-west-1.maxcompute.aliyun.com/api|http://dt.us-west-1.maxcompute.aliyun.com|
     |East USA 1|Virginia|In service|http://service.us-east-1.maxcompute.aliyun.com/api|http://dt.us-east-1.maxcompute.aliyun.com|
-    |Asia Pacific SOU 1|Mumbai |In service|http://service.ap-south-1.maxcompute.aliyun.com/api|http://dt.ap-south-1.maxcompute.aliyun.com|
+    |Asia Pacific SOU 1|Mumbai|In service|http://service.ap-south-1.maxcompute.aliyun.com/api|http://dt.ap-south-1.maxcompute.aliyun.com|
     |Middle East 1|Dubai|In service|http://service.me-east-1.maxcompute.aliyun.com/api|http://dt.me-east-1.maxcompute.aliyun.com|
     |UK|London|In service|http://service.eu-west-1.maxcompute.aliyun.com/api|http://dt.eu-west-1.maxcompute.aliyun.com|
 
--   **Classic network MaxCompute activation and service connections by region**
+-   **Classic network MaxCompute activation and service connections by region** 
 
     |Region name|City|Service status|Classic network endpoint|Classic Network tunnel endpoint|
     |-----------|----|--------------|------------------------|-------------------------------|
@@ -89,11 +91,11 @@ The table as follows gives information about deployment of MaxCompute in differe
     |Central Europe 1|Frankfurt|In service|http://service.eu-central-1.maxcompute.aliyun-inc.com/api|http://dt.eu-central-1.maxcompute.aliyun-inc.com|
     |West USA 1|Silicon Valley|In service|http://service.us-west-1.maxcompute.aliyun-inc.com/api|http://dt.us-west-1.maxcompute.aliyun-inc.com|
     |East USA 1|Virginia|In service|http://service.us-east-1.maxcompute.aliyun-inc.com/api|http://dt.us-east-1.maxcompute.aliyun-inc.com|
-    |Asia Pacific SOU 1|Mumbai |In service|http://service.ap-south-1.maxcompute.aliyun-inc.com/api|http://dt.ap-south-1.maxcompute.aliyun-inc.com|
+    |Asia Pacific SOU 1|Mumbai|In service|http://service.ap-south-1.maxcompute.aliyun-inc.com/api|http://dt.ap-south-1.maxcompute.aliyun-inc.com|
     |Middle East 1|Dubai|In service|http://service.me-east-1.maxcompute.aliyun-inc.com/api|http://dt.me-east-1.maxcompute.aliyun-inc.com|
     |UK|London|In service|http://service.uk-all.maxcompute.aliyun-inc.com/api|http://dt.uk-all.maxcompute.aliyun-inc.com|
 
--   **VPC MaxCompute activation and service connections by region**
+-   **VPC MaxCompute activation and service connections by region** 
 
     In a VPC, you can only access MaxCompute using the endpoint and tunnel endpoint below. Endpoint
 
@@ -112,17 +114,17 @@ The table as follows gives information about deployment of MaxCompute in differe
     |Central Europe 1|Frankfurt|In service|http://service.eu-central-1.maxcompute.aliyun-inc.com/api|http://dt.eu-central-1.maxcompute.aliyun-inc.com|
     |West USA 1|Silicon Valley|In service|http://service.us-west-1.maxcompute.aliyun-inc.com/api|http://dt.us-west-1.maxcompute.aliyun-inc.com|
     |East USA 1|Virginia|In service|http://service.us-east-1.maxcompute.aliyun-inc.com/api|http://dt.us-east-1.maxcompute.aliyun-inc.com|
-    |Asia Pacific SOU 1|Mumbai |In service|http://service.ap-south-1.maxcompute.aliyun-inc.com/api|http://dt.ap-south-1.maxcompute.aliyun-inc.com|
+    |Asia Pacific SOU 1|Mumbai|In service|http://service.ap-south-1.maxcompute.aliyun-inc.com/api|http://dt.ap-south-1.maxcompute.aliyun-inc.com|
     |Middle East 1|Dubai|In service|http://service.me-east-1.maxcompute.aliyun-inc.com/api|http://dt.me-east-1.maxcompute.aliyun-inc.com|
     |UK|London|In service|http://service.uk-all.maxcompute.aliyun-inc.com/api|http://dt.uk-all.maxcompute.aliyun-inc.com|
 
 
 **Note:** Scenarios that need to configure Endpoint and Tunnel Endpoint:
 
--   MaxCompute client \(console\) configuration. See[Install and configure client](../../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Project space connection management.md#).
--   MaxCompute studio project connection configuration. See[Project space management connection](../../../../../reseller.en-US/Tools and Downloads/Client.md#).
--   SDK connects to MaxCompute configuration. See[Java SDK](../../../../../reseller.en-US/SDK Reference /Java SDK.md#) and[Python SDK](../../../../../reseller.en-US/SDK Reference /Python SDK.md#) connect the MaxCompute interface configuration.
--   The DataWorks data integration script pattern connects the MaxComputer data source configuration and uses the DataX open source tool to connect the MaxComputer data source. See[Export SQL operation results](../../../../../reseller.en-US/Best Practices/SQL/Export SQL operation result.md#).
+-   MaxCompute client \(console\) configuration. See[Install and configure client](../../../../intl.en-US/Tools and Downloads/MaxCompute Studio/Project space connection management.md#).
+-   MaxCompute studio project connection configuration. See[Project space management connection](../../../../intl.en-US/Tools and Downloads/Client.md#).
+-   SDK connects to MaxCompute configuration. See[Java SDK](../../../../intl.en-US/SDK Reference /Java SDK.md#) and[Python SDK](../../../../intl.en-US/SDK Reference /Python SDK.md#) connect the MaxCompute interface configuration.
+-   The DataWorks data integration script pattern connects the MaxComputer data source configuration and uses the DataX open source tool to connect the MaxComputer data source. See[Export SQL operation results](../../../../intl.en-US/Best Practices/SQL/Export SQL operation result.md#).
 
 ## Access concepts { .section}
 

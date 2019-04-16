@@ -2,7 +2,7 @@
 
 本文将为您介绍MaxCompute Region的开通情况和连接方式，解答您在与其他云产品（ECS、TableStore、OSS）互访场景中遇到的网络连通性和下载数据收费等问题。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15500476011423_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15554040651423_zh-CN.png)
 
 由上图可知，从服务层面来看，MaxCompute为您提供了两大类服务连接地址，如下所示：
 
@@ -12,7 +12,7 @@
     **说明：** 
 
     -   由于各Region部署和网络连接状况不一致，在Tunnel数据的下载计费规则上也不统一。
-    -   如果您不配置Tunnel Endpoint，则Tunnel可能自动路由到公网，从而产生下载费用。
+    -   如果您不配置Tunnel Endpoint，Tunnel会自动路由到Service Endpoint所在的网络对应的Tunnel Endpoint，例如Service Endpoint为公网就路由到公网的Tunnel Endpoint；Service Endpoint为内网就路由到内网的Tunnel Endpoint。若您继续手动配置，则以手动配置为准，不进行自动路由。
 
 ## 访问来源及下载数据收费规则说明 {#section_ydd_51y_5db .section}
 
@@ -33,9 +33,6 @@ Tunnel数据上传无论走哪一种网络形态都免费，如上文示意图�
 您无论是在ECS云服务器的哪一个Region上进行Tunnel服务请求进行下载数据，网络连通性设置都需满足如下形态定义。
 
 -   两者在同一Region内，Tunnel下载请求走阿里云经典网络/VPC网络都**免费**。
-
-    **说明：** 此时必须配置经典网络/VPC类型的Tunnel Endpoint ，否则数据会路由到外网进行跨Region下载，产生费用。
-
 -   两者不在同一Region内或没有条件满足同Region访问，则需走外网跨Region访问请求，此条件下的数据下载将会进行计费。
 
     **说明：** 由于阿里云数据中心各个Region部署和网络情况不一致，若您选择通过阿里云经典网络/VPC网络进行跨Region的访问，则MaxCompute产品方不承诺、不保证其永久连通性。
@@ -43,7 +40,7 @@ Tunnel数据上传无论走哪一种网络形态都免费，如上文示意图�
 
 ## MaxCompute访问外部表的连通性 {#section_d2d_51y_5db .section}
 
-MaxCompute2.0支持读写OSS对象存储数据，同时也支持读写TableStore表格存储数据，详情请参见[访问OSS非结构化数据](../../../../../intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)和[访问OTS非结构化数据](../../../../../intl.zh-CN/用户指南/外部表/访问OTS非结构化数据.md)。
+MaxCompute2.0支持读写OSS对象存储数据，同时也支持读写TableStore表格存储数据，详情请参见[访问OSS非结构化数据](../../../../intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)和[访问OTS非结构化数据](../../../../intl.zh-CN/用户指南/外部表/访问OTS非结构化数据.md)。
 
 网络连通性的配置说明，如下所示：
 
@@ -57,7 +54,7 @@ MaxCompute2.0支持读写OSS对象存储数据，同时也支持读写TableStore
 
 **说明：** 公网Endpoint域名\(aliyun\)支持http和https，若需要请求加密，请用https。内网Endpoint域名\(aliyun-inc\)仅支持http，不支持https访问。
 
--   **外网网络下Region和服务连接对照表**
+-   **外网网络下Region和服务连接对照表** 
 
     |Region名称|所在城市|开服状态|外网Endpoint|外网Tunnel Endpoint|
     |:-------|:---|:---|:---------|:----------------|
@@ -78,7 +75,7 @@ MaxCompute2.0支持读写OSS对象存储数据，同时也支持读写TableStore
     |中东东部1|迪拜|已开服|http://service.me-east-1.maxcompute.aliyun.com/api|http://dt.me-east-1.maxcompute.aliyun.com|
     |英国|伦敦|已开服|http://service.eu-west-1.maxcompute.aliyun.com/api|http://dt.eu-west-1.maxcompute.aliyun.com|
 
--   **经典网络下Region和服务连接对照表**
+-   **经典网络下Region和服务连接对照表** 
 
     |Region名称|所在城市|开服状态|经典网络Endpoint|经典网络Tunnel Endpoint|
     |--------|----|----|------------|-------------------|
@@ -126,9 +123,9 @@ MaxCompute2.0支持读写OSS对象存储数据，同时也支持读写TableStore
 **说明：** 需要配置Endpoint、Tunnel Endpoint的场景：
 
 -   MaxCompute客户端（console）配置。请参见[安装并配置客户端](intl.zh-CN/准备工作/安装并配置客户端.md#)。
--   MaxCompute studio project连接配置。请参见[项目空间连接管理](../../../../../intl.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md#)。
--   SDK连接MaxCompute配置。请参见[Java SDK](../../../../../intl.zh-CN/SDK 参考/Java SDK.md#)和[Python SDK](../../../../../intl.zh-CN/SDK 参考/Python SDK.md#)连接MaxCompute接口配置。
--   DataWorks的数据集成脚本模式连接MaxCompute数据源配置和使用DataX开源工具连接MaxCompute数据源。请参见[配置MaxCompute数据源](https://www.alibabacloud.com/help/zh/faq-detail/74280.htm)和[导出SQL的运行结果](../../../../../intl.zh-CN/最佳实践/SQL/导出SQL的运行结果.md#)。
+-   MaxCompute studio project连接配置。请参见[项目空间连接管理](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md#)。
+-   SDK连接MaxCompute配置。请参见[Java SDK](../../../../intl.zh-CN/SDK 参考/Java SDK.md#)和[Python SDK](../../../../intl.zh-CN/SDK 参考/Python SDK.md#)连接MaxCompute接口配置。
+-   DataWorks的数据集成脚本模式连接MaxCompute数据源配置和使用DataX开源工具连接MaxCompute数据源。请参见[配置MaxCompute数据源](https://www.alibabacloud.com/help/zh/faq-detail/74280.htm)和[导出SQL的运行结果](../../../../intl.zh-CN/最佳实践/SQL/导出SQL的运行结果.md#)。
 
 ## 访问原则 { .section}
 
