@@ -94,11 +94,11 @@ insert overwrite table dest2 partition (d='20171111') SELECT * from @g;
 
 使用MaxCompute Studio脚本模式，首先请保证MaxCompute Studio完成安装、添加项目链接、建立MaxCompute SQL脚本文件，详情请参见[安装IntelliJ IDEA](../../../../cn.zh-CN/工具及下载/MaxCompute Studio/工具安装与版本信息/安装IntelliJ IDEA.md#)、[项目空间连接管理](../../../../cn.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md#)、[创建MaxCompute Script Module](../../../../cn.zh-CN/工具及下载/MaxCompute Studio/开发SQL程序/创建MaxCompute Script Module.md#)。编辑脚本页面如下。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20231/155558319244793_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20231/155558353544793_zh-CN.png)
 
 脚本编译后提交运行，查看执行计划图。虽然脚本上是多个语句，但执行计划图是一个相通的DAG图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20231/155558319211441_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20231/155558353511441_zh-CN.png)
 
 ## 通过客户端 （odpscmd）提交脚本模式 {#section_arx_3xc_bfb .section}
 
@@ -114,7 +114,7 @@ insert overwrite table dest2 partition (d='20171111') SELECT * from @g;
 
 在DataWorks中可以建立脚本模式的节点，如下图所示。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20231/155558319244790_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20231/155558353544790_zh-CN.png)
 
 在此节点中进行脚本模式的脚本编辑，编辑好后点击工具栏的运行按钮，提交脚本到MaxCompute执行。执行计划图和结果可以从输出信息的logview url中得到。
 
