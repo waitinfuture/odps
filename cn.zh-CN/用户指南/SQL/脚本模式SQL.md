@@ -2,9 +2,11 @@
 
 脚本模式SQL即Script Mode SQL。
 
-MaxCompute当前的SQL引擎支持脚本模式。在脚本模式下编译脚本时，一个多语句的SQL脚本文件将被作为一个整体进行编译，而不是一个一个语句的编译。在提交运行时，它也会被作为一个整体提交，生成一个执行计划，保证一次排队，一次执行，从而充分利用MaxCompute的资源。
+**说明：** 脚本模式SQL目前无法使用[计量预估（Cost SQL命令）](cn.zh-CN/用户指南/常用命令/其他操作.md#section_xm2_sgf_vdb)完成费用预估，具体费用请以实际费用账单为准，详情请参见[账单详情](../../../../cn.zh-CN/产品定价/查看账单详情.md#)。
 
-Script Mode的SQL书写便利，您只需要按照业务逻辑，用类似于普通编程语言的方式书写，无需考虑如何组织语句。
+MaxCompute当前的SQL引擎支持脚本模式。在脚本模式下编译脚本时，一个多语句的SQL脚本文件将被作为一个整体进行编译，无需您对单个语句进行编译。在提交运行时，SQL脚本文件会被整体提交，并生成一个执行计划，保证只需排队一次、执行一次，保证您能充分利用MaxCompute的资源。
+
+Script Mode的SQL语句书写便利，您只需要按照业务逻辑，用类似于普通编程语言的方式书写，无需考虑如何组织语句。
 
 工具支持
 
@@ -46,7 +48,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] table_name
 ```
 
 -   脚本模式支持SET语句、部分DDL语句（不支持结果为屏显类型的语句如desc、show）、DML语句。
--   一个脚本的完整形式是先SET语句，然后DDL语句，最后DML语句。每个部分都可以有0到多个语句，但是不同类型的语句不能交错。
+-   一个脚本的完整形式是SET、DDL、DML语句按先后顺序排列。每种语句都可以包含0到多个具体的SQL语句，且不同类型的语句不能交错。
 -   多个语句以`@`开始的表示变量连接。
 -   一个脚本最多支持一个屏显结果的语句（如单独的SELECT语句），否则会发生报错。不建议在脚本中执行屏显的SELECT语句。
 -   一个脚本最多支持一个CREATE TABLE AS语句并且必须是最后一句。推荐您将建表语句与INSERT语句分开写。
@@ -88,17 +90,17 @@ insert overwrite table dest2 partition (d='20171111') SELECT * from @g;
 **适用场景** 
 
 -   脚本模式适合用来改写本来要用层层嵌套子查询的单个语句，或者因为脚本复杂性而不得不拆成多个语句的脚本。
--   如果多个输入的数据源数据准备完成的时间间隔很长（例如一个凌晨1点可以准备好，一个上午7点可以准备好），则不适合通过table variable衔接，拼装为一个大的脚本模式SQL。
+-   如果多个输入的数据源数据准备完成的时间间隔很长（例如一个凌晨1点可以准备好，一个上午7点可以准备好），则不适合通过table variable衔接拼装为一个大的脚本模式SQL。
 
 ## 使用MaxCompute Studio执行脚本模式 {#section_od2_yqc_bfb .section}
 
 使用MaxCompute Studio脚本模式，首先请保证MaxCompute Studio完成安装、添加项目链接、建立MaxCompute SQL脚本文件，详情请参见[安装IntelliJ IDEA](../../../../cn.zh-CN/工具及下载/MaxCompute Studio/工具安装与版本信息/安装IntelliJ IDEA.md#)、[项目空间连接管理](../../../../cn.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md#)、[创建MaxCompute Script Module](../../../../cn.zh-CN/工具及下载/MaxCompute Studio/开发SQL程序/创建MaxCompute Script Module.md#)。编辑脚本页面如下。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20231/155558698744793_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20231/155608830944793_zh-CN.png)
 
 脚本编译后提交运行，查看执行计划图。虽然脚本上是多个语句，但执行计划图是一个相通的DAG图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20231/155558698711441_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20231/155608830911441_zh-CN.png)
 
 ## 通过客户端 （odpscmd）提交脚本模式 {#section_arx_3xc_bfb .section}
 
@@ -108,13 +110,13 @@ insert overwrite table dest2 partition (d='20171111') SELECT * from @g;
 
  `odpscmd -s myscript.mxql;` 
 
-**说明：** `-s`为odpscmd的命令行选项，类似于-f, -e，而非交互环境中的命令。odpscmd的交互环境中暂不支持脚本模式与表变量。
+**说明：** `-s`为odpscmd的命令行选项，类似于`-f`、`-e`，而非交互环境中的命令。odpscmd的交互环境中暂不支持脚本模式与表变量。
 
 ## 通过DataWorks使用脚本模式 {#section_p91_9ik_im6 .section}
 
 在DataWorks中可以建立脚本模式的节点，如下图所示。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20231/155558698744790_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20231/155608830944790_zh-CN.png)
 
-在此节点中进行脚本模式的脚本编辑，编辑好后点击工具栏的运行按钮，提交脚本到MaxCompute执行。执行计划图和结果可以从输出信息的logview url中得到。
+在此节点中进行脚本模式的脚本编辑，编辑好后点击工具栏的运行按钮，提交脚本到MaxCompute执行。您从输出信息的logview url中可以查看到执行计划图和结果。
 
