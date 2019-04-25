@@ -1,12 +1,12 @@
 # 使用Java SDK运行安全命令最佳实践 {#concept_nhc_1ln_4gb .concept}
 
-本文为您介绍在MaxCompute Console上运行的安全相关的命令，如何通过Java SDK接口的SecurityManager.runQuery\(\)方法实现运行的最佳实践。
+本文为您介绍在MaxCompute Console上通过Java SDK接口的SecurityManager.runQuery\(\)方法运行安全相关的命令的最佳实践。
 
 ## 背景信息 {#section_apv_rqn_4gb .section}
 
 用户运行安全相关的命令有以下两种方式：
 
--   通过使用MaxCompute[Console](../../../../../cn.zh-CN/工具及下载/客户端.md#) 运行，详细的使用说明请参见[安全指南](../../../../../cn.zh-CN/安全指南/安全功能详解/目标用户.md#)和[安全相关语句汇总](../../../../../cn.zh-CN/安全指南/安全功能详解/项目空间的安全配置.md#)。
+-   通过使用MaxCompute[Console](../../../../cn.zh-CN/工具及下载/客户端.md#) 运行，详细的使用说明请参见[安全指南](../../../../cn.zh-CN/安全指南/安全功能详解/目标用户.md#)和[安全相关语句汇总](../../../../cn.zh-CN/安全指南/安全功能详解/项目空间的安全配置.md#)。
 
     以下关键字开头的命令为MaxCompute安全相关的操作命令：
 
@@ -36,15 +36,15 @@
 
 在开始使用Java SDK接口方法运行安全命令之前，您需要做如下准备工作：
 
-1.  准备IntelliJ IDEA开发工具，请参见[安装Studio](../../../../../cn.zh-CN/工具及下载/MaxCompute Studio/工具安装与版本信息/安装IntelliJ IDEA.md#)。
+1.  准备IntelliJ IDEA开发工具，请参见[安装Studio](../../../../cn.zh-CN/工具及下载/MaxCompute Studio/工具安装与版本信息/IntelliJ IDEA安装步骤.md#)。
 2.  准备Access ID和Access Key。
 
     您可以登录阿里云官网，在右上角的用户名下单击**accesskeys**进入Access Key管理页面获取，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/154865645538210_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/155618134638210_zh-CN.png)
 
-3.  配置Endpoint，详细内容请参见[配置Endpoint](../../../../../cn.zh-CN/准备工作/配置Endpoint.md#)。
-4.  创建空间项目<your\_project\>，通过IntelliJ IDEA MaxCompute Studio[创建MaxCompute项目连接](../../../../../cn.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md#)。
+3.  配置Endpoint，详细内容请参见[配置Endpoint](../../../../cn.zh-CN/准备工作/配置Endpoint.md#)。
+4.  创建空间项目<your\_project\>，通过IntelliJ IDEA MaxCompute Studio[创建MaxCompute项目连接](../../../../cn.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md#)。
 5.  在MaxCompute Studio上添加项目依赖。
 
     SecurityManager类在odps-sdk-core包中，因此在使用时需要配置：
@@ -58,7 +58,7 @@
     ```
 
 
-准备工作完成后，您可以开始如下使用Java SDK来运行安全命令示例操作。**设置表`test_label`列的访问级别为2，运行如下命令。**
+准备工作完成后，您可以开始运行安全命令示例操作。例如，设置表`test_label`列的访问级别为2，运行如下命令。
 
 ```
 SET LABEL 2 TO TABLE test_label(key, value);
@@ -75,7 +75,7 @@ SET LABEL 2 TO TABLE test_label(key, value);
     );
     ```
 
-2.  测试运行
+2.  测试运行。
     -   Java代码如下。
 
         ```language-java
@@ -110,18 +110,18 @@ SET LABEL 2 TO TABLE test_label(key, value);
 
     -   查看运行结果：
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/154865645538175_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/155618134638175_zh-CN.png)
 
-3.  结果验证
+3.  结果验证。
 
     程序运行完成后，在MaxCompute Console中运行desc test\_label;命令，可以看到set label命令已经生效了。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/154865645538189_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/120378/155618134638189_zh-CN.png)
 
     其他安全相关的命令，都可以通过Java SDK来运行。
 
 
 ## 更多信息 {#section_x5j_f1p_4gb .section}
 
-了解更多安全命令操作相关的内容，可参考[权限管理](../../../../../cn.zh-CN/安全指南/安全功能详解/用户及授权管理/授权.md#)、[列级别访问控制](../../../../../cn.zh-CN/安全指南/安全功能详解/列级别访问控制.md#)、[项目空间的安全配置](../../../../../cn.zh-CN/安全指南/安全功能详解/项目空间的安全配置.md#)以及[跨项目空间的资源分享](../../../../../cn.zh-CN/安全指南/安全功能详解/跨项目空间的资源分享/基于Package的跨项目空间的资源分享.md#)。
+了解更多安全命令操作相关的内容，可参考[权限管理](../../../../cn.zh-CN/安全指南/安全功能详解/用户及授权管理/授权.md#)、[列级别访问控制](../../../../cn.zh-CN/安全指南/安全功能详解/列级别访问控制.md#)、[项目空间的安全配置](../../../../cn.zh-CN/安全指南/安全功能详解/项目空间的安全配置.md#)以及[跨项目空间的资源分享](../../../../cn.zh-CN/安全指南/安全功能详解/跨项目空间的资源分享/基于Package的跨项目空间的资源分享.md#)。
 
