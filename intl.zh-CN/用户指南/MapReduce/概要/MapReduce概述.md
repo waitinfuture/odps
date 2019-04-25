@@ -2,26 +2,26 @@
 
 本文为您介绍MaxCompute支持的MapReduce编程接口及使用限制。
 
-MaxCompute提供三个版本的MapReduce编程接口，如下所示：
+MaxCompute提供三个版本的MapReduce编程接口。
 
--   MaxCompute MapReduce、MaxCompute的原生接口，执行速度更快，开发更便捷，不暴露文件系统。
--   [MR2](intl.zh-CN/用户指南/MapReduce/概要/扩展MapReduce.md)（扩展MapReduce）：对MaxCompute MapReduce的扩展，支持更复杂的作业调度逻辑。MapReduce的实现方式与MaxCompute原生接口一致。
--   [Hadoop兼容版本](intl.zh-CN/用户指南/MapReduce/概要/开源兼容MapReduce.md)：高度兼容[Hadoop MapReduce](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html) ，与MaxCompute原生MapReduce，[MR2](intl.zh-CN/用户指南/MapReduce/概要/扩展MapReduce.md)不兼容。
+-   MaxCompute MapReduce：MaxCompute的原生接口，执行速度更快，开发更便捷，不暴露文件系统。
+-   MaxCompute 扩展MapReduce[MR2](intl.zh-CN/用户指南/MapReduce/概要/扩展MapReduce.md)）：对MaxCompute MapReduce的扩展，支持更复杂的作业调度逻辑。MapReduce的实现方式与MaxCompute原生接口一致。
+-   [Hadoop兼容版本MapReduce](intl.zh-CN/用户指南/MapReduce/概要/开源兼容MapReduce.md)：高度兼容[Hadoop MapReduce](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html) ，与MaxCompute MapReduce [MR2](intl.zh-CN/用户指南/MapReduce/概要/扩展MapReduce.md)不兼容。
 
-以上三个版本在[基本概念](intl.zh-CN/用户指南/MapReduce/功能介绍/基本概念.md)、[作业提交](intl.zh-CN/用户指南/MapReduce/功能介绍/作业提交.md)、[输入与输出](intl.zh-CN/用户指南/MapReduce/功能介绍/输入与输出.md)、[资源使用](intl.zh-CN/用户指南/MapReduce/功能介绍/资源使用.md)等方面基本一致，不同的是Java SDK彼此不同。本文仅对MapReduce的基本原理做简单介绍，更多详情请参见[Hadoop Map/Reduce教程](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html)。
+以上三个版本在[基本概念](intl.zh-CN/用户指南/MapReduce/功能介绍/基本概念.md)、[作业提交](intl.zh-CN/用户指南/MapReduce/功能介绍/作业提交.md)、[输入与输出](intl.zh-CN/用户指南/MapReduce/功能介绍/输入与输出.md)、[资源使用](intl.zh-CN/用户指南/MapReduce/功能介绍/资源使用.md)等方面基本一致，仅各版本的Java SDK有所不同。本文仅对MapReduce的基本原理做简单介绍，更多详情请参见[Hadoop Map/Reduce教程](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html)。
 
-**说明：** 您还不能通过MapReduce读写[外部表](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md#)中的数据。
+**说明：** 您无法通过MapReduce读写[外部表](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md#)中的数据。
 
 ## 应用场景 {#section_m5s_rwf_vdb .section}
 
-MapReduce被大量应用到各种商业场景中：
+MapReduce支持下列场景：
 
 -   搜索：网页爬取、倒排索引、PageRank。
 -   Web访问日志分析：
     -   分析和挖掘用户在Web上的访问、购物行为特征，实现个性化推荐。
     -   分析用户访问行为。
 -   文本统计分析：
-    -   莫言小说的WordCount、词频TFIDF分析。
+    -   热门小说的字数统计（WordCount）、词频TFIDF分析。
     -   学术论文、专利文献的引用分析和统计。
     -   维基百科数据分析等。
 -   海量数据挖掘：非结构化数据、时空数据、图像数据的挖掘。
@@ -46,9 +46,9 @@ MapReduce处理数据过程主要分成Map和Reduce两个阶段。首先执行Ma
 
 假设存在一个文本a.txt，文本内每行是一个数字，您要统计每个数字出现的次数。文本内的数字称为Word，数字出现的次数称为Count。如果MaxCompute MapReduce完成这一功能，需要经历以下流程，如下图所示：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12013/15446004101922_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12013/15561790651922_zh-CN.jpg)
 
-**操作步骤**
+**操作步骤** 
 
 1.  输入数据：对文本进行分片，将每片内的数据作为单个Map Worker的输入。
 2.  Map阶段：Map处理输入，每获取一个数字，将数字的Count 设置为1，并将此<Word, Count\>对输出，此时以Word作为输出数据的Key。
@@ -61,7 +61,7 @@ MapReduce处理数据过程主要分成Map和Reduce两个阶段。首先执行Ma
 
 ## 使用限制 {#section_fcf_mcn_sfb .section}
 
-MapReduce[使用限制汇总](intl.zh-CN/用户指南/MapReduce/MR限制项汇总.md#)
+MapReduce[使用限制汇总](intl.zh-CN/用户指南/MapReduce/MR限制项汇总.md#)。
 
-有关本地运行的MapReduce使用限制，您还可以参考[本地运行和分布式环境运行差异](intl.zh-CN/用户指南/MapReduce/功能介绍/本地运行.md#section_k3l_t3g_vdb)
+有关本地运行的MapReduce使用限制，您可以参考[本地运行和分布式环境运行差异](intl.zh-CN/用户指南/MapReduce/功能介绍/本地运行.md#section_k3l_t3g_vdb)。
 
