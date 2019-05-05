@@ -39,5 +39,3 @@ from shop a join sale_detail b
 on a.total_price < b.total_price or a.total_price + b.total_price < 500;
 ```
 
-MAPJOIN多个小表示例请参考[**用MAPJOIN缓存多张小表**](https://help.aliyun.com/knowledge_detail/40270.html)。
-
