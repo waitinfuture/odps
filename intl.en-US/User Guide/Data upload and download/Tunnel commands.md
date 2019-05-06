@@ -1,6 +1,6 @@
 # Tunnel commands {#concept_rkf_2wc_5db .concept}
 
-This article introduces you to the instructions for the use of Upload, Show, Resume and other Tunnel upload and download commands.
+This topic introduces you to the instructions for the use of Upload, Show, Resume and other Tunnel upload and download commands.
 
 ## Features {#section_hcs_btf_vdb .section}
 
@@ -24,7 +24,7 @@ Tunnel commands are mainly used to upload or download data.
     -- Download data from the table to the test_table.txt file.
     ```
 
--   Resume:  If an error occurs because of network or the Tunnel service, you can resume transmission of the file or directory after interruption. This command allows you to resume the previous data upload operation, but does not support download operations.
+-   Resume: If an error occurs because of network or the Tunnel service, you can resume transmission of the file or directory after interruption. This command allows you to resume the previous data upload operation, but does not support download operations.
 
     ```
     tunnel resume;
@@ -49,13 +49,13 @@ Tunnel commands are mainly used to upload or download data.
 
 ## Tunnel upload and download limits {#section_an5_42t_j2b .section}
 
-Tunnel command does not support uploading and downloading data of the Array, Map, and Struct types.
+Tunnel command does not support uploading and downloading data of the ARRAY, MAP, and STRUCT types.
 
 Each session has a 24-hour life cycle on the server. It can be used within 24 hours after being created, and can be shared among processes or threads. The block ID of each session must be unique.
 
 ## Use of Tunnel commands {#section_g2l_1wf_vdb .section}
 
-Tunnel commands allows you to obtain help information using the Help sub-command on the client. Each command and selection supports short command format.
+Tunnel commands allow you to obtain help information using the Help sub-command on the client. Each command and selection supports short command format.
 
 ```
 odps@ project_name>tunnel help;
@@ -71,7 +71,7 @@ Available subcommands:
 tunnel is a command for uploading data to / downloading data from MaxCompute.
 ```
 
-**Parameters**
+**Parameters** 
 
 -   upload: Uploads the data to a MaxCompute table.
 -   download: Downloads the data from a MaxCompute table.
@@ -124,21 +124,21 @@ For example:
     tunnel upload log.txt test_project.test_table/p1="b1",p2="b2"
 ```
 
-**Parameters**
+**Parameters** 
 
 -   -acp: Determines if the operation automatically creates the destination partition if it does not exist. This one is disabled by default.
 -   -bs: Specifies the size of each data block uploaded using Tunnel. Default value: 100MiB \(1MiB=1024\*1024B\) .
--   -c: Specifies the local data file encoding. Default value: I. When not set, the encoding of the downloaded source data is used by default.
+-   -c: Specifies the local data file encoding. Default value: I. When not set, the encoding of the downloaded source data is used by default.
 -   -cp: Determines whether the local file is compressed before being uploaded, reducing traffic usage. It is enabled by default.
 -   -dbr: Determines whether to ignore corrupted data \(including extra, missing columns or mismatched column data types\).
     -   If this value is true, all the data that does not satisfy table definitions is ignored.
     -   When the parameter is set to false, the system displays error messages in case of corrupted data, but the raw data in the destination table remains unaffected.
--   -dfp: Specifies the format of DateTime data. Default value: yyyy-MM-dd HH:mm:ss. If you want to specify the time format to the level of milliseconds, use tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS', for more information, see [Data types](../../../../reseller.en-US/User Guide/Definition/Data types.md#).
+-   -dfp: Specifies the format of DateTime data. Default value: yyyy-MM-dd HH:mm:ss. If you want to specify the time format to the level of milliseconds, use tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS', for more information, see [Data types](../../../../reseller.en-US/User Guide/Definitions/Data types.md#).
 -   -fd: Specifies the column delimiter of the local data file. The default value is comma \(,\).
 -   -h: Determines whether the data file contains the header. If it is set to true, Dship skips the header and starts uploading from the next row.
 -   -mbr: By default, if more than 1,000 rows of corrupted data is uploaded, the upload is terminated. This parameter allows you to adjust the tolerated volume of the corrupted data.
 -   -ni: Specifies the NULL data identifier. Default value: “ “\(blank string\).
--   -rd: Specifies the row delimiter of the local data file. Default value: \\r\\n. 
+-   -rd: Specifies the row delimiter of the local data file. Default value: \\r\\n.
 -   -s: Determines whether to scan the local data file. Default value: false.
     -   If set to true, the system scans the data first, and then imports the data if the format is correct.
     -   If set to false, the system imports the data directly without scanning.
@@ -148,7 +148,7 @@ For example:
 -   -threads: Specifies the number of threads. Default value: 1.
 -   -tz: Specifies the time zone. The default value is the local time zone: Asia/Shanghai.
 
-**Example**
+**Example** 
 
 -   Create a destination table:
 
@@ -180,7 +180,7 @@ PARTITIONED BY (sale_date STRING,region STRING);
 
     ```
     odps@ project_name>tunnel u d:\data.txt sale_detail/sale_date=201312,region=hangzhou -s false
-    Upload session: 201506101639224880870a002ec60c
+    Upload session: 20150610************************60c
     Start upload:d:\data.txt
     Total bytes:41 Split input to 1 blocks
     2015-06-10 16:39:22 upload block: '1'
@@ -221,14 +221,14 @@ For example:
 
 -n: Specifies the number of rows to be displayed.
 
-**Example**
+**Example** 
 
 ```
 odps@ project_name>tunnel show history;
-201506101639224880870a002ec60c failed 'u --config-file /D:/console/conf/odps_config.ini --project odpstest_ay52c_ay52 --endpoint http://service.odps.aliyun.com/api --id UlVxOHuthHV1QrI1 --key 2m4r3WvTZbsNJjybVXj0InVke7UkvR d:\data.txt sale_detail/sale_date=201312,region=hangzhou -s false'
+20150610************************60c failed 'u --config-file /D:/console/conf/odps_config.ini --project odpstest_ay52c_ay52 --endpoint http://service.odps.aliyun.com/api --id Ul*******rI1 --key 2m*************R d:\data.txt sale_detail/sale_date=201312,region=hangzhou -s false'
 ```
 
-**Note:** With reference to the preceding example, 201506101639224880870a002ec60c is the session ID of the failed data importing in the previous section.
+**Note:** With reference to the preceding example, 20150610\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*60c is the session ID of the failed data importing in the previous section.
 
 ## Resume {#section_wgq_jyf_vdb .section}
 
@@ -248,17 +248,17 @@ For example:
 Modify the data.txt file as follows:
 
 ```
-shop9,97,100
-shop10,10,200
+shopx,x_id,100
+shopy,y_id,200
 ```
 
 Re-upload the repaired data:
 
 ```
-odps@ project_name>tunnel resume 201506101639224880870a002ec60c --force;
+odps@ project_name>tunnel resume 20150610************************60c --force;
 start resume
-201506101639224880870a002ec60c
-Upload session: 201506101639224880870a002ec60c
+20150610************************60c
+Upload session: 20150610************************60c
 Start upload:d:\data.txt
 Resume 1 blocks 
 2015-06-10 16:46:42 upload block: '1'
@@ -267,18 +267,18 @@ upload complete, average speed is 0 KB/s
 OK
 ```
 
-**Note:** With reference to the preceding example, 201506101639224880870a002ec60c is session ID.
+**Note:** With reference to the preceding example, 20150610\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*60c is session ID.
 
 Verify data:
 
 ```
 odps@ project_name>select * from sale_detail where sale_date='201312';
- ID = 20150610084801405g0a741z5
+ ID = 20150610xxxxxxxxxxxa741z5
  +-----------+-------------+-------------+-----------+--------+
  | shop_name | customer_id | total_price | sale_date | region |
  +-----------+-------------+-------------+-----------+--------+
- | shop9 | 97 | 100.0 | 201312 | hangzhou |
- | shop10 | 10 | 200.0 | 201312 | hangzhou |
+ | shopx     | x_id        | 100.0       | 201312    | hangzhou|
+ | shopy     | y_id        | 200.0       | 201312    | hangzhou|
  +-----------+-------------+-------------+-----------+--------+
 ```
 
@@ -359,7 +359,7 @@ For example:
     tunnel download instance://test_project/test_instance log.txt
 ```
 
-**Parameters**
+**Parameters** 
 
 -   -c: Specifies the local data file encoding. Default value: Ignore.
 -   -ci: Specifies the column index \(starts from 0\) for downloading. Separate multiple entries with commas \(,\).
@@ -373,7 +373,7 @@ For example:
     **Note:** `-h=true` and `threads>1` cannot be used together.
 
 -   -limit: Specifies the number of files to be downloaded.
--   -ni: Specifies the NULL data identifier. Default value: “  “\(blank string\).
+-   -ni: Specifies the NULL data identifier. Default value: “ “\(blank string\).
 -   -rd: Specifies the row delimiter of the local data file. Default value: \\r\\n.
 -   -sd: Sets the session directory.
 -   -te: Specifies the tunnel endpoint.
@@ -400,6 +400,107 @@ shop9,97,100.0
 shop10,10,200.0
 ```
 
+**Download the data of an instance**
+
+**Method 1**
+
+Run the tunnel download command to download the query result of a specified instance to your computer.
+
+```
+tunnel download instance://<[project_name/]instance_id> <path>
+```
+
+**Parameters** 
+
+-   project\_name: the name of the project where the instance resides.
+-   instance\_id: the ID of the instance whose data is to be downloaded.
+
+**Example**
+
+1.  Run a `SELECT` statement to query the data of a specified instance:
+
+    ``` {#codeblock_b8h_zzb_0to}
+    odps@ odps_test_project>select * from wc_in;
+    ID = 20170724071705393ge3csfb8
+    ... ...
+    ```
+
+2.  Use InstanceTunnel to download the query result to your computer:
+
+    ``` {#codeblock_odm_7to_6v9}
+    odps@ odps_test_project>tunnel download instance://20170724071705393ge3csfb8 result;
+    2017-07-24 15:18:47  -  new session: 2017072415184785b6516400090ca8    total lines: 8
+    2017-07-24 15:18:47  -  file [0]: [0, 8), result
+    downloading 8 records into 1 file
+    2017-07-24 15:18:47  -  file [0] start
+    2017-07-24 15:18:48  -  file [0] OK. total: 44 bytes
+    download OK
+    ```
+
+3.  View the query result:
+
+    ``` {#codeblock_64s_b6q_rw6}
+    cat result
+    slkdfj
+    hellp
+    apple
+    tea
+    peach
+    apple
+    tea
+    teaa
+    ```
+
+
+**Method 2**
+
+Set the `use_instance_tunnel` parameter to true.
+
+After you set this parameter to true on the MaxCompute console, SQL uses InstanceTunnel to download the query results that are returned by `SELECT` statements. This helps to ensure that the query results can be properly downloaded in the case that your session times out or the data to be downloaded exceeds the maximum size that is permitted. You can use one of the following two methods to enable this function:
+
+-   Log on to the latest version of [Console](../../../../reseller.en-US/Tools and Downloads/Client.md#). Find the odps\_config.ini file. Then set the `use_instance_tunnel` parameter to true and the `instance_tunnel_max_record` parameter to 10000.
+
+    ```
+    # download sql results by instance tunnel
+    use_instance_tunnel=true
+    # the max records when download sql results by instance tunnel
+    instance_tunnel_max_record=10000
+    ```
+
+    **Note:** The `instance_tunnel_max_record` parameter specifies the maximum number of query result records that SQL can download by using InstanceTunnel. If this parameter is unspecified, the number of query result records that can be downloaded is not limited by this parameter.
+
+-   Run the following command to set the `console.sql.result.instancetunnel` parameter to true:
+
+    ``` {#codeblock_5oo_1hw_8gj}
+    odps@ odps_test_tunnel_project>set console.sql.result.instancetunnel=true;
+    OK
+    ```
+
+    You can run a `SELECT` statement to query the data of a specified instance:
+
+    ``` {#codeblock_e8t_7n7_nzm}
+    odps@ odps_test_tunnel_project>select * from wc_in;
+    ID = 20170724081946458g14csfb8
+    Log view:
+    http://logview/xxxxx.....
+    +------------+
+    | key        |
+    +------------+
+    | slkdfj     |
+    | hellp      |
+    | apple      |
+    | tea        |
+    | peach      |
+    | apple      |
+    | tea        |
+    | teaa       |
+    +------------+
+    A total of 8 records fetched by instance tunnel.
+    ```
+
+    **Note:** When InstanceTunnel is enabled, a message is displayed that states that a total of eight records is returned, after you run a `SELECT` statement to query the data of an instance. You can run the `set console.sql.result.instancetunnel` command to disable InstanceTunnel.
+
+
 ## Purge {#section_l3y_51g_vdb .section}
 
 Purge the session directory. By default, sessions for last three days are purged. The sub-commands are used as follows:
@@ -415,8 +516,8 @@ For example:
 
 **Data types**:
 
-| Type|Required|
-|:----|:-------|
+|Type|Required|
+|:---|:-------|
 |STRING|String type data. The length cannot exceed 8MB.|
 |BOOLEN|Upload values only support true, false, 0, and 1. Only the values true or false \(not case-sensitive\) are supported for downloading.|
 |BIGINT|Value range: \[-9223372036854775807, 9223372036854775807\].|
@@ -439,7 +540,7 @@ If you upload DATETIME type data, specify the time and date format. For more inf
 "MM/dd/yyyy": data format "09/01/2014"
 ```
 
-**Example**
+**Example** 
 
 ```
 tunnel upload log.txt test_table -dfp "yyyy-MM-dd HH:mm:ss"
@@ -468,7 +569,7 @@ Description:
 -   A column delimiter cannot contain a row delimiter.
 -   Only the follow escape character delimiters are supported in the command line: \\r, \\n, and \\t.
 
-**Example**
+**Example** 
 
 ```
 tunnel upload log.txt test_table -fd "||" -rd "\r\n"

@@ -4,7 +4,7 @@
 
 ## Tunnel命令功能 {#section_hcs_btf_vdb .section}
 
-您可以通过[客户端](../../../../../intl.zh-CN/工具及下载/客户端.md)提供的[Tunnel](intl.zh-CN/用户指南/数据上传下载/Tunnel命令操作.md)命令实现原有Dship工具的功能。
+您可以通过[客户端](../../../../intl.zh-CN/工具及下载/客户端.md)提供的[Tunnel](intl.zh-CN/用户指南/数据上传下载/Tunnel命令操作.md)命令实现原有Dship工具的功能。
 
 Tunnel命令主要用于数据的上传和下载等功能。
 
@@ -133,7 +133,7 @@ Example:
 -   -dbr：是否忽略脏数据（多列、少列、列数据类型不匹配等情况）。
     -   值为true时，将全部不符合表定义的数据忽略。
     -   值为false时，若遇到脏数据，则给出错误提示信息，目标表内的原始数据不会被污染。
--   -dfp：DateTime类型数据格式，默认为yyyy-MM-dd HH:mm:ss。如果您想指定时间格式到毫秒级别，可以使用tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS'，有关DateTime数据类型的详情请参见[数据类型](../../../../../intl.zh-CN/用户指南/基本概念/数据类型.md#)。
+-   -dfp：DateTime类型数据格式，默认为yyyy-MM-dd HH:mm:ss。如果您想指定时间格式到毫秒级别，可以使用tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS'，有关DateTime数据类型的详情请参见[数据类型](../../../../intl.zh-CN/用户指南/基本概念/数据类型.md#)。
 -   -fd：本地数据文件的列分割符，默认为逗号。
 -   -h：数据文件是否包括表头，如果为true，则dship会跳过表头从第二行开始上传数据。
 -   -mbr：默认情况下，当上传的脏数据超过1000条时，上传动作终止。通过此参数，可以调整可容忍的脏数据量。
@@ -448,7 +448,7 @@ teaa
 
 在MaxCompute Console中打开`use_instance_tunnel`选项后，执行的SELECT query会默认使用InstanceTunnel来下载结果，从而避免在MaxCompute平台获取SQL查询结果时所遇到的获取数据超时和获取数据量受限的问题。打开该配置有以下两种方法：
 
--   在最新版本的 [Console](../../../../../intl.zh-CN/工具及下载/客户端.md#)中，odps\_config.ini文件里已经默认打开此选项，并且`instance_tunnel_max_record`被默认设置成了10000。
+-   在最新版本的 [Console](../../../../intl.zh-CN/工具及下载/客户端.md#)中，odps\_config.ini文件里已经默认打开此选项，并且`instance_tunnel_max_record`被默认设置成了10000。
 
     ```
     # download sql results by instance tunnel
