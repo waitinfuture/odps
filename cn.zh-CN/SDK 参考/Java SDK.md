@@ -2,21 +2,24 @@
 
 本文从实例、资源、表、函数等几个方面为您介绍Java SDK。
 
-**说明：** 使用SDK调用MaxCompute产生的计算、存储等费用与直接使用MaxCompute产生的费用一致，详情请参见[计量计费说明](../../../../../intl.zh-CN/产品定价/计量计费说明.md#)。
+**说明：** 使用SDK调用MaxCompute产生的计算、存储等费用与直接使用MaxCompute产生的费用一致，详情请参见[计量计费](../../../../cn.zh-CN/产品定价/计算计费项（按CU预付费）.md#)。
 
-本文将为您介绍较为常用的 MaxCompute 核心接口，更多详情请参见 [SDK Java Doc](http://www.javadoc.io/doc/com.aliyun.odps/odps-sdk-core/)。
+较为常用的MaxCompute核心接口详情请参见 [SDK Java Doc](http://www.javadoc.io/doc/com.aliyun.odps/odps-sdk-core/)。
 
-您可以通过 Maven 管理配置新 SDK 的版本。Maven 的配置信息如下（最新版本可以随时到 [search.maven.org](https://search.maven.org/search?q=g:com.aliyun.odps%20AND%20a:odps-sdk-udf&core=gav) 搜索 odps-sdk-core 获取）：
+您可以通过Maven管理配置新SDK的版本。Maven的配置示例如下：
 
 ```
 <dependency>
   <groupId>com.aliyun.odps</groupId>
   <artifactId>odps-sdk-core</artifactId>
-  <version>0.26.2-public</version>
+  <version>xxxx-public</version>
 </dependency>
 ```
 
-**说明：** 注意：0.27.2-public 版本及以上才支持MaxCompute 2.0[新数据类型](../../../../../intl.zh-CN/用户指南/基本概念/数据类型.md#) 。
+**说明：** 
+
+-   0.27.2-public版本及以上才支持MaxCompute 2.0[新数据类型](../../../../cn.zh-CN/用户指南/基本概念/数据类型.md#) 。
+-   您可以到 [search.maven.org](https://search.maven.org/search?q=g:com.aliyun.odps%20AND%20a:odps-sdk-udf&core=gav) 搜索odps-sdk-core获取最新版本的SDK。
 
 MaxCompute 提供的 SDK 包整体信息，如下表所示：
 
@@ -34,7 +37,7 @@ MaxCompute 提供的 SDK 包整体信息，如下表所示：
 
 ## MaxCompute {#section_i25_f5b_wdb .section}
 
-MaxCompute SDK 的入口，您可通过此类来获取项目空间下的所有对象集合，包括：[Projects](../../../../../intl.zh-CN/用户指南/基本概念/项目空间.md)，[Tables](../../../../../intl.zh-CN/用户指南/基本概念/表.md)，[Resources](../../../../../intl.zh-CN/用户指南/基本概念/资源.md)，[Functions](../../../../../intl.zh-CN/用户指南/基本概念/函数.md)，[Instances](../../../../../intl.zh-CN/用户指南/基本概念/任务实例.md)。
+MaxCompute SDK 的入口，您可通过此类来获取项目空间下的所有对象集合，包括：[Projects](../../../../cn.zh-CN/用户指南/基本概念/项目空间.md)，[Tables](../../../../cn.zh-CN/用户指南/基本概念/表.md)，[Resources](../../../../cn.zh-CN/用户指南/基本概念/资源.md)，[Functions](../../../../cn.zh-CN/用户指南/基本概念/函数.md)，[Instances](../../../../cn.zh-CN/用户指南/基本概念/任务实例.md)。
 
 **说明：** MaxCompute 原名 ODPS，因此在现有的 SDK 版本中，入口类仍命名为 ODPS。
 
@@ -49,16 +52,16 @@ MaxCompute SDK 的入口，您可通过此类来获取项目空间下的所有�
     for (Table t : odps.tables()) {
         ....
     }
-
+				
 ```
 
 ## 批量数据通道 {#section_ff1_yd5_qfb .section}
 
-MaxCompute Tunnel数据通道是基于Tunnel SDK编写的，您可以通过Tunnel向MaxCompute中上传或者下载数据，详细内容请参见[批量数据通道](../../../../../intl.zh-CN/用户指南/数据上传下载/批量数据通道SDK介绍/批量数据通道概要.md#)。目前Tunnel仅支持表（不包括视图View）和数据的上传和下载。
+MaxCompute Tunnel数据通道是基于Tunnel SDK编写的，您可以通过Tunnel向MaxCompute中上传或者下载数据，详细内容请参见[批量数据通道](../../../../cn.zh-CN/用户指南/数据上传下载/批量数据通道SDK介绍/批量数据通道概要.md#)。目前Tunnel仅支持表（不包括视图View）和数据的上传和下载。
 
 ## MapReduce {#section_k1z_3nz_sfb .section}
 
-MapReduce 支持的MapReduce SDK请参见[原生SDK概述](../../../../../intl.zh-CN/用户指南/MapReduce/Java SDK/原生SDK概述.md#)。
+MapReduce 支持的MapReduce SDK请参见[原生SDK概述](../../../../cn.zh-CN/用户指南/MapReduce/Java SDK/原生SDK概述.md#)。
 
 ## Projects {#section_eg4_k5b_wdb .section}
 
@@ -73,7 +76,7 @@ Projects 是 MaxCompute 中所有项目空间的集合。集合中的元素为 P
     p.reload();
     Map<String, String> properties = prj.getProperties();
     ...
-
+				
 ```
 
 ## Project {#section_lg2_n5b_wdb .section}
@@ -120,10 +123,10 @@ run 接口返回 Instance 实例，通过 Instance 获取 SQL 的运行状态及
       }
    }
   }
-
+				
 ```
 
-**说明：** 如果您想创建表，需要通过 SQLTask 接口，而不是 Table 接口。您需要将[表操作](../../../../../intl.zh-CN/用户指南/SQL/DDL语句/表操作.md#)的语句传入SQLTask。
+**说明：** 如果您想创建表，需要通过 SQLTask 接口，而不是 Table 接口。您需要将[表操作](../../../../cn.zh-CN/用户指南/SQL/DDL语句/表操作.md#)的语句传入SQLTask。
 
 ## Instances {#section_xtz_s5b_wdb .section}
 
@@ -138,7 +141,7 @@ Instances 是 MaxCompute 中所有实例（Instance）的集合，集合中的�
     for (Instance i : odps.instances()) {
         ....
     }
-
+				
 ```
 
 ## Instance {#section_rqp_v5b_wdb .section}
@@ -171,7 +174,7 @@ Instance 是对实例信息的描述，可以通过 Instances 获取相应的实
     ...
     TaskSummary summary = instance.getTaskSummary("task name");
     String s = summary.getSummaryText();
-
+				
 ```
 
 ## Tables {#section_bwd_z5b_wdb .section}
@@ -187,7 +190,7 @@ Tables 是 MaxCompute 中所有表的集合，集合中的元素为 Table。程�
     for (Table t : odps.tables()) {
         ....
     }
-
+				
 ```
 
 ## Table {#section_c13_bvb_wdb .section}
@@ -204,7 +207,7 @@ Table 是对表信息的描述，可以通过 Tables 获取相应的表。程序
     Partition part = t.getPartition(new PartitionSpec(tableSpec[1]));
     part.reload();
     ...
-
+				
 ```
 
 ## Resources {#section_tdn_dvb_wdb .section}
@@ -220,7 +223,7 @@ Resources 是 MaxCompute 中所有资源的集合。集合中的元素为 Resour
     for (Resource r : odps.resources()) {
         ....
     }
-
+				
 ```
 
 ## Resource {#section_p3x_fvb_wdb .section}
@@ -244,7 +247,7 @@ Resource 是对资源信息的描述，可以通过 Resources 获取相应的资
      }
      ....   
     }
-
+				
 ```
 
 创建文件资源的示例，如下所示：
@@ -282,7 +285,7 @@ Functions 是 MaxCompute 中所有函数的集合。集合中的元素为 Functi
     for (Function f : odps.functions()) {
         ....
     }
-
+				
 ```
 
 ## Function {#section_xbw_nvb_wdb .section}
@@ -296,7 +299,7 @@ Function 是对函数信息的描述，可以通过 Functions 获取相应的函
     odps.setEndpoint(odpsUrl);
     Function f = odps.functions().get("function name");
     List<Resource> resources = f.getResources();
-
+				
 ```
 
 创建函数的示例，如下所示：
@@ -313,6 +316,6 @@ Function 是对函数信息的描述，可以通过 Functions 获取相应的函
     func.setClassType(classType);
     func.setResources(resourceList);
     odps.functions().create(projectName, func);
-
+				
 ```
 
