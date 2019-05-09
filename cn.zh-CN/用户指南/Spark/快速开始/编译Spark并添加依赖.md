@@ -11,7 +11,16 @@
 spark.hadoop.odps.project.name =
 spark.hadoop.odps.access.id =
 spark.hadoop.odps.access.key =
+# 配置Spark客户端连接访问MaxCompute项目项目的endpoint，请根据网络环境以及region填写对应MaxCompute Endpoint
 spark.hadoop.odps.end.point = http://service.cn.maxcompute.aliyun.com/api
+# Spark运行环境endpoint，请配置为所在region的MaxCompute VPC内网Endpoint
+spark.hadoop.odps.runtime.end.point = http://service.cn.maxcompute.aliyun-inc.com/api
+
+# 以下配置保持不变
+spark.sql.catalogImplementation=odps
+spark.hadoop.odps.task.major.version = cupid_v2
+spark.hadoop.odps.cupid.container.image.enable = true
+spark.hadoop.odps.cupid.container.vm.engine.type = hyper
 ```
 
 各配置项含义说明：
@@ -22,45 +31,11 @@ spark.hadoop.odps.end.point = http://service.cn.maxcompute.aliyun.com/api
 |`spark.hadoop.odps.access.id`|填写MaxCompute用户的accessKeyId|
 |`spark.hadoop.odps.access.key`|填写MaxCompute用户的accessKeySecret|
 |`spark.hadoop.odps.end.point`|填写项目所在region的MaxCompute Endpoint，如：http://service.cn.maxcompute.aliyun.com/api|
-
-## Windows环境下编译Spark {#section_j0i_dqd_rxo .section}
-
-编译环境要求：
-
-1.  Java SDK 1.8及以上版本
-2.  Maven 3.3.0以上版本
-
-操作步骤（以Spark-2.x为例）：
-
-1.  下载aliyun-cupid-sdk代码。对应命令如下。
-
-    ``` {#codeblock_psn_y22_is0}
-    git clone https://github.com/aliyun/aliyun-cupid-sdk.git -b 3.3.2-public
-    ```
-
-2.  [下载](https://github.com/protocolbuffers/protobuf/releases/tag/v2.5.0)Windows下的protoc， 即win32.zip的2.5.0版本。
-3.  解压对应的poroc-2.5.0-win32.zip文件，将解压后的potoc.exe文件移动到$\{cupid install path\}\\core\\cupid-sdk\\bin\\protoc目录下。
-4.  开始编译aliyun-cupid-sdk。
-    -   使用cmd命令行切换到$\{cupid install path\}\\core\\cupid-sdk之后，执行如下命令。
-
-        ``` {#codeblock_auf_iq7_o4f}
-         mvn clean install -Pwindows -Ppublic -DskipTests
-        ```
-
-    -   切换到$\{cupid install path\}\\spark\\spark-2.x\\datasource之后，执行如下命令。
-
-        ``` {#codeblock_ama_6x0_jyg}
-        mvn clean install -Pwindows -Ppublic -DskipTests
-        ```
-
-    -   切换到$\{cupid install path\}\\spark\\spark-2.x\\spark-examples之后，执行如下命令。
-
-        ``` {#codeblock_gup_7ax_l4h}
-        mvn clean install -Pwindows -Ppublic -DskipTests
-        ```
-
-    -   在$\{cupid install path\}\\spark\\spark-2.x\\spark-examples\\target下查看生成的spark-examples\_2.11-3.3.2-public-shaded.jar包。
-    -   测试执行Spark Demo, 请参考[Spark-2.x](cn.zh-CN/用户指南/Spark/常见使用场景示例/Spark-2.x.md#)。
+|`spark.hadoop.odps.runtime.end.point`|Spark运行环境endpoint，请配置为所在region的MaxCompute VPC内网Endpoint，如：http://service.cn.maxcompute.aliyun-inc.com/api|
+|`spark.sql.catalogImplementation`|固定填 odps|
+|`spark.hadoop.odps.task.major.version`|固定填 cupid_v2|
+|`spark.hadoop.odps.cupid.container.image.enable`|固定填 true|
+|`spark.hadoop.odps.cupid.container.vm.engine.type`|固定填 hyper|
 
 ## 主要模块以及Maven依赖 {#section_hzt_lgg_4gb .section}
 
@@ -76,20 +51,20 @@ spark.hadoop.odps.end.point = http://service.cn.maxcompute.aliyun.com/api
 <dependency>
 	<groupId>com.aliyun.odps</groupId>
 	<artifactId>cupid-sdk</artifactId>
-	<version>3.3.2-public</version>
+	<version>3.3.3-public</version>
 	<scope>provided</scope>
 </dependency>
 # Spark-1.x请依赖此模块
 <dependency>
 	<groupId>com.aliyun.odps</groupId>
 	<artifactId>odps-spark-datasource_2.10</artifactId>
-	<version>3.3.2-public</version>
+	<version>3.3.3-public</version>
 </dependency>
 # Spark-2.x请依赖此模块
 <dependency>
   	<groupId>com.aliyun.odps</groupId>
   	<artifactId>odps-spark-datasource_2.11</artifactId>
-  	<version>3.3.2-public</version>
+  	<version>3.3.3-public</version>
 </dependency>
 ```
 
